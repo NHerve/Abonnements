@@ -1,21 +1,24 @@
 CREATE TABLE Client (
 	cliId SERIAL PRIMARY KEY,
-	cliNom VARCHAR(255) NOT NULL,
-	cliPrenom VARCHAR(255) NOT NULL,
-	cliPassword VARCHAR(255) NOT NULL,
-	cliMail VARCHAR(255) NOT NULL,
+	cliNom TEXT NOT NULL,
+	cliPrenom TEXT NOT NULL,
+	cliPassword TEXT NOT NULL,
+	cliMail TEXT NOT NULL,
 	cliDateNaissance DATE,
-	cliLieuNaissance VARCHAR(255)
-)
+	cliLieuNaissance TEXT,
+	cliNumCarte VARCHAR(16),
+	cliExpiCarte VARCHAR(4),
+	cliCCV VARCHAR(3)
+);
 
 CREATE TABLE Magazine (
 	magId SERIAL PRIMARY KEY,
-	magTitre VARCHAR(255) NOT NULL,
+	magTitre TEXT NOT NULL,
 	magNbVolumeAnnee INT NOT NULL, 
-	magPhotoCouverture VARCHAR(10000),
-	magDescription VARCHAR(10000) NOT NULL,
+	magPhotoCouverture TEXT,
+	magDescription TEXT NOT NULL,
 	magPrixAnnuel REAL NOT NULL
-)
+);
 
 CREATE TABLE Abonnement (
 	aboFKCli INT NOT NULL REFERENCES client(cliId),
@@ -23,10 +26,10 @@ CREATE TABLE Abonnement (
 	aboDateDebut DATE NOT NULL,
 	aboDateFin DATE,
 	PRIMARY KEY(aboFKCli,aboFKMag)
-)
+);
 
 INSERT INTO client (cliNom,cliPrenom,clipassword,cliMail,cliDateNaissance,cliLieuNaissance) VALUES ( 'AYMES', 'Herve', '123haymes456' , 'herve.04@hotmail.fr', '1996-07-17', 'Marseille');
-INSERT INTO client (cliNom,cliPrenom,clipassword,cliMail,cliDateNaissance,cliLieuNaissance) VALUES ( 'JEANNE', 'Steven', '123sjeanne456' , 'steven@mail.com', '1996-07-17', 'Valreas');
+INSERT INTO client (cliNom,cliPrenom,clipassword,cliMail,cliDateNaissance,cliLieuNaissance,cliNumCarte,cliExpiCarte,cliCCV) VALUES ( 'JEANNE', 'Steven', '123sjeanne456' , 'steven@mail.com', '1996-07-17', 'Valreas','0123456789123456','0820','123');
 INSERT INTO client (cliNom,cliPrenom,clipassword,cliMail,cliDateNaissance,cliLieuNaissance) VALUES ( 'JOLY', 'Fred', '123fjoly456' , 'fred@mail.fr', '1994-06-09', 'Paris');
 
 INSERT INTO magazine (magTitre, magNbVolumeAnnee,magPhotoCouverture,magDescription,magPrixAnnuel) VALUES ('le gorafi' , 365, 'http://www.legorafi.fr/wp-content/themes/legorafi/img/socials.png', 'Le Gorafi est un site d''information trés serieux, créé en mai 2012 durant la campagne présidentielle française',99.99);
