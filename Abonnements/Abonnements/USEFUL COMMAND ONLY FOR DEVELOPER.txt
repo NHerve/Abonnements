@@ -1,0 +1,14 @@
+﻿Command avec CTRL ... + CTR
+	Collasping / Expanding
+		M + O = COLLASPE ALL
+		M + L = EXPAND ALL
+		M + M = Collaspe / Expand Line
+	Commenting : 
+		K + C = Comment
+		K + U = Uncomment
+	Moving Command / Block:
+		ALT UP : Moving UP
+		ALT DOWN : MOVING DOWN
+
+		https://www.dofactory.com/reference/visual-studio-shortcuts
+		https://www.generatedata.com/ -> GenerateData for Json api call etc (good for testing)
