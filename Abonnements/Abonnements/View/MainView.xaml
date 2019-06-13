@@ -8,7 +8,7 @@
     android:TabbedPage.ToolbarPlacement="Bottom">
     <TabbedPage.Children>
         <local:AccountView BindingContext="{Binding AccountViewModel}" Icon="profile.png" />
-        <local:AbonnementView BindingContext="{Binding AbonnementViewModel}" Icon="seeSubscribe.png" />
+        <local:AbonnementsView BindingContext="{Binding AbonnementViewModel}" Icon="seeSubscribe.png" />
         <ContentPage Icon="subscribe.png" />
     </TabbedPage.Children>
 </TabbedPage>

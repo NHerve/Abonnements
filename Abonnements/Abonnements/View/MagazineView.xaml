@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Abonnements.View.MagazineView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Abonnements.View">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style
+                x:Key="TitleLabelStyle"
+                BasedOn="{StaticResource MontserratRegularLabelStyle}"
+                TargetType="{x:Type Label}">
+                <Setter Property="TextColor" Value="{StaticResource BlueColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+            </Style>
+            <Style
+                x:Key="ItemLabelStyle"
+                BasedOn="{StaticResource MontserratRegularLabelStyle}"
+                TargetType="{x:Type Label}">
+                <Setter Property="TextColor" Value="{StaticResource TransparentBlueColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="Margin" Value="0,0,0,14" />
+            </Style>
+            <Style x:Key="DescriptionLabelStyle" TargetType="{x:Type Label}">
+                <Setter Property="FontFamily" Value="{StaticResource MontserratRegular}" />
+                <Setter Property="LineBreakMode" Value="WordWrap" />
+                <Setter Property="TextColor" Value="{StaticResource TransparentBlueColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="Margin" Value="0,0,0,14" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid>
+                <Grid.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="40, 20, 40, 20" />
+                </Grid.Padding>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Aspect="AspectFit"
+                    Scale="0.95"
+                    Source="default_magazine.png" />
+                <StackLayout Grid.Row="0" Grid.Column="1">
+                    <Label Style="{StaticResource ItemLabelStyle}" Text="{Binding Magazine.Titre}" />
+                </StackLayout>
+                <StackLayout Grid.Row="1" Grid.ColumnSpan="2">
+                    <Label Style="{StaticResource TitleLabelStyle}" Text="Nombre de volume à l'année" />
+                    <Label Style="{StaticResource ItemLabelStyle}" Text="{Binding Magazine.NbVolumeAnnee}" />
+
+                    <Label Style="{StaticResource TitleLabelStyle}" Text="Description" />
+                    <Label Style="{StaticResource DescriptionLabelStyle}" Text="{Binding Magazine.Description}" />
+
+                    <Label Style="{StaticResource TitleLabelStyle}" Text="Prix annuel" />
+                    <Label Style="{StaticResource ItemLabelStyle}" Text="{Binding Magazine.PrixAnnuel, StringFormat='\{0}€'}" />
+                    <local:ButtonSubscribedMagazineView IsVisible="True" />
+                    <local:ButtonSubscribeMagazineView IsVisible="False" />
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

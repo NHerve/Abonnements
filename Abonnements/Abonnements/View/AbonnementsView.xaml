@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="Abonnements.View.AbonnementView"
+    x:Class="Abonnements.View.AbonnementsView"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behavior="clr-namespace:Abonnements.Behaviors">
     <ContentPage.Content>
         <Grid>
             <StackLayout>
@@ -14,13 +15,14 @@
                     Text="Vos Abonnements" />
 
                 <ListView
+                    behavior:ItemTappedCommandListView.ItemTappedCommand="{Binding GoToMagazine}"
                     ItemsSource="{Binding Abonnements}"
                     RowHeight="100"
                     SeparatorVisibility="None">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Grid>
+                                <Grid BackgroundColor="{Binding StatusColor}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />

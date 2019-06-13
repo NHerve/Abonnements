@@ -16,5 +16,9 @@ namespace Abonnements.View
         {
             InitializeComponent();
         }
+        protected override void OnAppearing()
+        {
+            this.CurrentPage = this.Children[1];
+        }
     }
 }

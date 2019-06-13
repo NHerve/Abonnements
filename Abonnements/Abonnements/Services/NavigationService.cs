@@ -122,12 +122,11 @@ namespace Abonnements.Services
 
                     if (navigationPage != null)
                     {
-                        await navigationPage.Navigation.PushAsync(page);
+                        await navigationPage.Navigation.PushModalAsync(page);
                     }
                     else
                     {
                         await CurrentApplication.MainPage.Navigation.PushModalAsync(page);
-                        //CurrentApplication.MainPage = new Main(page);
                     }
                 }
 
@@ -176,9 +175,11 @@ namespace Abonnements.Services
             _mappings.Add(typeof(LoginViewModel), typeof(LoginView));
             _mappings.Add(typeof(SignUpViewModel), typeof(SignUpView));
             _mappings.Add(typeof(AccountViewModel), typeof(AccountView));
+            _mappings.Add(typeof(MagazineViewModel), typeof(MagazineView));
 
             _mappings.Add(typeof(MainViewModel), typeof(MainView));
-            _mappings.Add(typeof(AbonnementViewModel), typeof(AbonnementView));
+            _mappings.Add(typeof(AbonnementsViewModel), typeof(AbonnementsView));
+            _mappings.Add(typeof(SubscribeViewModel), typeof(SubscribeView));
 
             // _mappings.Add(typeof(CategoriesSettingsViewModel), typeof(CategoriesSettings));
         }

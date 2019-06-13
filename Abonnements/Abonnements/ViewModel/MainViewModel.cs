@@ -9,14 +9,14 @@ namespace Abonnements.ViewModel
     {
 
         #region Public Properties
-        public AbonnementViewModel AbonnementViewModel { get; set; }
+        public AbonnementsViewModel AbonnementViewModel { get; set; }
         public AccountViewModel AccountViewModel { get; set; }
         #endregion
 
         #region Ctor
         public MainViewModel()
         {
-            AbonnementViewModel = new AbonnementViewModel();
+            AbonnementViewModel = new AbonnementsViewModel();
             AccountViewModel = new AccountViewModel();
         }
         #endregion

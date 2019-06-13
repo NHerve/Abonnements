@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="Abonnements.View.ButtonSubscribedMagazineView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <!--  On est dans la partie déjà abonné  -->
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ActionButtonStyle" TargetType="{x:Type ImageButton}">
+
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ImageButton
+                Grid.Column="0"
+                Command="{Binding StopSubscription}"
+                Source="cancel_subscription.pnh"
+                Style="{StaticResource ActionButtonStyle}" />
+            <ImageButton
+                Grid.Column="1"
+                Command="{Binding RelaunchSubscription}"
+                Source="renew.png"
+                Style="{StaticResource ActionButtonStyle}" />
+            <ImageButton
+                Grid.Column="2"
+                Command="{Binding PaySubscription}"
+                Source="pay.png"
+                Style="{StaticResource ActionButtonStyle}" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>
