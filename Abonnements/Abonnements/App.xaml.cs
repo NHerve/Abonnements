@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Abonnements.Model;
+using Abonnements.Services.Interfaces;
+using Abonnements.ViewModel.Base;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,15 +13,15 @@ namespace Abonnements
     public partial class App : Application
     {
         public App()
-        {
-            InitializeComponent();
-
-            MainPage = new MainPage();
+        { 
+                InitializeComponent();
         }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
             // Handle when your app starts
+            await InitNavigation();
+        
         }
 
         protected override void OnSleep()
@@ -24,9 +29,17 @@ namespace Abonnements
             // Handle when your app sleeps
         }
 
-        protected override void OnResume()
+        protected override async void OnResume()
         {
             // Handle when your app resumes
+            await InitNavigation();
         }
+
+        private Task InitNavigation()
+        {
+            var navigationService = ViewModelLocator.Instance.Resolve<INavigationService>();
+            return navigationService.InitializeAsync();
+        }
+    
     }
 }

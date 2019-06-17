@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Abonnements.View.LoginView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Abonnements.Behaviors"
+    xmlns:effects="clr-namespace:Abonnements.Effects">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style
+                x:Key="ForgotPwdLabelStyle"
+                BasedOn="{StaticResource MontserratRegularLabelStyle}"
+                TargetType="{x:Type Label}">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+                <Setter Property="Margin" Value="0, 5, 5, 15" />
+            </Style>
+
+            <Style
+                x:Key="SignInButtonStyle"
+                BasedOn="{StaticResource ButtonStyle}"
+                TargetType="{x:Type Button}">
+                <Setter Property="HeightRequest" Value="54" />
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+            </Style>
+
+            <Style x:Key="HaveAccountLabelStyle" TargetType="{x:Type Label}">
+                <Setter Property="FontFamily" Value="{StaticResource MontserratRegular}" />
+                <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+            </Style>
+
+            <Style x:Key="SignUpLabelStyle" TargetType="{x:Type Label}">
+                <Setter Property="FontFamily" Value="{StaticResource MontserratRegular}" />
+                <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
+                <Setter Property="TextColor" Value="{StaticResource BrightYellowColor}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid BackgroundColor="{StaticResource TransparentBlueColor}">
+            <Grid.Padding>
+                <OnPlatform x:TypeArguments="Thickness" Android="40, 150, 40, 30" />
+            </Grid.Padding>
+            <Grid.VerticalOptions>
+                <OnPlatform x:TypeArguments="LayoutOptions" Android="FillAndExpand" />
+            </Grid.VerticalOptions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition>
+                    <RowDefinition.Height>
+                        <OnPlatform x:TypeArguments="GridLength" Android="40" />
+                    </RowDefinition.Height>
+                </RowDefinition>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0">
+                <StackLayout.HorizontalOptions>
+                    <OnPlatform x:TypeArguments="LayoutOptions" Android="FillAndExpand" />
+                </StackLayout.HorizontalOptions>
+                <Entry
+                    x:Name="EntryUserMail"
+                    AutomationId="usermail"
+                    Placeholder="Mail"
+                    Text="{Binding UserMail.Value, Mode=TwoWay}">
+                    <Entry.Style>
+                        <OnPlatform x:TypeArguments="Style" Android="{StaticResource EntryStyle}" />
+                    </Entry.Style>
+                    <Entry.Behaviors>
+                        <behaviors:TurnValidOnFocusBehavior ValidityObject="{Binding UserMail}" />
+                        <behaviors:ValidateOnTextChangedBehavior ValidateCommand="{Binding ValidateCommand}" />
+                    </Entry.Behaviors>
+                    <Entry.Triggers>
+                        <DataTrigger
+                            Binding="{Binding UserMail.IsValid}"
+                            TargetType="Entry"
+                            Value="False">
+                            <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource ErrorColor}" />
+                        </DataTrigger>
+                    </Entry.Triggers>
+                </Entry>
+                <Entry
+                    x:Name="EntryPassword"
+                    AutomationId="password"
+                    IsPassword="true"
+                    Placeholder="Mots de passe"
+                    Text="{Binding Password.Value, Mode=TwoWay}">
+                    <Entry.Style>
+                        <OnPlatform x:TypeArguments="Style" Android="{StaticResource EntryStyle}" />
+                    </Entry.Style>
+                    <Entry.Behaviors>
+                        <behaviors:TurnValidOnFocusBehavior ValidityObject="{Binding Password}" />
+                        <behaviors:ValidateOnTextChangedBehavior ValidateCommand="{Binding ValidateCommand}" />
+                    </Entry.Behaviors>
+                    <Entry.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Password.IsValid}"
+                            TargetType="Entry"
+                            Value="False">
+                            <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource ErrorColor}" />
+                        </DataTrigger>
+
+                    </Entry.Triggers>
+                </Entry>
+                <Label
+                    HorizontalOptions="End"
+                    Style="{StaticResource ForgotPwdLabelStyle}"
+                    Text="Mots de passe oublier ?">
+                    <Label.Effects>
+                        <effects:UnderlineTextEffect />
+                    </Label.Effects>
+                </Label>
+                <Button
+                    x:Name="SignInButton"
+                    AutomationId="signin"
+                    Command="{Binding SignInCommand}"
+                    Style="{StaticResource SignInButtonStyle}"
+                    Text="Se connecter" />
+            </StackLayout>
+            <StackLayout
+                Grid.Row="1"
+                HorizontalOptions="Center"
+                Orientation="Horizontal">
+                <StackLayout.Margin>
+                    <OnPlatform x:TypeArguments="Thickness" Android="0" />
+                </StackLayout.Margin>
+                <Label
+                    Style="{StaticResource HaveAccountLabelStyle}"
+                    Text="Pas encore de compte ?"
+                    VerticalOptions="Center" />
+                <Grid HeightRequest="40">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToSignUpCommand}" NumberOfTapsRequired="1" />
+                    </Grid.GestureRecognizers>
+                    <Label
+                        Style="{StaticResource SignUpLabelStyle}"
+                        Text="S'inscrire"
+                        VerticalOptions="Center" />
+                </Grid>
+            </StackLayout>
+            <ActivityIndicator
+                Margin="0,150,0,0"
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                VerticalOptions="Center"
+                Color="{StaticResource WhiteColor}">
+                <ActivityIndicator.WidthRequest>
+                    <OnPlatform x:TypeArguments="x:Double" Android="100" />
+                </ActivityIndicator.WidthRequest>
+            </ActivityIndicator>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

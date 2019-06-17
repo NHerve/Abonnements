@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Abonnements.View.AccountView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style
+                x:Key="LogoutButtonStyle"
+                BasedOn="{StaticResource ButtonStyle}"
+                TargetType="{x:Type Button}">
+                <Setter Property="HeightRequest" Value="36" />
+                <Setter Property="TextColor" Value="{StaticResource RedColor}" />
+                <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            </Style>
+
+            <Style
+                x:Key="EditButtonStyle"
+                BasedOn="{StaticResource ButtonStyle}"
+                TargetType="{x:Type Button}">
+                <Setter Property="HeightRequest" Value="54" />
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+            </Style>
+
+            <Style
+                x:Key="ProfileTitleLabelStyle"
+                BasedOn="{StaticResource MontserratRegularLabelStyle}"
+                TargetType="{x:Type Label}">
+                <Setter Property="TextColor" Value="{StaticResource BlueColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+            </Style>
+
+            <Style
+                x:Key="ProfileItemLabelStyle"
+                BasedOn="{StaticResource MontserratRegularLabelStyle}"
+                TargetType="{x:Type Label}">
+                <Setter Property="TextColor" Value="{StaticResource TransparentBlueColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="Margin" Value="0,0,0,14" />
+            </Style>
+
+            <Style x:Key="ProfileItemSpanStyle" TargetType="{x:Type Span}">
+                <Setter Property="FontFamily" Value="{StaticResource MontserratRegular}" />
+                <Setter Property="TextColor" Value="{StaticResource BlueColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+            </Style>
+
+            <Style
+                x:Key="EntryProfileStyle"
+                BasedOn="{StaticResource EntryStyle}"
+                TargetType="{x:Type Entry}">
+                <Setter Property="TextColor" Value="{StaticResource TransparentBlueColor}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.Padding>
+            <OnPlatform x:TypeArguments="Thickness" Android="40, 20, 40, 20" />
+        </Grid.Padding>
+        <Label>
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Style="{StaticResource ProfileItemSpanStyle}" Text="{Binding Profile.FirstName}" />
+                    <Span Style="{StaticResource ProfileItemSpanStyle}" Text="{Binding Profile.LastName, StringFormat=' {0}'}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <ScrollView>
+            <Grid Padding="0,40,0,0">
+                <StackLayout Spacing="10">
+                    <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Mot de passe" />
+                    <Entry Style="{StaticResource EntryProfileStyle}" Text="{Binding Profile.Password.Value}" />
+
+                    <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Confirmation mot de passe" />
+                    <Entry Style="{StaticResource EntryProfileStyle}" Text="{Binding Profile.PasswordConfirmation.Value}" />
+
+                    <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Mail" />
+                    <Entry Style="{StaticResource EntryProfileStyle}" Text="{Binding Profile.Mail.Value}" />
+
+                    <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Date de naissance" />
+                    <DatePicker Date="{Binding Profile.BirthDay}" MaximumDate="{x:Static sys:DateTime.Now}" />
+
+                    <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Lieu de naissance" />
+                    <Entry Style="{StaticResource EntryProfileStyle}" Text="{Binding Profile.BirthLocation.Value}" />
+
+                    <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Numéro de carte" />
+                    <Entry
+                        MaxLength="16"
+                        Style="{StaticResource EntryProfileStyle}"
+                        Text="{Binding Profile.CardNumber}" />
+
+                    <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Date d'expiration" />
+                    <Entry Style="{StaticResource EntryProfileStyle}" Text="{Binding Profile.ExpirationDate.Value}" />
+
+                    <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="CCV" />
+                    <Entry
+                        MaxLength="3"
+                        Style="{StaticResource EntryProfileStyle}"
+                        Text="{Binding Profile.Ccv}" />
+                    <Button
+                        x:Name="EditButton"
+                        AutomationId="edit"
+                        Command="{Binding EditCommand}"
+                        Style="{StaticResource EditButtonStyle}"
+                        Text="Modifier les données" />
+                    <Button
+                        Command="{Binding LogoutCommand}"
+                        Style="{StaticResource LogoutButtonStyle}"
+                        Text="Se déconnecter" />
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

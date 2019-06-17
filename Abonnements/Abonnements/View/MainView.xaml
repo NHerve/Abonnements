@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    x:Class="Abonnements.View.MainView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:local="clr-namespace:Abonnements.View"
+    android:TabbedPage.ToolbarPlacement="Bottom">
+    <TabbedPage.Children>
+        <local:AccountView BindingContext="{Binding AccountViewModel}" Icon="profile.png" />
+        <local:AbonnementsView BindingContext="{Binding AbonnementViewModel}" Icon="seeSubscribe.png" />
+        <ContentPage Icon="subscribe.png" />
+    </TabbedPage.Children>
+</TabbedPage>
