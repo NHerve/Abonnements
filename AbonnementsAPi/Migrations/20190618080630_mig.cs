@@ -14,8 +14,8 @@ namespace AbonnementsAPi.Migrations
                 {
                     aboId = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    aboCli = table.Column<int>(nullable: false),
-                    aboMag = table.Column<int>(nullable: false),
+                    aboFKCli = table.Column<int>(nullable: false),
+                    aboFKMag = table.Column<int>(nullable: false),
                     aboDateDebut = table.Column<DateTime>(nullable: false),
                     aboDateFin = table.Column<DateTime>(nullable: false),
                     aboStatus = table.Column<int>(nullable: false)
@@ -35,6 +35,7 @@ namespace AbonnementsAPi.Migrations
                     cliPrenom = table.Column<string>(nullable: false),
                     cliPassword = table.Column<string>(nullable: false),
                     cliMail = table.Column<string>(nullable: false),
+                    cliPhone = table.Column<string>(nullable: false),
                     cliDateNaissance = table.Column<DateTime>(nullable: true),
                     cliLieuNaissance = table.Column<string>(nullable: true),
                     cliNumCart = table.Column<string>(nullable: true),
@@ -45,6 +46,51 @@ namespace AbonnementsAPi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_clients", x => x.cliId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Employer",
+                columns: table => new
+                {
+                    empId = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    empLogin = table.Column<string>(nullable: false),
+                    empPassword = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employer", x => x.empId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Historique",
+                columns: table => new
+                {
+                    hisId = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    hisFKCli = table.Column<int>(nullable: false),
+                    hisFKEmp = table.Column<int>(nullable: false),
+                    hisDate = table.Column<DateTime>(nullable: false),
+                    hisMoyen = table.Column<string>(nullable: false),
+                    hisMotif = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Historique", x => x.hisId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Log",
+                columns: table => new
+                {
+                    logId = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    logDescription = table.Column<string>(nullable: false),
+                    logDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Log", x => x.logId);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,6 +118,15 @@ namespace AbonnementsAPi.Migrations
 
             migrationBuilder.DropTable(
                 name: "clients");
+
+            migrationBuilder.DropTable(
+                name: "Employer");
+
+            migrationBuilder.DropTable(
+                name: "Historique");
+
+            migrationBuilder.DropTable(
+                name: "Log");
 
             migrationBuilder.DropTable(
                 name: "Magazines");

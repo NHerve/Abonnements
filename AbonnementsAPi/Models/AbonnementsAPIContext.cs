@@ -13,5 +13,8 @@ namespace AbonnementsAPi.Models
         public DbSet<Clients> clients { get; set; }
         public DbSet<Magazines> Magazines { get; set; }
         public DbSet<Abonnements> Abonnements { get; set; }
+        public DbSet<AbonnementsAPi.Models.Log> Log { get; set; }
+        public DbSet<AbonnementsAPi.Models.Historique> Historique { get; set; }
+        public DbSet<AbonnementsAPi.Models.Employer> Employer { get; set; }
     }
 }

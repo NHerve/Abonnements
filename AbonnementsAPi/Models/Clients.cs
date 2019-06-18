@@ -18,6 +18,8 @@ namespace AbonnementsAPi.Models
         public string cliPassword { get; set; }
         [Required]
         public string cliMail { get; set; }
+        [Required]
+        public string cliPhone { get; set; }
         public DateTime? cliDateNaissance { get; set; }
         public string cliLieuNaissance { get; set; }
         public string cliNumCart { get; set; }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbonnementsAPi.Migrations
 {
     [DbContext(typeof(AbonnementsAPIContext))]
-    [Migration("20190617081129_mig")]
+    [Migration("20190618080630_mig")]
     partial class mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,13 +25,13 @@ namespace AbonnementsAPi.Migrations
                     b.Property<int>("aboId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("aboCli");
-
                     b.Property<DateTime>("aboDateDebut");
 
                     b.Property<DateTime>("aboDateFin");
 
-                    b.Property<int>("aboMag");
+                    b.Property<int>("aboFKCli");
+
+                    b.Property<int>("aboFKMag");
 
                     b.Property<int>("aboStatus");
 
@@ -66,12 +66,68 @@ namespace AbonnementsAPi.Migrations
                     b.Property<string>("cliPassword")
                         .IsRequired();
 
+                    b.Property<string>("cliPhone")
+                        .IsRequired();
+
                     b.Property<string>("cliPrenom")
                         .IsRequired();
 
                     b.HasKey("cliId");
 
                     b.ToTable("clients");
+                });
+
+            modelBuilder.Entity("AbonnementsAPi.Models.Employer", b =>
+                {
+                    b.Property<int>("empId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("empLogin")
+                        .IsRequired();
+
+                    b.Property<string>("empPassword")
+                        .IsRequired();
+
+                    b.HasKey("empId");
+
+                    b.ToTable("Employer");
+                });
+
+            modelBuilder.Entity("AbonnementsAPi.Models.Historique", b =>
+                {
+                    b.Property<int>("hisId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("hisDate");
+
+                    b.Property<int>("hisFKCli");
+
+                    b.Property<int>("hisFKEmp");
+
+                    b.Property<string>("hisMotif")
+                        .IsRequired();
+
+                    b.Property<string>("hisMoyen")
+                        .IsRequired();
+
+                    b.HasKey("hisId");
+
+                    b.ToTable("Historique");
+                });
+
+            modelBuilder.Entity("AbonnementsAPi.Models.Log", b =>
+                {
+                    b.Property<int>("logId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("logDate");
+
+                    b.Property<string>("logDescription")
+                        .IsRequired();
+
+                    b.HasKey("logId");
+
+                    b.ToTable("Log");
                 });
 
             modelBuilder.Entity("AbonnementsAPi.Models.Magazines", b =>

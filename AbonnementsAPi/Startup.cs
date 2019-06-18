@@ -28,7 +28,6 @@ namespace AbonnementsAPi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services.AddEntityFrameworkNpgsql().AddDbContext<AbonnementsAPIContext>(opt =>
             opt.UseNpgsql(Configuration.GetConnectionString("AbonnementsAPIConnection")));
         }
