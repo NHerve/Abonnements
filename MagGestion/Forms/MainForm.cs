@@ -1,5 +1,9 @@
 ﻿using MagGestion.Controls;
+using MagGestion.DataServices.Interface;
+using MagGestion.Forms.Interface;
+using MagGestion.Helper.Interface;
 using MagGestion.Model.Enum;
+using RestSharp.Deserializers;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -7,8 +11,17 @@ namespace MagGestion.Forms
 {
     public partial class MainForm : Form
     {
-        public MainForm()
+        private readonly IFormOpener _formOpener;
+        private readonly ICacheService _cache;
+        private readonly IErrorLogger _errorLogger;
+        private readonly IDeserializer _serializer;
+
+        public MainForm(ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer, IFormOpener formOpener)
         {
+            _cache = cache;
+            _errorLogger = errorLogger;
+            _serializer = serializer;
+            _formOpener = formOpener;
             InitializeComponent();
             this.CenterToScreen();
         }
@@ -25,22 +38,21 @@ namespace MagGestion.Forms
                 {
                     case EnumAction.ShowClient:
                         MainPanel.Controls.Clear();
-                        MainPanel.Controls.Add(new ClientsControl());
+                        MainPanel.Controls.Add(_formOpener.CreateNewControl<ClientsControl>());
                         break;
                     case EnumAction.ShowHistorique:
                         MainPanel.Controls.Clear();
-                        MainPanel.Controls.Add(new HistoriqueControl());
+                        MainPanel.Controls.Add(new HistoriqueControl(_cache, _errorLogger, _serializer));
                         break;
                     case EnumAction.ManageMagasine:
                         MainPanel.Controls.Clear();
-                        MainPanel.Controls.Add(new MagazineControl());
+                        MainPanel.Controls.Add(new MagazineControl(_cache, _errorLogger, _serializer));
                         break;
                 }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
-
-                throw;
+                
             }
         }
 

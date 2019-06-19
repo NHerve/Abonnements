@@ -9,14 +9,24 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MagGestion.Model.Magazine;
 using MagGestion.Forms;
+using MagGestion.DataServices;
+using MagGestion.DataServices.Interface;
+using MagGestion.Helper.Interface;
+using RestSharp.Deserializers;
 
 namespace MagGestion.Controls
 {
     public partial class MagazineControl : UserControl
     {
-        public MagazineControl()
+        private readonly ICacheService _cache;
+        private readonly IErrorLogger _errorLogger;
+        private readonly IDeserializer _serializer;
+        public MagazineControl(ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer)
         {
             InitializeComponent();
+            _cache = cache;
+            _errorLogger = errorLogger;
+            _serializer = serializer;
             Initialize();
         }
 
@@ -33,17 +43,14 @@ namespace MagGestion.Controls
         private void BTMagazine_Click(object sender, EventArgs e)
         {
             var id = DGVPublication.SelectedRows[0].Cells["Id"].Value;
-            new MagazineForm(this).Show();
+            new MagazineForm(this, id.ToString()).Show();
         }
 
         private void Initialize()
         {
-            List<MagazineDGV> Magazines = new List<MagazineDGV>();
-            Magazines.Add(new MagazineDGV(1, "Le monde", "12", "45€"));
-            Magazines.Add(new MagazineDGV(1, "Le gorafi", "5", "34€"));
-            Magazines.Add(new MagazineDGV(1, "La provence", "24", "89€"));
+            List<DGVMagazine> Magazines = new MagazineDataService(_cache,_serializer, _errorLogger).GetMagazines() ?? new List<DGVMagazine>();
 
-            var h = new BindingList<MagazineDGV>(Magazines);
+            var h = new BindingList<DGVMagazine>(Magazines);
             DGVPublication.DataSource = new BindingSource(h, null);
             DGVPublication.Columns["Id"].Visible = false;
             DGVPublication.Columns["NumeroAnnée"].HeaderText = "Numéro année";

@@ -35,13 +35,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.TBTitre = new System.Windows.Forms.TextBox();
-            this.TBUrlPhoto = new System.Windows.Forms.TextBox();
             this.NumericPrice = new System.Windows.Forms.NumericUpDown();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.BTEnregistrer = new System.Windows.Forms.Button();
             this.NumericNumberPerYear = new System.Windows.Forms.NumericUpDown();
+            this.BTSelectImage = new System.Windows.Forms.Button();
+            this.PicturePhoto = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.NumericPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericNumberPerYear)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicturePhoto)).BeginInit();
             this.SuspendLayout();
             // 
             // BTQuit
@@ -50,7 +52,7 @@
             this.BTQuit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BTQuit.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTQuit.ForeColor = System.Drawing.Color.White;
-            this.BTQuit.Location = new System.Drawing.Point(150, 444);
+            this.BTQuit.Location = new System.Drawing.Point(399, 444);
             this.BTQuit.Name = "BTQuit";
             this.BTQuit.Size = new System.Drawing.Size(135, 45);
             this.BTQuit.TabIndex = 0;
@@ -127,15 +129,6 @@
             this.TBTitre.Size = new System.Drawing.Size(222, 22);
             this.TBTitre.TabIndex = 23;
             // 
-            // TBUrlPhoto
-            // 
-            this.TBUrlPhoto.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TBUrlPhoto.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBUrlPhoto.Location = new System.Drawing.Point(35, 211);
-            this.TBUrlPhoto.Name = "TBUrlPhoto";
-            this.TBUrlPhoto.Size = new System.Drawing.Size(222, 22);
-            this.TBUrlPhoto.TabIndex = 25;
-            // 
             // NumericPrice
             // 
             this.NumericPrice.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -160,7 +153,7 @@
             this.BTEnregistrer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BTEnregistrer.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTEnregistrer.ForeColor = System.Drawing.Color.White;
-            this.BTEnregistrer.Location = new System.Drawing.Point(9, 444);
+            this.BTEnregistrer.Location = new System.Drawing.Point(122, 444);
             this.BTEnregistrer.Name = "BTEnregistrer";
             this.BTEnregistrer.Size = new System.Drawing.Size(135, 45);
             this.BTEnregistrer.TabIndex = 29;
@@ -176,16 +169,39 @@
             this.NumericNumberPerYear.Size = new System.Drawing.Size(222, 25);
             this.NumericNumberPerYear.TabIndex = 30;
             // 
+            // BTSelectImage
+            // 
+            this.BTSelectImage.BackColor = System.Drawing.SystemColors.Info;
+            this.BTSelectImage.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.BTSelectImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTSelectImage.ForeColor = System.Drawing.Color.Red;
+            this.BTSelectImage.Location = new System.Drawing.Point(35, 211);
+            this.BTSelectImage.Name = "BTSelectImage";
+            this.BTSelectImage.Size = new System.Drawing.Size(222, 38);
+            this.BTSelectImage.TabIndex = 31;
+            this.BTSelectImage.Text = "Choisir Image";
+            this.BTSelectImage.UseVisualStyleBackColor = false;
+            this.BTSelectImage.Click += new System.EventHandler(this.BTSelectImage_Click);
+            // 
+            // PicturePhoto
+            // 
+            this.PicturePhoto.Location = new System.Drawing.Point(263, 52);
+            this.PicturePhoto.Name = "PicturePhoto";
+            this.PicturePhoto.Size = new System.Drawing.Size(271, 386);
+            this.PicturePhoto.TabIndex = 32;
+            this.PicturePhoto.TabStop = false;
+            // 
             // MagazineForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(296, 500);
+            this.ClientSize = new System.Drawing.Size(546, 500);
+            this.Controls.Add(this.PicturePhoto);
+            this.Controls.Add(this.BTSelectImage);
             this.Controls.Add(this.NumericNumberPerYear);
             this.Controls.Add(this.BTEnregistrer);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.NumericPrice);
-            this.Controls.Add(this.TBUrlPhoto);
             this.Controls.Add(this.TBTitre);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label5);
@@ -198,6 +214,7 @@
             this.Text = "Magasine";
             ((System.ComponentModel.ISupportInitialize)(this.NumericPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericNumberPerYear)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicturePhoto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -212,10 +229,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox TBTitre;
-        private System.Windows.Forms.TextBox TBUrlPhoto;
         private System.Windows.Forms.NumericUpDown NumericPrice;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button BTEnregistrer;
         private System.Windows.Forms.NumericUpDown NumericNumberPerYear;
+        private System.Windows.Forms.Button BTSelectImage;
+        private System.Windows.Forms.PictureBox PicturePhoto;
     }
 }

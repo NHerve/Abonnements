@@ -4,12 +4,13 @@ namespace MagGestion.Model
 {
     public class HistoriqueDataGridView
     {
-        public HistoriqueDataGridView(int id, string nom, string prenom, string moyen, DateTime date)
+        public HistoriqueDataGridView(int id, string nom, string prenom, string moyen, string motif, DateTime date)
         {
             Id = id;
             Nom = nom;
             Prenom = prenom;
             Moyen = moyen;
+            Motif = motif;
             Date = date;
         }
 
@@ -20,6 +21,8 @@ namespace MagGestion.Model
         public string Prenom { get; set; }
 
         public string Moyen { get; set; }
+
+        public string Motif { get; set; }
 
         public DateTime Date { get; set; }
     }

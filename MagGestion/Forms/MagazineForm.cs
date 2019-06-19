@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MagGestion.DataServices;
+using MagGestion.Model.Magazine;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,10 +15,12 @@ namespace MagGestion.Forms
     public partial class MagazineForm : Form
     {
         private Control _control;
-        public MagazineForm(Control control)
+        private readonly string _id;
+        public MagazineForm(Control control, string id)
         {
             InitializeComponent();
             _control = control;
+            _id = id;
             _control.Parent.Parent.Enabled = false;
             this.TopMost = true;
             this.CenterToScreen();
@@ -27,6 +31,25 @@ namespace MagGestion.Forms
             _control.Parent.Parent.Enabled = true;
 
             this.Close();
+        }
+
+        private void BTSelectImage_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog dlg = new OpenFileDialog())
+            {
+
+                dlg.Title = "Choisir couverture";
+                dlg.Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|All files (*.*)|*.*";
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    PicturePhoto.Image = new Bitmap(dlg.FileName);
+                    PicturePhoto.SizeMode = PictureBoxSizeMode.CenterImage;
+                }
+            }
+        }
+        private void Initialize(int id)
+        {
+          //  Magazine magazine = new MagazineDataService().GetMagazine(id);
         }
     }
 }

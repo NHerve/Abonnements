@@ -48,8 +48,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.6.9.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.6.9\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=4.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.6.0\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -79,12 +90,21 @@
     <Compile Include="Controls\MagazineControl.Designer.cs">
       <DependentUpon>MagazineControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataServices\BaseClient.cs" />
+    <Compile Include="DataServices\ClientDataService.cs" />
+    <Compile Include="DataServices\Deserializer\JsonSerializer.cs" />
+    <Compile Include="DataServices\EmployeDataService.cs" />
+    <Compile Include="DataServices\ErrorDataService.cs" />
+    <Compile Include="DataServices\InMemoryCache.cs" />
+    <Compile Include="DataServices\Interface\ICacheService.cs" />
+    <Compile Include="DataServices\MagazineDataService.cs" />
     <Compile Include="Forms\ClientForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ClientForm.Designer.cs">
       <DependentUpon>ClientForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Interface\IFormOpener.cs" />
     <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,10 +124,17 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper\Constant.cs" />
-    <Compile Include="Model\Client.cs" />
+    <Compile Include="Helper\ErrorLogger.cs" />
+    <Compile Include="Helper\Interface\IErrorLogger.cs" />
+    <Compile Include="Helper\SaltPassword.cs" />
+    <Compile Include="Model\Client\Client.cs" />
+    <Compile Include="Model\Client\DGVClients.cs" />
+    <Compile Include="Model\Employe\Employe.cs" />
     <Compile Include="Model\Enum\EnumAction.cs" />
     <Compile Include="Model\HistoriqueDataGridView.cs" />
-    <Compile Include="Model\Magazine\MagazineDGV.cs" />
+    <Compile Include="Model\LogError\Error.cs" />
+    <Compile Include="Model\Magazine\DGVMagazine.cs" />
+    <Compile Include="Model\Magazine\Magazine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\ClientsControl.resx">
@@ -140,6 +167,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -154,8 +182,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DataServices\" />
-    <Folder Include="Model\Client\" />
     <Folder Include="Model\Historique\" />
   </ItemGroup>
   <ItemGroup>
