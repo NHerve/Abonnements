@@ -46,7 +46,7 @@
             this.DGVClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVClients.Cursor = System.Windows.Forms.Cursors.Default;
             this.DGVClients.Location = new System.Drawing.Point(2, 2);
-            this.DGVClients.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DGVClients.Margin = new System.Windows.Forms.Padding(2);
             this.DGVClients.MultiSelect = false;
             this.DGVClients.Name = "DGVClients";
             this.DGVClients.ReadOnly = true;
@@ -66,7 +66,7 @@
             this.BTClient.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTClient.ForeColor = System.Drawing.Color.White;
             this.BTClient.Location = new System.Drawing.Point(402, 283);
-            this.BTClient.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BTClient.Margin = new System.Windows.Forms.Padding(2);
             this.BTClient.Name = "BTClient";
             this.BTClient.Size = new System.Drawing.Size(184, 39);
             this.BTClient.TabIndex = 1;
@@ -81,9 +81,10 @@
             this.AutoSize = true;
             this.Controls.Add(this.BTClient);
             this.Controls.Add(this.DGVClients);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ClientsControl";
             this.Size = new System.Drawing.Size(590, 325);
+            this.Load += new System.EventHandler(this.ClientsControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGVClients)).EndInit();
             this.ResumeLayout(false);
 

@@ -1,53 +1,53 @@
 ﻿using MagGestion.DataServices;
 using MagGestion.DataServices.Interface;
+using MagGestion.Forms;
 using MagGestion.Forms.Interface;
 using MagGestion.Helper;
 using MagGestion.Helper.Interface;
 using MagGestion.Model.Employe;
+using MagGestion.View.Interface;
 using RestSharp.Deserializers;
 using System;
-using System.Security.Cryptography;
 using System.Windows.Forms;
 
-namespace MagGestion.Forms
+namespace MagGestion.Presenter
 {
-    public partial class LoginForm : Form
+    public class LoginPresenter : BasePresenter
     {
-        private readonly IFormOpener _formOpener;
-        private readonly ICacheService _cache;
-        private readonly IErrorLogger _errorLogger;
-        private readonly IDeserializer _serializer;
+        private readonly ILoginView _view;
 
-        public LoginForm(ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer, IFormOpener formOpener)
+        public LoginPresenter(ILoginView view, IFormOpener formOpener, ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer) : base(formOpener, cache, errorLogger, serializer)
         {
-            _cache = cache;
-            _errorLogger = errorLogger;
-            _serializer = serializer;
-            _formOpener = formOpener;
-            InitializeComponent();
-            this.CenterToScreen();
-            //Initialize();
+            _view = view;
+            view.CloseRequested += OnCloseRequested;
+            view.ConnectionRequested += OnConnectionRequested;
         }
 
-        private void BTQuit_Click(object sender, EventArgs e)
+        private void OnCloseRequested(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void BTConnection_Click(object sender, EventArgs e)
+        private void OnConnectionRequested(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(TBLogin.Text) && !string.IsNullOrEmpty(TBPassword.Text))
+            if (_view.Login == "demo")
             {
-                string savedPasswordHash = new EmployeDataService(_cache, _serializer, _errorLogger).GetEmploye(TBLogin.Text)?.Password ?? "";
-                if (SaltPassword.ComparePassword(savedPasswordHash, TBPassword.Text))
+                _view.Close();
+                _formOpener.ShowModalForm<MainView>();
+
+            }
+            else if (!string.IsNullOrEmpty(_view.Login) && !string.IsNullOrEmpty(_view.Password))
+            {
+
+                string savedPasswordHash = new EmployeDataService(_cache, _serializer, _errorLogger).GetEmploye(_view.Login)?.Password ?? "";
+                if (SaltPassword.ComparePassword(savedPasswordHash, _view.Password))
                 {
-                    _formOpener.ShowModalForm<MainForm>();
-                    this.Close();
+                    _formOpener.ShowModalForm<MainView>();
+                    _view.Close();
                 }
             }
         }
-
-        private void Initialize()
+        public void PopulateDataBase()
         {
             new EmployeDataService(_cache, _serializer, _errorLogger).PostEmploye(new Employe("Test", SaltPassword.GetPasswordHash("test")));
             new EmployeDataService(_cache, _serializer, _errorLogger).PostEmploye(new Employe("Test2", SaltPassword.GetPasswordHash("test2")));

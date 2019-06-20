@@ -1,38 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using MagGestion.Model.Magazine;
-using MagGestion.Forms;
-using MagGestion.DataServices;
+﻿using MagGestion.Controls.Interface;
 using MagGestion.DataServices.Interface;
 using MagGestion.Helper.Interface;
+using MagGestion.Presenter;
 using RestSharp.Deserializers;
+using System;
+using System.Windows.Forms;
 
 namespace MagGestion.Controls
 {
-    public partial class MagazineControl : UserControl
+    public partial class MagazineControl : UserControl, IMagazineControl
     {
         private readonly ICacheService _cache;
         private readonly IErrorLogger _errorLogger;
         private readonly IDeserializer _serializer;
+
+        public event EventHandler MagazineSelected;
+        public event EventHandler OnShowMagazineForm;
+
+        public MagazineControlPresenter Presenter { private get; set; }
+        public DataGridView DGVMagazine { get => DGVMagazine; set => DGVMagazine = value; }
+        public Button BTMag { get => BTMagazine; set => BTMagazine = value; }
+
         public MagazineControl(ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer)
         {
-            InitializeComponent();
             _cache = cache;
             _errorLogger = errorLogger;
             _serializer = serializer;
-            Initialize();
+            InitializeComponent();
         }
 
         private void DGVPublication_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            BTMagazine.Enabled = true;
+            MagazineSelected(this, EventArgs.Empty);
         }
 
         private void DGVPublication_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -42,19 +41,13 @@ namespace MagGestion.Controls
 
         private void BTMagazine_Click(object sender, EventArgs e)
         {
-            var id = DGVPublication.SelectedRows[0].Cells["Id"].Value;
-            new MagazineForm(this, id.ToString()).Show();
+
         }
 
-        private void Initialize()
+        private void MagazineControl_Load(object sender, EventArgs e)
         {
-            List<DGVMagazine> Magazines = new MagazineDataService(_cache,_serializer, _errorLogger).GetMagazines() ?? new List<DGVMagazine>();
-
-            var h = new BindingList<DGVMagazine>(Magazines);
-            DGVPublication.DataSource = new BindingSource(h, null);
-            DGVPublication.Columns["Id"].Visible = false;
-            DGVPublication.Columns["NumeroAnnée"].HeaderText = "Numéro année";
-            DGVPublication.Columns["PrixAnnuel"].HeaderText = "Prix annuel";
+            Presenter = new MagazineControlPresenter(this, _cache, _errorLogger, _serializer);
+            Presenter.FillDGV();
         }
     }
 }

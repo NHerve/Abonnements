@@ -81,6 +81,7 @@
             this.Controls.Add(this.DGVPublication);
             this.Name = "MagazineControl";
             this.Size = new System.Drawing.Size(590, 325);
+            this.Load += new System.EventHandler(this.MagazineControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGVPublication)).EndInit();
             this.ResumeLayout(false);
 

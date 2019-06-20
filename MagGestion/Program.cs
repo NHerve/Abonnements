@@ -5,6 +5,7 @@ using MagGestion.Forms;
 using MagGestion.Forms.Interface;
 using MagGestion.Helper;
 using MagGestion.Helper.Interface;
+using MagGestion.Presenter;
 using RestSharp.Deserializers;
 using RestSharp.Serializers;
 using SimpleInjector;
@@ -40,7 +41,7 @@ namespace MagGestion
             container.Register<ErrorDataService>();
             container.Register<EmployeDataService>();
             container.Register<MagazineDataService>();
-        
+
             container.RegisterSingleton<IFormOpener, FormOpener>();
 
             container.Verify();
