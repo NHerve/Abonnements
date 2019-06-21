@@ -46,6 +46,28 @@ namespace AbonnementsAPi.Controllers
             return Ok(employer);
         }
 
+        // GET: api/Employers/login/haymes
+        [HttpGet("login/{login}")]
+        public async Task<IActionResult> GetEmployerbyLogin([FromRoute] string login)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var employer =
+                (from e in _context.Employer
+                where e.empLogin == login
+                select e).FirstOrDefault();
+
+            if (employer == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(employer);
+        }
+
         // PUT: api/Employers/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployer([FromRoute] int id, [FromBody] Employer employer)

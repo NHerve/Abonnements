@@ -13,6 +13,7 @@
           "cliAuthKey" text NULL,
           CONSTRAINT "PK_clients" PRIMARY KEY ("cliId")
       );
+      ALTER TABLE public."clients" ADD CONSTRAINT unique_cliMail UNIQUE("cliMail")
 
     CREATE TABLE "Employer" (
           "empId" serial NOT NULL,
@@ -20,6 +21,7 @@
           "empPassword" text NOT NULL,
           CONSTRAINT "PK_Employer" PRIMARY KEY ("empId")
       );
+      ALTER TABLE public."Employer" ADD CONSTRAINT unique_empLogin UNIQUE("empLogin");
 
     CREATE TABLE "Magazines" (
           "magId" serial NOT NULL,

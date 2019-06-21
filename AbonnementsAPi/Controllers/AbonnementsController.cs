@@ -56,7 +56,13 @@ namespace AbonnementsAPi.Controllers
             }
 
             //var abonnements = await _context.Abonnements.FindAsync(id);
-            var abonnements =  await _context.Abonnements.Where(x => x.aboFKCli == id).ToListAsync();
+            //var abonnements =  await _context.Abonnements.Where(x => x.aboFKCli == id).ToListAsync();
+
+            var abonnements =
+                from a in _context.Abonnements
+                where a.aboFKCli == id
+                where a.aboDateFin > DateTime.Now
+                select a;
 
             if (abonnements == null)
             {
