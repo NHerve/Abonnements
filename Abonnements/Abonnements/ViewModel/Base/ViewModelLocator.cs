@@ -1,8 +1,10 @@
 ﻿using Abonnements.DataServices;
-using Abonnements.DataServices.Base;
-using Abonnements.DataServices.Interface;
+using Abonnements.DataServices.Deserializer;
+using Abonnements.Helpers;
+using Abonnements.Helpers.Interface;
 using Abonnements.Services;
 using Abonnements.Services.Interfaces;
+using RestSharp.Deserializers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,17 +33,18 @@ namespace Abonnements.ViewModel.Base
             _unityContainer.AddExtension(new Diagnostic());
 
             // Providers
-            _unityContainer.RegisterType<IRequestProvider, RequestProvider>();
-
 
             // Services
             _unityContainer.RegisterType<IDialogService, DialogService>();
             RegisterSingleton<INavigationService, NavigationService>();
-
+            _unityContainer.RegisterType<IDeserializer, JsonSerializer>();
+            _unityContainer.RegisterType<IErrorLogger, ErrorLogger>();
 
             //DataServices
-            _unityContainer.RegisterType<IAuthenticationService, AuthenticationService>();
-
+            _unityContainer.RegisterType<BaseClient>();
+            _unityContainer.RegisterType<UserDataService>();
+            _unityContainer.RegisterType<MagazineDataService>();
+            _unityContainer.RegisterType<AbonnementDataService>();
 
             // View models
             _unityContainer.RegisterType<LoginViewModel>();

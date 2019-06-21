@@ -37,6 +37,10 @@ namespace Abonnements.Model.Users
         #endregion
 
         #region Ctor
+        public UserProfile()
+        {
+
+        }
         public UserProfile(string firstName, string lastName, string mail, string phone, DateTime birthDay, string birthLocation, string ccv, string cardNumber, string expirationDate)
         {
             FirstName = firstName;

@@ -1,6 +1,4 @@
-﻿using Abonnements.DataServices.Base;
-using Abonnements.DataServices.Interface;
-using Abonnements.Validations;
+﻿using Abonnements.Validations;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,7 +19,6 @@ namespace Abonnements.ViewModel
         private ValidatableObject<string> _password;
         private bool _isValid;
         private bool _isEnabled;
-        private readonly IAuthenticationService _authenticationService;
         #endregion
         #region PublicProperty
         public ValidatableObject<string> UserMail
@@ -79,12 +76,10 @@ namespace Abonnements.ViewModel
         #endregion
 
         #region Ctor
-        public LoginViewModel(IAuthenticationService authenticationService)
+        public LoginViewModel()
         {
-            _authenticationService = authenticationService;
             _userMail = new ValidatableObject<string>();
             _password = new ValidatableObject<string>();
-
             AddValidations();
         }
         #endregion
@@ -115,12 +110,9 @@ namespace Abonnements.ViewModel
                     //isAuthenticated = await _authenticationService.LoginAsync(UserMail.Value, Password.Value);
                     isAuthenticated = true;
                 }
-                catch (ServiceAuthenticationException)
-                {
-                    await DialogService.ShowAlertAsync("Invalid credentials", "Login failure", "Try again");
-                }
                 catch (Exception ex) when (ex is WebException || ex is HttpRequestException)
                 {
+                    await DialogService.ShowAlertAsync("Invalid credentials", "Login failure", "Try again");
                     Debug.WriteLine($"[SignIn] Error signing in: {ex}");
                     await DialogService.ShowAlertAsync("Communication error", "Error", "Ok");
                 }

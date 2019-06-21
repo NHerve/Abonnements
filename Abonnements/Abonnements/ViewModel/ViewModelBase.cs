@@ -1,5 +1,7 @@
-﻿using Abonnements.Services.Interfaces;
+﻿using Abonnements.Helpers.Interface;
+using Abonnements.Services.Interfaces;
 using Abonnements.ViewModel.Base;
+using RestSharp.Deserializers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +13,8 @@ namespace Abonnements.ViewModel
     {
         protected readonly IDialogService DialogService;
         protected readonly INavigationService NavigationService;
+        protected readonly IErrorLogger ErrorLogger;
+        protected readonly IDeserializer Serializer;
 
         private bool _isBusy;
 
@@ -32,6 +36,8 @@ namespace Abonnements.ViewModel
         {
             DialogService = ViewModelLocator.Instance.Resolve<IDialogService>();
             NavigationService = ViewModelLocator.Instance.Resolve<INavigationService>();
+            ErrorLogger = ViewModelLocator.Instance.Resolve<IErrorLogger>();
+            Serializer = ViewModelLocator.Instance.Resolve<IDeserializer>();
         }
 
         public virtual Task InitializeAsync(object navigationData)

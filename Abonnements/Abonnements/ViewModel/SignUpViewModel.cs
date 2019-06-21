@@ -1,5 +1,4 @@
-﻿using Abonnements.DataServices.Base;
-using Abonnements.Validations;
+﻿using Abonnements.Validations;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -155,12 +154,9 @@ namespace Abonnements.ViewModel
                     //isRegistered = await _registerService.SignUnAsync(UserMail.Value, Password.Value);
                     isRegistered = true;
                 }
-                catch (ServiceAuthenticationException)
-                {
-                    await DialogService.ShowAlertAsync("Invalid credentials", "Login failure", "Try again");
-                }
                 catch (Exception ex) when (ex is WebException || ex is HttpRequestException)
                 {
+                    await DialogService.ShowAlertAsync("Invalid credentials", "Login failure", "Try again");
                     Debug.WriteLine($"[SignIn] Error signing in: {ex}");
                     await DialogService.ShowAlertAsync("Communication error", "Error", "Ok");
                 }

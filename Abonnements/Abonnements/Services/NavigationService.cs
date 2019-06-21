@@ -1,4 +1,4 @@
-﻿using Abonnements.DataServices.Interface;
+﻿using Abonnements.Helpers;
 using Abonnements.Services.Interfaces;
 using Abonnements.View;
 using Abonnements.ViewModel;
@@ -12,9 +12,8 @@ namespace Abonnements.Services
 {
     public class NavigationService : INavigationService
     {
-        private readonly IAuthenticationService _authenticationService;
         protected readonly Dictionary<Type, Type> _mappings;
-
+        protected readonly IDialogService _dialogService;
         protected Application CurrentApplication
         {
             get
@@ -23,9 +22,9 @@ namespace Abonnements.Services
             }
         }
 
-        public NavigationService(IAuthenticationService authenticationService)
+        public NavigationService(IDialogService dialogService)
         {
-            _authenticationService = authenticationService;
+            _dialogService = dialogService;
             _mappings = new Dictionary<Type, Type>();
 
             CreatePageViewModelMappings();
@@ -33,7 +32,7 @@ namespace Abonnements.Services
 
         public Task InitializeAsync()
         {
-            if (_authenticationService.IsAuthenticated)
+            if (Settings.AccessToken != "")
             {
                 return NavigateToAsync<MainViewModel>();
             }
@@ -134,7 +133,7 @@ namespace Abonnements.Services
             }
             catch (Exception ex)
             {
-
+                throw;
             }
         }
 

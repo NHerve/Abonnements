@@ -29,7 +29,7 @@ namespace Abonnements.ViewModel
         #region Ctor
         public MagazineViewModel()
         {
-            _magazine = new Magazine{ Titre = "Le monde", Description = "Courte description d'un magazine pas super connu", NbVolumeAnnee = 12, PrixAnnuel = 36.00m};
+            _magazine = new Magazine{ Titre = "Le monde", Description = "Courte description d'un magazine pas super connu", NumeroAnnée = 12, PrixAnnuel = 36.00m};
         }
         #endregion
     }
