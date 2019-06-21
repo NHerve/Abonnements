@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AbonnementsAPi.Models;
+using Microsoft.AspNetCore.Authorization;
+using AbonnementsAPi.Services;
+using System.Net.Http.Headers;
 
 namespace AbonnementsAPi.Controllers
 {
@@ -14,23 +17,30 @@ namespace AbonnementsAPi.Controllers
     public class ClientsController : ControllerBase
     {
         private readonly AbonnementsAPIContext _context;
+        private readonly IClientService _clientService;
 
-        public ClientsController(AbonnementsAPIContext context)
+        public ClientsController(AbonnementsAPIContext context, IClientService clientService)
         {
             _context = context;
+            _clientService = clientService;
         }
 
         // GET: api/Clients
         [HttpGet]
         public IEnumerable<Clients> Getclients()
         {
-            return _context.clients;
+            return _clientService.GetAll();
         }
 
         // GET: api/Clients/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetClients([FromRoute] int id)
         {
+
+            //IEnumerable<string> headerValues = Request.Headers.GetValues("MyCustomID");
+            //var id = headerValues.FirstOrDefault();
+
+            //CheckCliAuthKey(id,)
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -81,6 +91,22 @@ namespace AbonnementsAPi.Controllers
             return NoContent();
         }
 
+        // POST: api/Clients/authenticate
+        [HttpPost("Authenticate")]
+        public async Task<IActionResult> Authenticate([FromBody]Clients cliParam)
+        {
+            var cli = _clientService.Authenticate(cliParam.cliMail, cliParam.cliPassword);
+
+            if (cli == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
+            
+            await _context.SaveChangesAsync();
+
+            cli.cliPassword = null;
+
+            return Ok(cli);
+        }
+
         // POST: api/Clients
         [HttpPost]
         public async Task<IActionResult> PostClients([FromBody] Clients clients)
@@ -120,6 +146,28 @@ namespace AbonnementsAPi.Controllers
         private bool ClientsExists(int id)
         {
             return _context.clients.Any(e => e.cliId == id);
+        }
+
+        private bool CheckCliAuthKey(int id,HttpRequestHeaders head)
+        {
+            var cliAuthKey = from c in _context.clients
+                             where c.cliId == id
+                             select new String(c.cliAuthKey);
+
+
+            if (cliAuthKey == null)
+            {
+                return false;
+            }
+
+            if (cliAuthKey.ToString() == head.GetValues("cliAuthKey").ElementAt(0))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
