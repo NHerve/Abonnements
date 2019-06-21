@@ -1,29 +1,42 @@
-﻿using MagGestion.Forms;
-using MagGestion.Model;
+﻿using MagGestion.Controls.Interface;
+using MagGestion.DataServices.Interface;
+using MagGestion.Helper.Interface;
+using MagGestion.Presenter;
+using RestSharp.Deserializers;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace MagGestion.Controls
 {
-    public partial class HistoriqueControl : UserControl
+    public partial class HistoriqueControl : UserControl, IHistoriqueControl
     {
-        public HistoriqueControl()
+        private readonly ICacheService _cache;
+        private readonly IErrorLogger _errorLogger;
+        private readonly IDeserializer _serializer;
+        public HistoriqueControl(ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer)
         {
+            _cache = cache;
+            _errorLogger = errorLogger;
+            _serializer = serializer;
             InitializeComponent();
-            Initiialize();
         }
+
+        public HistoriqueControlPresenter Presenter { private get; set; }
+        public DataGridView DataGridViewHistorique { get => DGVHistorique; set => DGVHistorique = value; }
+        public Button ButtonClient { get => BTClient; set => BTClient = value; }
+
+        public event EventHandler HistoriqueSelected;
+        public event EventHandler OnShowClientForm;
 
         private void BTClient_Click(object sender, EventArgs e)
         {
-            var id = DGVHistorique.SelectedRows[0].Cells["Id"].Value;
-            new ClientForm(this).Show();
+            OnShowClientForm(this, EventArgs.Empty);
         }
 
         private void DGVHistorique_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            BTClient.Enabled = true;
+            HistoriqueSelected(this, EventArgs.Empty);
+
         }
 
         private void DGVHistorique_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -31,18 +44,10 @@ namespace MagGestion.Controls
             DGVHistorique.ClearSelection();
         }
 
-        private void Initiialize()
+        private void HistoriqueControl_Load(object sender, EventArgs e)
         {
-            List<HistoriqueDataGridView> Historique = new List<HistoriqueDataGridView>();
-            Historique.Add(new HistoriqueDataGridView(1, "Steven", "Jeanne", "Mail", DateTime.Now.AddMonths(-2)));
-            Historique.Add(new HistoriqueDataGridView(1, "Steven", "Jeanne", "Sms", DateTime.Now.AddMonths(-1)));
-            Historique.Add(new HistoriqueDataGridView(1, "Steven", "Jeanne", "Telephone", DateTime.Now.AddDays(-2)));
-            Historique.Add(new HistoriqueDataGridView(1, "Steven", "Jeanne", "Sms", DateTime.Now.AddDays(-1)));
-            Historique.Add(new HistoriqueDataGridView(1, "Steven", "Jeanne", "Sms", DateTime.Now));
-
-            var h = new BindingList<HistoriqueDataGridView>(Historique);
-            DGVHistorique.DataSource = new BindingSource(h, null);
-            DGVHistorique.Columns["Id"].Visible = false;
+            Presenter = new HistoriqueControlPresenter(this, _cache, _errorLogger, _serializer);
+            Presenter.FillDGV();
         }
     }
 }
