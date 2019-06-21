@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
-namespace MagGestion.Model
+namespace MagGestion.Model.Historique
 {
-    public class HistoriqueDataGridView
+    public class DGVHistorique
     {
-        public HistoriqueDataGridView(int id, string nom, string prenom, string moyen, string motif, DateTime date)
+        public DGVHistorique(int id, string nom, string prenom, string moyen, string motif, DateTime date)
         {
             Id = id;
             Nom = nom;
@@ -14,16 +15,22 @@ namespace MagGestion.Model
             Date = date;
         }
 
+        [JsonProperty(PropertyName = "cliId")]
         public int Id { get; set; }  // Id Client used to see fiche client
 
+        [JsonProperty("cliNom")]
         public string Nom { get; set; }
 
+        [JsonProperty(PropertyName = "cliPrenom")]
         public string Prenom { get; set; }
 
+        [JsonProperty("")]
         public string Moyen { get; set; }
 
+        [JsonProperty("")]
         public string Motif { get; set; }
 
+        [JsonProperty("")]
         public DateTime Date { get; set; }
     }
 }

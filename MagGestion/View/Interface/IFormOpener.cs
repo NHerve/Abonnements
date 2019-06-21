@@ -1,9 +1,6 @@
 ﻿using SimpleInjector;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MagGestion.Forms.Interface
@@ -57,15 +54,11 @@ namespace MagGestion.Forms.Interface
 
         public Control CreateNewControl<TControl>() where TControl : Control
         {
-            return this.GetControl<TControl>();
+            return this.container.GetInstance<TControl>();
         }
         private Form GetForm<TForm>() where TForm : Form
         {
             return this.container.GetInstance<TForm>();
-        }
-        private Control GetControl<TControl>() where TControl : Control
-        {
-            return this.container.GetInstance<TControl>();
         }
     }
 }

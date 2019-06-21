@@ -23,6 +23,9 @@
 
         public static string MagazineUrl = @"magazines";
 
+        public static string HistoriqueUrl = @"historiques";
+
+
 
     }
 }

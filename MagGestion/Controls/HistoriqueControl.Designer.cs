@@ -81,6 +81,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "HistoriqueControl";
             this.Size = new System.Drawing.Size(590, 325);
+            this.Load += new System.EventHandler(this.HistoriqueControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGVHistorique)).EndInit();
             this.ResumeLayout(false);
 

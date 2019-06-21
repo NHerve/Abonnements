@@ -1,13 +1,6 @@
-﻿using MagGestion.DataServices;
-using MagGestion.Model.Magazine;
+﻿using MagGestion.Controls.Interface;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MagGestion.Forms
@@ -49,7 +42,7 @@ namespace MagGestion.Forms
         }
         private void Initialize(int id)
         {
-          //  Magazine magazine = new MagazineDataService().GetMagazine(id);
+            //  Magazine magazine = new MagazineDataService().GetMagazine(id);
         }
     }
 }
