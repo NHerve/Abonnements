@@ -9,9 +9,12 @@ using AbonnementsAPi.Models;
 using Microsoft.AspNetCore.Authorization;
 using AbonnementsAPi.Services;
 using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Security.Claims;
 
 namespace AbonnementsAPi.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class ClientsController : ControllerBase
@@ -36,62 +39,76 @@ namespace AbonnementsAPi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetClients([FromRoute] int id)
         {
-
-            //IEnumerable<string> headerValues = Request.Headers.GetValues("MyCustomID");
-            //var id = headerValues.FirstOrDefault();
-
-            //CheckCliAuthKey(id,)
-            if (!ModelState.IsValid)
+            string cliId = User.FindFirst(ClaimTypes.Email)?.Value;
+            if(int.Parse(cliId) == id)
             {
-                return BadRequest(ModelState);
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var clients = await _context.clients.FindAsync(id);
+
+                if (clients == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(clients);
             }
-
-            var clients = await _context.clients.FindAsync(id);
-
-            if (clients == null)
+            else
             {
-                return NotFound();
+                return Unauthorized();
             }
-
-            return Ok(clients);
         }
 
         // PUT: api/Clients/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutClients([FromRoute] int id, [FromBody] Clients clients)
         {
-            if (!ModelState.IsValid)
+            string cliId = User.FindFirst(ClaimTypes.Email)?.Value;
+            if (int.Parse(cliId) == id)
             {
-                return BadRequest(ModelState);
-            }
 
-            if (id != clients.cliId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(clients).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ClientsExists(id))
+                if (!ModelState.IsValid)
                 {
-                    return NotFound();
+                    return BadRequest(ModelState);
                 }
-                else
-                {
-                    throw;
-                }
-            }
 
-            return NoContent();
+                if (id != clients.cliId)
+                {
+                    return BadRequest();
+                }
+
+                _context.Entry(clients).State = EntityState.Modified;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ClientsExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return NoContent();
+            }
+            else
+            {
+                return Unauthorized();
+            }
         }
 
         // POST: api/Clients/authenticate
+        [AllowAnonymous]
         [HttpPost("Authenticate")]
         public async Task<IActionResult> Authenticate([FromBody]Clients cliParam)
         {
@@ -126,21 +143,30 @@ namespace AbonnementsAPi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteClients([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
+            string cliId = User.FindFirst(ClaimTypes.Email)?.Value;
+            if (int.Parse(cliId) == id)
             {
-                return BadRequest(ModelState);
-            }
 
-            var clients = await _context.clients.FindAsync(id);
-            if (clients == null)
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var clients = await _context.clients.FindAsync(id);
+                if (clients == null)
+                {
+                    return NotFound();
+                }
+
+                _context.clients.Remove(clients);
+                await _context.SaveChangesAsync();
+
+                return Ok(clients);
+            }
+            else
             {
-                return NotFound();
+                return Unauthorized();
             }
-
-            _context.clients.Remove(clients);
-            await _context.SaveChangesAsync();
-
-            return Ok(clients);
         }
 
         private bool ClientsExists(int id)
@@ -148,26 +174,5 @@ namespace AbonnementsAPi.Controllers
             return _context.clients.Any(e => e.cliId == id);
         }
 
-        private bool CheckCliAuthKey(int id,HttpRequestHeaders head)
-        {
-            var cliAuthKey = from c in _context.clients
-                             where c.cliId == id
-                             select new String(c.cliAuthKey);
-
-
-            if (cliAuthKey == null)
-            {
-                return false;
-            }
-
-            if (cliAuthKey.ToString() == head.GetValues("cliAuthKey").ElementAt(0))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
     }
 }

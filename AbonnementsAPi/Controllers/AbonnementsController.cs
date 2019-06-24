@@ -6,9 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AbonnementsAPi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace AbonnementsAPi.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class AbonnementsController : ControllerBase
@@ -50,62 +54,75 @@ namespace AbonnementsAPi.Controllers
         [HttpGet("client/{id}")]
         public async Task<IActionResult> GetAboByCli([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
+            string cliId = User.FindFirst(ClaimTypes.Email)?.Value;
+            if (int.Parse(cliId) == id)
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var abonnements =
+                    from a in _context.Abonnements
+                    where a.aboFKCli == id
+                    where a.aboDateFin > DateTime.Now
+                    select a;
+
+                if (abonnements == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(abonnements);
             }
-
-            //var abonnements = await _context.Abonnements.FindAsync(id);
-            //var abonnements =  await _context.Abonnements.Where(x => x.aboFKCli == id).ToListAsync();
-
-            var abonnements =
-                from a in _context.Abonnements
-                where a.aboFKCli == id
-                where a.aboDateFin > DateTime.Now
-                select a;
-
-            if (abonnements == null)
+            else
             {
-                return NotFound();
+                return Unauthorized();
             }
-
-            return Ok(abonnements);
         }
 
         //GET: api/Abonnements/clientNonAbo/5
         [HttpGet("clientNonAbo/{id}")]
         public async Task<IActionResult> GetNonAboByCli([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
+            string cliId = User.FindFirst(ClaimTypes.Email)?.Value;
+            if (int.Parse(cliId) == id)
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var abonnements =
+                    from m in _context.Magazines
+                    where (from a in _context.Abonnements
+                           where a.aboFKCli == id
+                           where a.aboDateFin < DateTime.Now
+                           select a.aboFKMag)
+                           .Contains(m.magId)
+                    select m;
+
+                var abo = from m2 in _context.Magazines
+                          join ab in _context.Abonnements on m2.magId equals ab.aboFKMag into t
+                          from su in t.DefaultIfEmpty()
+                          where su.aboFKCli == null
+                          select m2;
+
+                var result = abo.Union(abonnements);
+
+
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(result);
             }
-
-            var abonnements =
-                from m in _context.Magazines
-                where (from a in _context.Abonnements
-                       where a.aboFKCli == id
-                       where a.aboDateFin < DateTime.Now
-                       select a.aboFKMag)
-                       .Contains(m.magId)
-                select m;
-
-            var abo = from m2 in _context.Magazines
-                      join ab in _context.Abonnements on m2.magId equals ab.aboFKMag into t
-                      from su in t.DefaultIfEmpty()
-                      where su.aboFKCli == null
-                      select m2;
-
-            var result = abo.Union(abonnements);
-
-
-
-            if (result == null)
+            else
             {
-                return NotFound();
+                return Unauthorized();
             }
-
-            return Ok(result);
         }
 
         // PUT: api/Abonnements/5
