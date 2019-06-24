@@ -1,4 +1,5 @@
-﻿using Abonnements.Helpers;
+﻿using Abonnements.Helper;
+using Abonnements.Helpers;
 using Abonnements.Helpers.Interface;
 using Abonnements.Model.Users;
 using Abonnements.Services.Interfaces;
@@ -17,17 +18,30 @@ namespace Abonnements.DataServices
             BaseUrl = new Uri(BaseUrl, Constant.ClientUrl);
         }
 
-        public void PostUser(UserSignUp user)
+        public UserSignUp SignUp(UserSignUp user)
         {
             RestRequest request = new RestRequest() { Method = Method.POST };
             request.AddJsonBody(user);
 
-            Execute(request);
+            return Get<UserSignUp>(request);
         }
 
-        public UserProfile Connection(string login)
+        public bool Update(UserProfile profile)
         {
-            RestRequest request = new RestRequest($"{Constant.Authenticate}/{login}") { Method = Method.GET };
+            RestRequest request = new RestRequest($"{profile.Id}") { Method = Method.PUT };
+            request.AddJsonBody(profile);
+
+            if (Execute(request).StatusCode == System.Net.HttpStatusCode.NoContent)
+                return true;
+
+            return false;
+
+        }
+
+        public UserProfile Login(UserConnection userConnection)
+        {
+            RestRequest request = new RestRequest($"{Constant.Authenticate}/{userConnection.Mail}") { Method = Method.GET };
+            request.AddJsonBody(userConnection);
             return Get<UserProfile>(request);
         }
     }

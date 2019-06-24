@@ -3,6 +3,7 @@
     x:Class="Abonnements.View.AccountView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behavior="clr-namespace:Abonnements.Behaviors"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -87,15 +88,24 @@
 
                     <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Numéro de carte" />
                     <Entry
+                        Keyboard="Numeric"
                         MaxLength="16"
                         Style="{StaticResource EntryProfileStyle}"
                         Text="{Binding Profile.CardNumber}" />
 
                     <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Date d'expiration" />
-                    <Entry Style="{StaticResource EntryProfileStyle}" Text="{Binding Profile.ExpirationDate.Value}" />
+                    <Entry
+                        Keyboard="Numeric"
+                        Style="{StaticResource EntryProfileStyle}"
+                        Text="{Binding Profile.ExpirationDate.Value}">
+                        <Entry.Behaviors>
+                            <behavior:ExpirationDateMaskBehavior Mask="XX/XX" />
+                        </Entry.Behaviors>
+                    </Entry>
 
                     <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="CCV" />
                     <Entry
+                        Keyboard="Numeric"
                         MaxLength="3"
                         Style="{StaticResource EntryProfileStyle}"
                         Text="{Binding Profile.Ccv}" />

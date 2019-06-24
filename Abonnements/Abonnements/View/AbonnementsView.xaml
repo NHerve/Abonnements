@@ -38,7 +38,6 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="150" />
                                             <ColumnDefinition Width="*" />
-
                                         </Grid.ColumnDefinitions>
                                         <Image
                                             Grid.Column="0"

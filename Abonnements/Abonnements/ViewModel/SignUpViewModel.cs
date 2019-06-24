@@ -1,4 +1,8 @@
-﻿using Abonnements.Validations;
+﻿using Abonnements.DataServices;
+using Abonnements.Helper;
+using Abonnements.Helpers;
+using Abonnements.Model.Users;
+using Abonnements.Validations;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,7 +18,10 @@ namespace Abonnements.ViewModel
     public class SignUpViewModel : ViewModelBase
     {
         #region PrivateProperties
+        private readonly UserDataService _userDataService;
         private ValidatableObject<string> _userMail;
+        private ValidatableObject<string> _userPhone;
+
         private ValidatableObject<string> _userPassword;
         private ValidatableObject<string> _userPasswordConfirmation;
         private ValidatableObject<string> _userFirstname;
@@ -36,6 +43,19 @@ namespace Abonnements.ViewModel
                 RaisePropertyChanged(() => UserMail);
             }
         }
+        public ValidatableObject<string> UserPhone
+        {
+            get
+            {
+                return _userPhone;
+            }
+            set
+            {
+                _userPhone = value;
+                RaisePropertyChanged(() => UserPhone);
+            }
+        }
+
         public ValidatableObject<string> UserPassword
         {
             get
@@ -113,11 +133,13 @@ namespace Abonnements.ViewModel
         #endregion
 
         #region Ctor
-        public SignUpViewModel()
+        public SignUpViewModel(UserDataService userDataService)
         {
+            _userDataService = userDataService;
             _userMail = new ValidatableObject<string>();
             _userPassword = new ValidatableObject<string>();
             _userLastname = new ValidatableObject<string>();
+            _userPhone = new ValidatableObject<string>();
             _userPasswordConfirmation = new ValidatableObject<string>();
             _userFirstname = new ValidatableObject<string>();
 
@@ -151,8 +173,17 @@ namespace Abonnements.ViewModel
             {
                 try
                 {
-                    //isRegistered = await _registerService.SignUnAsync(UserMail.Value, Password.Value);
-                    isRegistered = true;
+                    UserSignUp userSignUp = new UserSignUp(_userMail.Value, SaltPassword.GetPasswordHash(_userPassword.Value), _userFirstname.Value, _userLastname.Value, _userPhone.Value);
+                    userSignUp = _userDataService.SignUp(userSignUp);
+                    if(userSignUp != null && userSignUp.Id > 0)
+                    {
+                        Settings.CurrentUser = new UserProfile(userSignUp);
+                        isRegistered = true;
+                    }
+                    else
+                    {
+                        await DialogService.ShowAlertAsync("Erreur lors de l'inscription", "Inscription raté", "Réessayer");
+                    }
                 }
                 catch (Exception ex) when (ex is WebException || ex is HttpRequestException)
                 {
@@ -185,11 +216,11 @@ namespace Abonnements.ViewModel
             bool isValidMail = _userMail.Validate();
             bool isValidPassword = _userPassword.Validate();
             bool isValidPasswordConfirmation = _userPasswordConfirmation.Validate();
-
+            bool isValidePhone = _userPhone.Validate();
             bool isValidFirstname = _userFirstname.Validate();
             bool isValidLastname = _userLastname.Validate();
 
-            return isValidMail && isValidPassword && isValidLastname && isValidFirstname && isValidPasswordConfirmation;
+            return isValidMail && isValidPassword && isValidLastname && isValidFirstname && isValidPasswordConfirmation && isValidePhone;
         }
 
         private void Enable()
@@ -198,7 +229,8 @@ namespace Abonnements.ViewModel
                 !string.IsNullOrEmpty(UserPassword.Value) &&
                 !string.IsNullOrEmpty(UserPasswordConfirmation.Value) &&
                 !string.IsNullOrEmpty(UserLastName.Value) &&
-                !string.IsNullOrEmpty(UserFirstName.Value);
+                !string.IsNullOrEmpty(UserFirstName.Value) &&
+                !string.IsNullOrEmpty(UserPhone.Value);
         }
 
         private void AddValidations()
@@ -212,6 +244,7 @@ namespace Abonnements.ViewModel
             _userFirstname.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Le prénom ne doit pas être vide" });
             _userLastname.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Le nom ne doit pas être vide" });
 
+            UserPhone.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Le téléphone ne doit pas être vide" });
         }
 
         private void AddDynamicValidations()

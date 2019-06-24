@@ -7,6 +7,10 @@ namespace Abonnements.Helpers
 {
     public static class Constant
     {
+        public const int SaltByteSize = 16;
+        public const int HashByteSize = 20;
+        public const int HashingIterationsCount = 1000;
+
 
         public static string BaseUrl = @"https://192.168.2.80:45456/api/";
         public const string ErrorUrl = @"errors";

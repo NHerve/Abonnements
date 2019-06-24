@@ -13,6 +13,17 @@
             <Setter Property="HeightRequest" Value="54" />
             <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
         </Style>
+        <Style
+            x:Key="FormEntryStyle"
+            BasedOn="{StaticResource EntryStyle}"
+            TargetType="Entry">
+            <Setter Property="HeightRequest" Value="36" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
+            <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
+            <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource BlueColor}" />
+            <Setter Property="Margin" Value="0" />
+        </Style>
     </ContentPage.Resources>
     <ContentPage.Content>
         <Grid BackgroundColor="{StaticResource TransparentBlueColor}">
@@ -39,13 +50,10 @@
                     Margin="0,20"
                     AutomationId="lastName"
                     Placeholder="Nom"
+                    Style="{StaticResource FormEntryStyle}"
                     Text="{Binding UserLastName.Value, Mode=TwoWay}">
-                    <Entry.Style>
-                        <OnPlatform x:TypeArguments="Style" Android="{StaticResource EntryStyle}" />
-                    </Entry.Style>
                     <Entry.Behaviors>
                         <behaviors:TurnValidOnFocusBehavior ValidityObject="{Binding UserLastName}" />
-                        <behaviors:ValidateOnTextChangedBehavior ValidateCommand="{Binding ValidateCommand}" />
                     </Entry.Behaviors>
                     <Entry.Triggers>
                         <DataTrigger
@@ -61,13 +69,10 @@
                     Margin="0,20"
                     AutomationId="firstName"
                     Placeholder="Prénom"
+                    Style="{StaticResource FormEntryStyle}"
                     Text="{Binding UserFirstName.Value, Mode=TwoWay}">
-                    <Entry.Style>
-                        <OnPlatform x:TypeArguments="Style" Android="{StaticResource EntryStyle}" />
-                    </Entry.Style>
                     <Entry.Behaviors>
                         <behaviors:TurnValidOnFocusBehavior ValidityObject="{Binding UserFirstName}" />
-                        <behaviors:ValidateOnTextChangedBehavior ValidateCommand="{Binding ValidateCommand}" />
                     </Entry.Behaviors>
                     <Entry.Triggers>
                         <DataTrigger
@@ -83,17 +88,36 @@
                     Margin="0,20"
                     AutomationId="usermail"
                     Placeholder="Mail"
+                    Style="{StaticResource FormEntryStyle}"
                     Text="{Binding UserMail.Value, Mode=TwoWay}">
-                    <Entry.Style>
-                        <OnPlatform x:TypeArguments="Style" Android="{StaticResource EntryStyle}" />
-                    </Entry.Style>
+
                     <Entry.Behaviors>
                         <behaviors:TurnValidOnFocusBehavior ValidityObject="{Binding UserMail}" />
-                        <behaviors:ValidateOnTextChangedBehavior ValidateCommand="{Binding ValidateCommand}" />
                     </Entry.Behaviors>
                     <Entry.Triggers>
                         <DataTrigger
                             Binding="{Binding UserMail.IsValid}"
+                            TargetType="Entry"
+                            Value="False">
+                            <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource ErrorColor}" />
+                        </DataTrigger>
+                    </Entry.Triggers>
+                </Entry>
+                <Entry
+                    x:Name="EntryUserPhone"
+                    Margin="0,20"
+                    AutomationId="userPhone"
+                    Keyboard="Numeric"
+                    Placeholder="Telephone"
+                    Style="{StaticResource FormEntryStyle}"
+                    Text="{Binding UserPhone.Value, Mode=TwoWay}">
+
+                    <Entry.Behaviors>
+                        <behaviors:TurnValidOnFocusBehavior ValidityObject="{Binding UserPhone}" />
+                    </Entry.Behaviors>
+                    <Entry.Triggers>
+                        <DataTrigger
+                            Binding="{Binding UserPhone.IsValid}"
                             TargetType="Entry"
                             Value="False">
                             <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource ErrorColor}" />
@@ -106,13 +130,11 @@
                     AutomationId="password"
                     IsPassword="true"
                     Placeholder="Mots de passe"
+                    Style="{StaticResource FormEntryStyle}"
                     Text="{Binding UserPassword.Value, Mode=TwoWay}">
-                    <Entry.Style>
-                        <OnPlatform x:TypeArguments="Style" Android="{StaticResource EntryStyle}" />
-                    </Entry.Style>
+
                     <Entry.Behaviors>
                         <behaviors:TurnValidOnFocusBehavior ValidityObject="{Binding UserPassword}" />
-                        <behaviors:ValidateOnTextChangedBehavior ValidateCommand="{Binding ValidateCommand}" />
                     </Entry.Behaviors>
                     <Entry.Triggers>
                         <DataTrigger
@@ -129,10 +151,8 @@
                     AutomationId="passwordConfirmation"
                     IsPassword="true"
                     Placeholder="Confirmation mots de passe"
+                    Style="{StaticResource FormEntryStyle}"
                     Text="{Binding UserPasswordConfirmation.Value, Mode=TwoWay}">
-                    <Entry.Style>
-                        <OnPlatform x:TypeArguments="Style" Android="{StaticResource EntryStyle}" />
-                    </Entry.Style>
                     <Entry.Behaviors>
                         <behaviors:TurnValidOnFocusBehavior ValidityObject="{Binding UserPasswordConfirmation}" />
                         <behaviors:ValidateOnTextChangedBehavior ValidateCommand="{Binding ValidateCommand}" />
