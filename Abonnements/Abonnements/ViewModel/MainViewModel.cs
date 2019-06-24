@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Abonnements.ViewModel.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace Abonnements.ViewModel
         public MainViewModel()
         {
             AbonnementViewModel = new AbonnementsViewModel();
-            AccountViewModel = new AccountViewModel();
+            AccountViewModel = ViewModelLocator.Instance.Resolve<AccountViewModel>();
         }
         #endregion
     }

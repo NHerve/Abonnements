@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+using Abonnements.DataServices;
+using Abonnements.Helpers;
 using Abonnements.Model.Users;
 using Xamarin.Forms;
 
@@ -10,6 +12,7 @@ namespace Abonnements.ViewModel
     public class AccountViewModel : ViewModelBase
     {
         #region PrivateProperties
+        private readonly UserDataService _userDataService;
         private UserProfile _profile;
         #endregion
 
@@ -29,9 +32,12 @@ namespace Abonnements.ViewModel
         #endregion
 
         #region Ctor
-        public AccountViewModel()
+        public AccountViewModel(UserDataService userDataService)
         {
-            _profile = new UserProfile("Hervé", "Aymes", "ha@gmail.com", "", DateTime.Now, "", "874", "69465464985", "0529");
+            _userDataService = userDataService;
+            //Todo : Uncomment below comment when login will work
+            _profile = Settings.CurrentUser;
+           // _profile = new UserProfile("Hervé", "Aymes", "ha@gmail.com", "", DateTime.Now, "", "874", "69465464985", "0529");
         }
         #endregion
 
@@ -59,6 +65,7 @@ namespace Abonnements.ViewModel
             if (result.Result)
             {
                 //Edit
+                _userDataService.Update(_profile);
             }
         }
 

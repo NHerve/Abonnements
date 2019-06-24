@@ -1,4 +1,6 @@
-﻿using Abonnements.Validations;
+﻿using Abonnements.DataServices;
+using Abonnements.Helpers;
+using Abonnements.Validations;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,8 +17,9 @@ namespace Abonnements.ViewModel
     {
 
         #region PrivateProperty
+        private readonly UserDataService _userDataService;
         private ValidatableObject<string> _userMail;
-        private ValidatableObject<string> _password;
+        private ValidatableObject<string> _userPassword;
         private bool _isValid;
         private bool _isEnabled;
         #endregion
@@ -34,16 +37,16 @@ namespace Abonnements.ViewModel
             }
         }
 
-        public ValidatableObject<string> Password
+        public ValidatableObject<string> UserPassword
         {
             get
             {
-                return _password;
+                return _userPassword;
             }
             set
             {
-                _password = value;
-                RaisePropertyChanged(() => Password);
+                _userPassword = value;
+                RaisePropertyChanged(() => UserPassword);
             }
         }
 
@@ -76,10 +79,11 @@ namespace Abonnements.ViewModel
         #endregion
 
         #region Ctor
-        public LoginViewModel()
+        public LoginViewModel(UserDataService userDataService)
         {
+            _userDataService = userDataService;
             _userMail = new ValidatableObject<string>();
-            _password = new ValidatableObject<string>();
+            _userPassword = new ValidatableObject<string>();
             AddValidations();
         }
         #endregion
@@ -107,8 +111,20 @@ namespace Abonnements.ViewModel
             {
                 try
                 {
+                    using(DialogService.LoadingAlert("Connexion en cours", true, Acr.UserDialogs.MaskType.Black))
+                    {
+
                     //isAuthenticated = await _authenticationService.LoginAsync(UserMail.Value, Password.Value);
-                    isAuthenticated = true;
+                    Settings.CurrentUser =_userDataService.Login(new Model.Users.UserConnection(_userMail.Value, _userPassword.Value));
+                    if(Settings.CurrentUser != null)
+                    {
+                        isAuthenticated = true;
+                    }
+                    else
+                    {
+                        await DialogService.ShowAlertAsync("Erreur lors de la connection", "Erreur de connection", "Ok");
+                    }
+                    }
                 }
                 catch (Exception ex) when (ex is WebException || ex is HttpRequestException)
                 {
@@ -142,7 +158,7 @@ namespace Abonnements.ViewModel
         private bool Validate()
         {
             bool isValidUser = _userMail.Validate();
-            bool isValidPassword = _password.Validate();
+            bool isValidPassword = _userPassword.Validate();
 
             return isValidUser && isValidPassword;
         }
@@ -150,13 +166,13 @@ namespace Abonnements.ViewModel
         private void Enable()
         {
             IsEnabled = !string.IsNullOrEmpty(UserMail.Value) &&
-                !string.IsNullOrEmpty(Password.Value);
+                !string.IsNullOrEmpty(UserPassword.Value);
         }
 
         private void AddValidations()
         {
             _userMail.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "L'émail ne doit pas être vide" });
-            _password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Le mots de passe ne doit pas être vide" });
+            _userPassword.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Le mots de passe ne doit pas être vide" });
         }
         #endregion
 

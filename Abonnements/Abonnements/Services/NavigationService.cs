@@ -32,7 +32,7 @@ namespace Abonnements.Services
 
         public Task InitializeAsync()
         {
-            if (Settings.AccessToken != "")
+            if (Settings.CurrentUser != null)
             {
                 return NavigateToAsync<MainViewModel>();
             }

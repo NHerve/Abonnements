@@ -28,6 +28,10 @@ namespace Abonnements.DataServices
 
         public override IRestResponse Execute(IRestRequest request)
         {
+            if(Settings.CurrentUser != null)
+            {
+                request.AddHeader("Authorization", Settings.CurrentUser.Auth_key);
+            }
             if(request.Method == Method.POST)
             {
                 request.JsonSerializer = new JsonSerializer();
@@ -38,6 +42,14 @@ namespace Abonnements.DataServices
         }
         public override IRestResponse<T> Execute<T>(IRestRequest request)
         {
+            if (Settings.CurrentUser != null)
+            {
+                request.AddHeader("Authorization", Settings.CurrentUser.Auth_key);
+            }
+            if (request.Method == Method.POST)
+            {
+                request.JsonSerializer = new JsonSerializer();
+            }
             var response = base.Execute<T>(request);
             TimeoutCheck(request, response);
             return response;
@@ -46,14 +58,12 @@ namespace Abonnements.DataServices
         public T Get<T>(IRestRequest request) where T : new()
         {
             var response = Execute<T>(request);
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            if (response.StatusCode == System.Net.HttpStatusCode.OK || response.StatusCode == System.Net.HttpStatusCode.Created)
             {
                 return response.Data;
             }
             else
             {
-                
-
                 if (response.StatusCode != 0)
                 {
                     LogError(BaseUrl, request, response);

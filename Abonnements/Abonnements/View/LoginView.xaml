@@ -87,17 +87,17 @@
                     AutomationId="password"
                     IsPassword="true"
                     Placeholder="Mots de passe"
-                    Text="{Binding Password.Value, Mode=TwoWay}">
+                    Text="{Binding UserPassword.Value, Mode=TwoWay}">
                     <Entry.Style>
                         <OnPlatform x:TypeArguments="Style" Android="{StaticResource EntryStyle}" />
                     </Entry.Style>
                     <Entry.Behaviors>
-                        <behaviors:TurnValidOnFocusBehavior ValidityObject="{Binding Password}" />
+                        <behaviors:TurnValidOnFocusBehavior ValidityObject="{Binding UserPassword}" />
                         <behaviors:ValidateOnTextChangedBehavior ValidateCommand="{Binding ValidateCommand}" />
                     </Entry.Behaviors>
                     <Entry.Triggers>
                         <DataTrigger
-                            Binding="{Binding Password.IsValid}"
+                            Binding="{Binding UserPassword.IsValid}"
                             TargetType="Entry"
                             Value="False">
                             <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource ErrorColor}" />

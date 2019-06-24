@@ -1,4 +1,5 @@
 ﻿using Abonnements.Validations;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,16 +24,31 @@ namespace Abonnements.Model.Users
         #endregion
 
         #region PublicProperties
+        [JsonProperty("cliAuth")]
+        public string Auth_key { get; set; }
+        [JsonProperty("cliId")]
+        public int Id { get; set; }
+        [JsonProperty("cliNom")]
         public string FirstName { get => _firstName; set => _firstName = value; }
+        [JsonProperty("cliPrenom")]
         public string LastName { get => _lastName; set => _lastName = value; }
+        [JsonProperty("cliMail")]
         public ValidatableObject<string> Mail { get => _mail; set => _mail = value; }
+        [JsonProperty("cliPhone")]
         public ValidatableObject<string> Phone { get => _phone; set => _phone = value; }
+        [JsonProperty("cliDateNaissance")]
         public DateTime BirthDay { get => _birthDay; set => _birthDay = value; }
+        [JsonProperty("cliLieuNaissance")]
         public ValidatableObject<string> BirthLocation { get => _birthLocation; set => _birthLocation = value; }
+        [JsonProperty("cliCCV")]
         public ValidatableObject<string> Ccv { get => _ccv; set => _ccv = value; }
+        [JsonProperty("cliNumCart")]
         public ValidatableObject<string> CardNumber { get => _cardNumber; set => _cardNumber = value; }
+        [JsonProperty("cliExpiCarte")]
         public ValidatableObject<string> ExpirationDate { get => _expirationDate; set => _expirationDate = value; }
+        [JsonProperty("cliPassword")]
         public ValidatableObject<string> Password { get => _password; set => _password = value; }
+        
         public ValidatableObject<string> PasswordConfirmation { get => _passwordConfirmation; set => _passwordConfirmation = value; }
         #endregion
 
@@ -52,6 +68,15 @@ namespace Abonnements.Model.Users
             Ccv.Value = ccv;
             CardNumber.Value = cardNumber;
             ExpirationDate.Value = expirationDate;
+        }
+
+        public UserProfile(UserSignUp userSignUp)
+        {
+            Id = userSignUp.Id;
+            FirstName = userSignUp.FirstName;
+            LastName = userSignUp.LastName;
+            Phone = new ValidatableObject<string>() { Value = userSignUp.Phone };
+            Mail = new ValidatableObject<string>() { Value = userSignUp.Mail };
         }
         //Add validation
         #endregion
