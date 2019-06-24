@@ -9,9 +9,11 @@ using AbonnementsAPi.Models;
 using Microsoft.AspNetCore.Authorization;
 using AbonnementsAPi.Services;
 using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace AbonnementsAPi.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class ClientsController : ControllerBase
