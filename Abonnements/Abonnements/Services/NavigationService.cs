@@ -175,6 +175,7 @@ namespace Abonnements.Services
             _mappings.Add(typeof(SignUpViewModel), typeof(SignUpView));
             _mappings.Add(typeof(AccountViewModel), typeof(AccountView));
             _mappings.Add(typeof(MagazineViewModel), typeof(MagazineView));
+            _mappings.Add(typeof(NonAbonnementsViewModel), typeof(NonAbonnementsView));
 
             _mappings.Add(typeof(MainViewModel), typeof(MainView));
             _mappings.Add(typeof(AbonnementsViewModel), typeof(AbonnementsView));

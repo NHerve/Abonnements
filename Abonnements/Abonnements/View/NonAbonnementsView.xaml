@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Abonnements.View.NonAbonnementsView"
+            xmlns:behavior="clr-namespace:Abonnements.Behaviors"
+            xmlns:converter="clr-namespace:Abonnements.Converter">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:DateTimeConverter x:Key="DateToString" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout>
+
+                <Label
+                    Margin="0,20"
+                    FontSize="{StaticResource LargeSize}"
+                    HorizontalOptions="Center"
+                    Text="Magazines Disponible" />
+
+                <ListView
+                    behavior:ItemTappedCommandListView.ItemTappedCommand="{Binding GoToMagazine}"
+                    HasUnevenRows="True"
+                    ItemsSource="{Binding Abonnements}"
+                    SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame
+                                    Margin="0,10"
+                                    Padding="4"
+                                    HasShadow="True"
+                                    HorizontalOptions="CenterAndExpand"
+                                    OutlineColor="{Binding StatusColor}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="150" />
+                                            <ColumnDefinition Width="*" />
+
+                                        </Grid.ColumnDefinitions>
+                                        <Image
+                                            Grid.Column="0"
+                                            Aspect="AspectFit"
+                                            Scale="0.75"
+                                            Source="default_magazine.png" />
+                                        <StackLayout Grid.Column="1">
+                                            <Label
+                                                Margin="10,10"
+                                                FontSize="{StaticResource LargeSize}"
+                                                Text="{Binding Magazine.Titre}" />
+                                            <Label FontSize="{StaticResource MediumSize}" Text="{Binding DateExpiration, Converter={StaticResource DateToString}, StringFormat=' Fin : {0}'}" />
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -9,6 +9,7 @@
     <TabbedPage.Children>
         <local:AccountView BindingContext="{Binding AccountViewModel}" Icon="profile.png" />
         <local:AbonnementsView BindingContext="{Binding AbonnementViewModel}" Icon="seeSubscribe.png" />
-        <ContentPage Icon="subscribe.png" />
+        <local:NonAbonnementsView BindingContext="{Binding NonAbonnementsViewModel}" Icon="subscribe.png" />
+        <!--<ContentPage Icon="subscribe.png" />-->
     </TabbedPage.Children>
 </TabbedPage>
