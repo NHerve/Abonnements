@@ -95,29 +95,25 @@ namespace AbonnementsAPi.Controllers
 
                 var abonnements =
                     from m in _context.Magazines
-                    where (from a in _context.Abonnements
-                           where a.aboFKCli == id
-                           where a.aboDateFin < DateTime.Now
-                           select a.aboFKMag)
+                    where  !(from ab in _context.Abonnements
+                            where ab.aboFKCli == id
+                            where ab.aboDateFin > DateTime.Now
+                            select ab.aboFKMag)
                            .Contains(m.magId)
+                           
                     select m;
 
-                var abo = from m2 in _context.Magazines
-                          join ab in _context.Abonnements on m2.magId equals ab.aboFKMag into t
-                          from su in t.DefaultIfEmpty()
-                          where su.aboFKCli == null
-                          select m2;
-
-                var result = abo.Union(abonnements);
+    //            SELECT distinct "magTitre" FROM public."Magazines" left join public."Abonnements" on "magId" = "magId" WHERE "magId" not in (
+                        //select "aboFKMag" from public."Abonnements" WHERE "aboFKCli" = 15 AND "aboDateFin" > NOW())
 
 
 
-                if (result == null)
+                if (abonnements == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(result);
+                return Ok(abonnements.Distinct());
             }
             else
             {
