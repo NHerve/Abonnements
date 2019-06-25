@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Abonnements.Model
 {
-    public class Magazine : BaseModel
+    public class Magazine
     {
         public Magazine()
         {

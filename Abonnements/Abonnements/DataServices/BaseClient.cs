@@ -33,7 +33,7 @@ namespace Abonnements.DataServices
                 if (request.Parameters.FirstOrDefault(p => p.Name == "Authorization") == null)
                     request.AddParameter("Authorization", string.Format("bearer {0}", Settings.CurrentUser.Auth_key), ParameterType.HttpHeader);
             }
-            if (request.Method == Method.POST)
+            if (request.Method == Method.POST || request.Method == Method.PUT)
             {
                 request.JsonSerializer = new JsonSerializer();
             }
@@ -48,7 +48,7 @@ namespace Abonnements.DataServices
                 if(request.Parameters.FirstOrDefault(p => p.Name == "Authorization") == null)
                     request.AddParameter("Authorization", string.Format("bearer {0}", Settings.CurrentUser.Auth_key), ParameterType.HttpHeader); 
             }
-            if (request.Method == Method.POST)
+            if (request.Method == Method.POST || request.Method == Method.PUT)
             {
                 request.JsonSerializer = new JsonSerializer();
             }

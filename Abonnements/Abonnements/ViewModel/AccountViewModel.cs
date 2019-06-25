@@ -183,14 +183,17 @@ namespace Abonnements.ViewModel
             if (result.Result)
             {
                 //Logout
+                Settings.CurrentUser = null;
+                NavigationService.NavigateToAsync<LoginViewModel>();
+
             }
         }
 
-        private void Edit()
+        private async void Edit()
         {
             //Check if data are valid
-            var result = DialogService.ConfirmAsync("Souhaitez-vous réellement éditez vos données?", "", "Oui", "Non");
-            if (result.Result)
+            bool result = await DialogService.ConfirmAsync("Souhaitez-vous réellement éditez vos données?", "", "Oui", "Non");
+            if (result)
             {
                 //Edit
                 _userDataService.Update(_profile);
