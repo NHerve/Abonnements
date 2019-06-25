@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Abonnements.DataServices;
 using Abonnements.Helpers;
 using Abonnements.Model.Users;
+using Abonnements.Validations;
 using Xamarin.Forms;
 
 namespace Abonnements.ViewModel
@@ -14,6 +15,16 @@ namespace Abonnements.ViewModel
         #region PrivateProperties
         private readonly UserDataService _userDataService;
         private UserProfile _profile;
+        public ValidatableObject<string> _mail;
+        public ValidatableObject<string> _phone;
+        public ValidatableObject<DateTime> _birthDay;
+        public ValidatableObject<string> _birthLocation;
+        public ValidatableObject<string> _ccv;
+        public ValidatableObject<string> _cardNumber;
+        public ValidatableObject<string> _expirationDate;
+        public ValidatableObject<string> _password;
+
+        public ValidatableObject<string> _passwordConfirmation;
         #endregion
 
         #region Ctor

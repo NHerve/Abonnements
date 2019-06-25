@@ -39,7 +39,7 @@ namespace Abonnements.ViewModel
             {
                 AbonnementDataService abonnementDataService = new AbonnementDataService(Serializer, ErrorLogger, DialogService);
                 MagazineDataService magazineDataService = new MagazineDataService(Serializer, ErrorLogger, DialogService);
-                _abonnements = new ObservableCollection<Abonnement>(abonnementDataService.GetAbonnements(1));//Settings.UserId
+                _abonnements = new ObservableCollection<Abonnement>(abonnementDataService.GetAbonnements(Settings.CurrentUser.Id));//Settings.UserId
                 foreach (var abo in _abonnements)
                 {
                     abo.Magazine = magazineDataService.GetMagazine(abo.IdMagazine) ?? new Magazine();

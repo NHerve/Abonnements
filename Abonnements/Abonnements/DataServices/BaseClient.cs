@@ -30,9 +30,9 @@ namespace Abonnements.DataServices
         {
             if(Settings.CurrentUser != null)
             {
-                request.AddHeader("Authorization", Settings.CurrentUser.Auth_key);
+                request.AddHeader("Authorization", string.Format("bearer {0}", Settings.CurrentUser.Auth_key));
             }
-            if(request.Method == Method.POST)
+            if (request.Method == Method.POST)
             {
                 request.JsonSerializer = new JsonSerializer();
             }
@@ -44,7 +44,7 @@ namespace Abonnements.DataServices
         {
             if (Settings.CurrentUser != null)
             {
-                request.AddHeader("Authorization", Settings.CurrentUser.Auth_key);
+                request.AddHeader("Authorization",string.Format("bearer {0}",Settings.CurrentUser.Auth_key));
             }
             if (request.Method == Method.POST)
             {

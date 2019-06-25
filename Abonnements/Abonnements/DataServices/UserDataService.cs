@@ -40,7 +40,7 @@ namespace Abonnements.DataServices
 
         public UserProfile Login(UserConnection userConnection)
         {
-            RestRequest request = new RestRequest($"{Constant.Authenticate}/{userConnection.Mail}") { Method = Method.GET };
+            RestRequest request = new RestRequest($"{Constant.Authenticate}") { Method = Method.POST };
             request.AddJsonBody(userConnection);
             return Get<UserProfile>(request);
         }
