@@ -81,10 +81,13 @@
                     <Entry Style="{StaticResource EntryProfileStyle}" Text="{Binding Mail.Value}" />
 
                     <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Date de naissance" />
-                    <DatePicker Date="{Binding BirthDay}" MaximumDate="{x:Static sys:DateTime.Now}" />
+                    <DatePicker Date="{Binding BirthDay.Value}" MaximumDate="{x:Static sys:DateTime.Now}" />
 
                     <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Lieu de naissance" />
                     <Entry Style="{StaticResource EntryProfileStyle}" Text="{Binding BirthLocation.Value}" />
+
+                    <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Numéro de téléphone" />
+                    <Entry Style="{StaticResource EntryProfileStyle}" Text="{Binding Phone.Value}" />
 
                     <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Numéro de carte" />
                     <Entry
