@@ -15,7 +15,6 @@ namespace Abonnements.ViewModel
     {
         #region Private Properties
         private ObservableCollection<Magazine> _magazines;
-        private ObservableCollection<Abonnement> _abonnements;
         #endregion
 
         #region Public Properties
@@ -39,35 +38,30 @@ namespace Abonnements.ViewModel
             try
             {
                 AbonnementDataService abonnementDataService = new AbonnementDataService(Serializer, ErrorLogger, DialogService);
-                MagazineDataService magazineDataService = new MagazineDataService(Serializer, ErrorLogger, DialogService);
 
-                _abonnements = new ObservableCollection<Abonnement>(abonnementDataService.GetNonAbonnements(Settings.CurrentUser.Id));//Settings.UserId
-                foreach (var mag in _abonnements)
-                {
-                    mag.Magazine = magazineDataService.GetMagazine(mag.IdMagazine) ?? new Magazine();
-                }
+                _magazines = new ObservableCollection<Magazine>(abonnementDataService.GetNonAbonnements(Settings.CurrentUser.Id));//Settings.UserId
 
             }
             catch (Exception ex)
             {
-                //_magazines = new ObservableCollection<Abonnement>();
-                //_magazines.Add(new Abonnement { Magazine = new Magazine { Titre = "le monde" }, DateExpiration = new DateTime(DateTime.Now.Ticks).AddMonths(2) });
-                //_magazines.Add(new Abonnement { Magazine = new Magazine { Titre = "Le Gorafi" }, DateExpiration = new DateTime(DateTime.Now.Ticks).AddYears(2) });
-                //_magazines.Add(new Abonnement { Magazine = new Magazine { Titre = "Le Parisien" }, DateExpiration = new DateTime(DateTime.Now.Ticks).AddMonths(8) });
-                //_magazines.Add(new Abonnement { Magazine = new Magazine { Titre = "La Provence" }, DateExpiration = new DateTime(DateTime.Now.Ticks).AddDays(7) });
-                //_magazines.Add(new Abonnement { Magazine = new Magazine { Titre = "Le canard enchaîné" }, DateExpiration = new DateTime(DateTime.Now.Ticks).AddMonths(1) });
+                //_abonnements = new ObservableCollection<Abonnement>();
+                //_abonnements.Add(new Abonnement { Magazine = new Magazine { Titre = "le monde" }, DateExpiration = new DateTime(DateTime.Now.Ticks).AddMonths(2) });
+                //_abonnements.Add(new Abonnement { Magazine = new Magazine { Titre = "Le Gorafi" }, DateExpiration = new DateTime(DateTime.Now.Ticks).AddYears(2) });
+                //_abonnements.Add(new Abonnement { Magazine = new Magazine { Titre = "Le Parisien" }, DateExpiration = new DateTime(DateTime.Now.Ticks).AddMonths(8) });
+                //_abonnements.Add(new Abonnement { Magazine = new Magazine { Titre = "La Provence" }, DateExpiration = new DateTime(DateTime.Now.Ticks).AddDays(7) });
+                //_abonnements.Add(new Abonnement { Magazine = new Magazine { Titre = "Le canard enchaîné" }, DateExpiration = new DateTime(DateTime.Now.Ticks).AddMonths(1) });
             }
 
         }
         #endregion
 
         #region Command
-        public ICommand GoToMagazine => new Command<Abonnement>(GoToMagazineAsync);
+        public ICommand GoToMagazine => new Command<Magazine>(GoToMagazineAsync);
         #endregion
         #region Private Function
-        private async void GoToMagazineAsync(Abonnement abonnement)
+        private async void GoToMagazineAsync(Magazine magazine)
         {
-            await NavigationService.NavigateToAsync<MagazineViewModel>(abonnement.IdMagazine);
+            await NavigationService.NavigateToAsync<MagazineViewModel>(magazine);
         }
         #endregion
     }

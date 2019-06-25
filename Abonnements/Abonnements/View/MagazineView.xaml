@@ -3,6 +3,7 @@
     x:Class="Abonnements.View.MagazineView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:effects="clr-namespace:Abonnements.Effects"
     xmlns:local="clr-namespace:Abonnements.View">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -21,8 +22,10 @@
                 <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
                 <Setter Property="Margin" Value="0,0,0,14" />
             </Style>
-            <Style x:Key="DescriptionLabelStyle" TargetType="{x:Type Label}">
+            <Style x:Key="DescriptionLabelStyle" TargetType="{x:Type Label}"
+                BasedOn="{StaticResource BaseLabelStyle}">
                 <Setter Property="FontFamily" Value="{StaticResource MontserratRegular}" />
+                <Setter Property="effects:NumberOfLinesEffect.NumberOfLines" Value="12"/>
                 <Setter Property="LineBreakMode" Value="WordWrap" />
                 <Setter Property="TextColor" Value="{StaticResource TransparentBlueColor}" />
                 <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
@@ -51,17 +54,17 @@
                     Scale="0.95"
                     Source="default_magazine.png" />
                 <StackLayout Grid.Row="0" Grid.Column="1">
-                    <Label Style="{StaticResource ItemLabelStyle}" Text="{Binding Magazine.Titre}" />
+                    <Label Style="{StaticResource ItemLabelStyle}" Text="{Binding Titre}" />
                 </StackLayout>
                 <StackLayout Grid.Row="1" Grid.ColumnSpan="2">
                     <Label Style="{StaticResource TitleLabelStyle}" Text="Nombre de volume à l'année" />
-                    <Label Style="{StaticResource ItemLabelStyle}" Text="{Binding Magazine.NbVolumeAnnee}" />
+                    <Label Style="{StaticResource ItemLabelStyle}" Text="{Binding NumeroAnnee}" />
 
                     <Label Style="{StaticResource TitleLabelStyle}" Text="Description" />
-                    <Label Style="{StaticResource DescriptionLabelStyle}" Text="{Binding Magazine.Description}" />
+                    <Label Style="{StaticResource DescriptionLabelStyle}" Text="{Binding Description}" />
 
                     <Label Style="{StaticResource TitleLabelStyle}" Text="Prix annuel" />
-                    <Label Style="{StaticResource ItemLabelStyle}" Text="{Binding Magazine.PrixAnnuel, StringFormat='\{0}€'}" />
+                    <Label Style="{StaticResource ItemLabelStyle}" Text="{Binding PrixAnnuel, StringFormat='\{0}€'}" />
                     <local:ButtonSubscribedMagazineView IsVisible="True" />
                     <local:ButtonSubscribeMagazineView IsVisible="False" />
                 </StackLayout>

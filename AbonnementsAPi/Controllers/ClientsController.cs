@@ -81,6 +81,13 @@ namespace AbonnementsAPi.Controllers
                     return BadRequest();
                 }
 
+                if(clients.cliPassword == null)
+                {
+                    clients.cliPassword = (from c in _context.clients
+                                                         where c.cliId == id
+                                                         select c.cliPassword).FirstOrDefault();
+                }
+
                 _context.Entry(clients).State = EntityState.Modified;
 
                 try

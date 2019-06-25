@@ -24,7 +24,7 @@ namespace Abonnements.Model
         public decimal PrixAnnuel { get; set; }
 
         [JsonProperty("magNbVolumeAnnee")]
-        public int NumeroAnnée { get; set; }
+        public int NumeroAnnee { get; set; }
 
         [JsonProperty("magPhoto")]
         public string PhotoCouverture { get; set; }

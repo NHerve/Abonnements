@@ -13,9 +13,9 @@ namespace AbonnementsAPi.Models
         public string cliNom { get; set; }
         //[Required]
         public string cliPrenom { get; set; }
-        [Required]
+        //[Required]
         public string cliPassword { get; set; }
-        [Required]
+        //[Required]
         public string cliMail { get; set; }
         //[Required]
         public string cliPhone { get; set; }

@@ -22,7 +22,7 @@
                 <ListView
                     behavior:ItemTappedCommandListView.ItemTappedCommand="{Binding GoToMagazine}"
                     HasUnevenRows="True"
-                    ItemsSource="{Binding Abonnements}"
+                    ItemsSource="{Binding Magazines}"
                     SeparatorVisibility="None">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -48,8 +48,7 @@
                                             <Label
                                                 Margin="10,10"
                                                 FontSize="{StaticResource LargeSize}"
-                                                Text="{Binding Magazine.Titre}" />
-                                            <Label FontSize="{StaticResource MediumSize}" Text="{Binding DateExpiration, Converter={StaticResource DateToString}, StringFormat=' Fin : {0}'}" />
+                                                Text="{Binding Titre}" />
                                         </StackLayout>
                                     </Grid>
                                 </Frame>

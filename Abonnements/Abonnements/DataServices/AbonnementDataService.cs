@@ -26,10 +26,10 @@ namespace Abonnements.DataServices
         }
 
         //Get Non-Abonnement User
-        public List<Abonnement> GetNonAbonnements(int id)
+        public List<Magazine> GetNonAbonnements(int id)
         {
             RestRequest request = new RestRequest($"{Constant.NonAbonnementClientUrl }{id}") { Method = Method.GET };
-            return Get<List<Abonnement>>(request);
+            return Get<List<Magazine>>(request);
         }
 
         //Subscribe Abonnement
