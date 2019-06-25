@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace Abonnements.ViewModel
 {
-    class NonAbonnementsViewModel : ViewModelBase
+    public class NonAbonnementsViewModel : ViewModelBase
     {
         #region Private Properties
         private ObservableCollection<Magazine> _magazines;
@@ -41,9 +41,9 @@ namespace Abonnements.ViewModel
                 MagazineDataService magazineDataService = new MagazineDataService(Serializer, ErrorLogger, DialogService);
 
                 _abonnements = new ObservableCollection<Abonnement>(abonnementDataService.GetNonAbonnements(1));//Settings.UserId
-                foreach (var abo in _abonnements)
+                foreach (var mag in _abonnements)
                 {
-                    abo.Magazine = magazineDataService.GetMagazine(abo.IdMagazine) ?? new Magazine();
+                    mag.Magazine = magazineDataService.GetMagazine(mag.IdMagazine) ?? new Magazine();
                 }
 
             }

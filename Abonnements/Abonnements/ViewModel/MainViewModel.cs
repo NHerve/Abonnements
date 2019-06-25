@@ -12,6 +12,7 @@ namespace Abonnements.ViewModel
         #region Public Properties
         public AbonnementsViewModel AbonnementViewModel { get; set; }
         public AccountViewModel AccountViewModel { get; set; }
+        public NonAbonnementsViewModel NonAbonnementsViewModel { get; set; }
         #endregion
 
         #region Ctor
@@ -19,6 +20,7 @@ namespace Abonnements.ViewModel
         {
             AbonnementViewModel = new AbonnementsViewModel();
             AccountViewModel = ViewModelLocator.Instance.Resolve<AccountViewModel>();
+            NonAbonnementsViewModel = new NonAbonnementsViewModel();
         }
         #endregion
     }
