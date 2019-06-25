@@ -10,7 +10,7 @@ namespace Abonnements.Model.Users
     {
         #region PublicProperties
         [JsonProperty("cliAuthKey")]
-        public string Auth_key { get; set; }
+        public string Auth_key { get; set; } 
         [JsonProperty("cliId")]
         public int Id { get; set; }
         [JsonProperty("cliNom")]
@@ -18,22 +18,22 @@ namespace Abonnements.Model.Users
         [JsonProperty("cliPrenom")]
         public string LastName { get; set; }
         [JsonProperty("cliMail")]
-        public string Mail { get; set; }
+        public string Mail { get; set; } = "";
         [JsonProperty("cliPhone")]
-        public string Phone { get; set ; }
+        public string Phone { get; set; } = "";
         [JsonProperty("cliDateNaissance")]
         public DateTime? BirthDay { get; set; }
         [JsonProperty("cliLieuNaissance")]
         public string BirthLocation { get; set; }
         [JsonProperty("cliCCV")]
-        public string Ccv { get; set; }
+        public string Ccv { get; set; } = "";
         [JsonProperty("cliNumCart")]
-        public string CardNumber { get; set; }
+        public string CardNumber { get; set; } = "";
         [JsonProperty("cliExpiCarte")]
-        public string ExpirationDate { get;  set; }
+        public string ExpirationDate { get; set; } = "";
         [JsonProperty("cliPassword")]
         public string Password { get; set; }
-        
+
         public string PasswordConfirmation { get; set; }
         #endregion
 

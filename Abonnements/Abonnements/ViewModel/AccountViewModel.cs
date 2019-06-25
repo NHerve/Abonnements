@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using Abonnements.DataServices;
@@ -63,7 +64,7 @@ namespace Abonnements.ViewModel
                 RaisePropertyChanged(() => Phone);
             }
         }
-        public ValidatableObject<DateTime> Birthday
+        public ValidatableObject<DateTime> BirthDay
         {
             get
             {
@@ -72,7 +73,7 @@ namespace Abonnements.ViewModel
             set
             {
                 _birthDay = value;
-                RaisePropertyChanged(() => Birthday);
+                RaisePropertyChanged(() => BirthDay);
             }
         }
         public ValidatableObject<string> BirthLocation
@@ -158,14 +159,15 @@ namespace Abonnements.ViewModel
 
             _mail = new ValidatableObject<string>() { Value = Profile.Mail };
             _phone = new ValidatableObject<string>() { Value = Profile.Phone };
-            _birthDay = new ValidatableObject<DateTime>() { Value = Profile.BirthDay ?? new DateTime() };
+            _birthDay = new ValidatableObject<DateTime>() { Value = Profile.BirthDay ?? DateTime.Now.AddYears(-70) };
+            _birthLocation = new ValidatableObject<string>() { Value = Profile.BirthLocation };
             _ccv = new ValidatableObject<string>() { Value = Profile.Ccv };
+            _cardNumber = new ValidatableObject<string>() { Value = Profile.CardNumber };
             _expirationDate = new ValidatableObject<string>() { Value = Profile.ExpirationDate };
             _password = new ValidatableObject<string>();
             _passwordConfirmation = new ValidatableObject<string>();
 
-            //Todo : Uncomment below comment when login will work
-           // _profile = new UserProfile("Hervé", "Aymes", "ha@gmail.com", "", DateTime.Now, "", "874", "69465464985", "0529");
+            AddValidations();
         }
         #endregion
 
@@ -177,16 +179,21 @@ namespace Abonnements.ViewModel
         #endregion
 
         #region Private Function
-        private void Logout()
+        private async void Logout()
         {
-            var result = DialogService.ConfirmAsync("Souhaitez-vous réellement vous déconnectez ?","","Oui", "Non");
-            if (result.Result)
+            var result = await DialogService.ConfirmAsync("Souhaitez-vous réellement vous déconnectez ?","","Oui", "Non");
+            if (result)
             {
                 //Logout
                 Settings.CurrentUser = null;
-                NavigationService.NavigateToAsync<LoginViewModel>();
+                await NavigationService.NavigateToAsync<LoginViewModel>();
 
             }
+        }
+        private void AddValidations()
+        {
+            _mail.Validations.Add(new EmailRule<string> { ValidationMessage = "L'émail doit être un émail" });
+            _mail.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "L'émail ne doit pas être vide" });
         }
 
         private async void Edit()
@@ -195,12 +202,53 @@ namespace Abonnements.ViewModel
             bool result = await DialogService.ConfirmAsync("Souhaitez-vous réellement éditez vos données?", "", "Oui", "Non");
             if (result)
             {
-                //Edit
-                _userDataService.Update(_profile);
+                try
+                {
+                    AddDynamicValidations();
+                    //Edit
+                    if (!string.IsNullOrEmpty(_mail.Value) && _profile.Mail != _mail.Value)
+                        _profile.Mail = _mail.Value;
+
+                    if (!string.IsNullOrEmpty(_phone.Value) && _profile.Phone != _phone.Value)
+                        _profile.Phone = _phone.Value;
+
+                    if (!string.IsNullOrEmpty(_expirationDate.Value) && _profile.ExpirationDate != _expirationDate.Value)
+                        _profile.ExpirationDate = _expirationDate.Value;
+
+                    if (!string.IsNullOrEmpty(_ccv.Value) && _profile.Ccv != _ccv.Value)
+                        _profile.Ccv = _ccv.Value;
+
+                    if (!string.IsNullOrEmpty(_cardNumber.Value) && _profile.CardNumber != _cardNumber.Value)
+                        _profile.CardNumber = _cardNumber.Value;
+
+                    if (_profile.BirthDay?.Equals(_birthDay.Value) == false)
+                        _profile.BirthDay = _birthDay.Value;
+
+                    if (!string.IsNullOrEmpty(_birthLocation.Value) && _profile.BirthLocation != _birthLocation.Value)
+                        _profile.BirthLocation = _birthLocation.Value;
+
+                    _userDataService.Update(_profile);
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+                
             }
         }
 
-        //Todo : Add Validation if field is not empty. (Dynamic Validation)
+        private void AddDynamicValidations()
+        {
+            if (_passwordConfirmation.Validations
+                .Any(v => v.GetType().Equals(typeof(RepeatPasswordRule<string>))))
+            {
+                var validation = _passwordConfirmation.Validations.First(v => v.GetType().Equals(typeof(RepeatPasswordRule<string>)));
+                _passwordConfirmation.Validations.Remove(validation);
+            }
+
+            _passwordConfirmation.Validations.Add(new RepeatPasswordRule<string> { ValidationMessage = "The passwords do not match", Password = _password.Value });
+        }
         #endregion
 
     }
