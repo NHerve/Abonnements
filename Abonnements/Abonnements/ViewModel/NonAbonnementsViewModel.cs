@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
 using Abonnements.DataServices;
+using Abonnements.Helpers;
 using Abonnements.Model;
 using Abonnements.Services;
 using Xamarin.Forms;
@@ -40,7 +41,7 @@ namespace Abonnements.ViewModel
                 AbonnementDataService abonnementDataService = new AbonnementDataService(Serializer, ErrorLogger, DialogService);
                 MagazineDataService magazineDataService = new MagazineDataService(Serializer, ErrorLogger, DialogService);
 
-                _abonnements = new ObservableCollection<Abonnement>(abonnementDataService.GetNonAbonnements(1));//Settings.UserId
+                _abonnements = new ObservableCollection<Abonnement>(abonnementDataService.GetNonAbonnements(Settings.CurrentUser.Id));//Settings.UserId
                 foreach (var mag in _abonnements)
                 {
                     mag.Magazine = magazineDataService.GetMagazine(mag.IdMagazine) ?? new Magazine();

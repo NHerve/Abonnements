@@ -18,8 +18,8 @@ namespace Abonnements.Helpers
         public const string MagazineUrl = @"magazines/";
         public const string Authenticate = @"authenticate/";
         public const string AbonnementUrl = @"abonnements/";
-        public const string AbonnementClientUrl = @"client/{0}"; // /id.
-        public const string NonAbonnementClientUrl = @"clientnonabo/{0}"; // /id
+        public const string AbonnementClientUrl = @"client/"; // /id.
+        public const string NonAbonnementClientUrl = @"clientnonabo/"; // /id
 
     }
 }

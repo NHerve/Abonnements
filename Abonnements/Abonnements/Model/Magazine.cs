@@ -12,6 +12,8 @@ namespace Abonnements.Model
 
         }
 
+        [JsonProperty("magId")]
+        public int Id { get; set; }
         [JsonProperty("magTitre")]
         public string Titre { get; set; }
 

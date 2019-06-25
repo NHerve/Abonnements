@@ -64,6 +64,7 @@
                 <Entry
                     x:Name="EntryUserMail"
                     AutomationId="usermail"
+                    Keyboard="Email"
                     Placeholder="Mail"
                     Text="{Binding UserMail.Value, Mode=TwoWay}">
                     <Entry.Style>
