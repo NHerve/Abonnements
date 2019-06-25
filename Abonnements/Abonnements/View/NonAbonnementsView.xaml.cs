@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace Abonnements.View
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class PayementView : ContentView
+	public partial class NonAbonnementsView : ContentPage
 	{
-		public PayementView ()
+		public NonAbonnementsView ()
 		{
 			InitializeComponent ();
 		}

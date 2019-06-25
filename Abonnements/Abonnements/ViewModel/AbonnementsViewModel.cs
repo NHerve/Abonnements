@@ -48,6 +48,7 @@ namespace Abonnements.ViewModel
             }
             catch (Exception ex)
             {
+                _abonnements = new ObservableCollection<Abonnement>();
                 _abonnements.Add(new Abonnement { Magazine = new Magazine { Titre = "le monde" }, DateExpiration = new DateTime(DateTime.Now.Ticks).AddMonths(2) });
                 _abonnements.Add(new Abonnement { Magazine = new Magazine { Titre = "Le Gorafi" }, DateExpiration = new DateTime(DateTime.Now.Ticks).AddYears(2) });
                 _abonnements.Add(new Abonnement { Magazine = new Magazine { Titre = "Le Parisien" }, DateExpiration = new DateTime(DateTime.Now.Ticks).AddMonths(8) });

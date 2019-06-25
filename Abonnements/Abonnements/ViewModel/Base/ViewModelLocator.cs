@@ -49,6 +49,7 @@ namespace Abonnements.ViewModel.Base
             // View models
             _unityContainer.RegisterType<LoginViewModel>();
             _unityContainer.RegisterType<AccountViewModel>();
+            _unityContainer.RegisterType<NonAbonnementsViewModel>();
 
             _unityContainer.RegisterType<AbonnementsViewModel>();
             _unityContainer.RegisterType<MagazineViewModel>();
