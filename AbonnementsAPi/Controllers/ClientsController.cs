@@ -112,19 +112,38 @@ namespace AbonnementsAPi.Controllers
         [HttpPost("Authenticate")]
         public async Task<IActionResult> Authenticate([FromBody]Clients cliParam)
         {
-            var cli = _clientService.Authenticate(cliParam.cliMail, cliParam.cliPassword);
+            string test = (from c in _context.clients
+                       where c.cliMail == cliParam.cliMail
+                       select c.cliPassword).FirstOrDefault();
 
-            if (cli == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
-            
-            await _context.SaveChangesAsync();
+            if (test != null)
+            {
 
-            cli.cliPassword = null;
 
-            return Ok(cli);
+                if(SaltPassword.ComparePassword(test, cliParam.cliPassword))
+                {
+                    var cli = _clientService.Authenticate(cliParam.cliMail, test);
+
+                    if (cli == null)
+                        return BadRequest(new { message = "Username or password is incorrect" });
+
+                    await _context.SaveChangesAsync();
+
+                    cli.cliPassword = null;
+
+                    return Ok(cli);
+                }
+                else
+                {
+                    return BadRequest(new { message = "Username or password is incorrect" });
+                }
+
+            }
+            return BadRequest(new { message = "Username or password is incorrect" });
         }
 
         // POST: api/Clients
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> PostClients([FromBody] Clients clients)
         {
