@@ -20,8 +20,7 @@ namespace Abonnements.DataServices
         //Get Abonnement User
         public List<Abonnement> GetAbonnements(int id)
         {
-               RestRequest request = new RestRequest(string.Format(Constant.AbonnementClientUrl, id)) { Method = Method.GET };
-            // RestRequest request = new RestRequest() { Method = Method.GET };
+               RestRequest request = new RestRequest($"{Constant.AbonnementClientUrl}{id}") { Method = Method.GET };
 
             return Get<List<Abonnement>>(request);
         }
@@ -29,7 +28,7 @@ namespace Abonnements.DataServices
         //Get Non-Abonnement User
         public List<Abonnement> GetNonAbonnements(int id)
         {
-            RestRequest request = new RestRequest(string.Format(Constant.NonAbonnementClientUrl, id)) { Method = Method.GET };
+            RestRequest request = new RestRequest($"{Constant.NonAbonnementClientUrl }{id}") { Method = Method.GET };
             return Get<List<Abonnement>>(request);
         }
 

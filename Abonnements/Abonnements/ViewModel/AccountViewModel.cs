@@ -15,19 +15,18 @@ namespace Abonnements.ViewModel
         #region PrivateProperties
         private readonly UserDataService _userDataService;
         private UserProfile _profile;
-        public ValidatableObject<string> _mail;
-        public ValidatableObject<string> _phone;
-        public ValidatableObject<DateTime> _birthDay;
-        public ValidatableObject<string> _birthLocation;
-        public ValidatableObject<string> _ccv;
-        public ValidatableObject<string> _cardNumber;
-        public ValidatableObject<string> _expirationDate;
-        public ValidatableObject<string> _password;
+        private ValidatableObject<string> _mail;
+        private ValidatableObject<string> _phone;
+        private ValidatableObject<DateTime> _birthDay;
+        private ValidatableObject<string> _birthLocation;
+        private ValidatableObject<string> _ccv;
+        private ValidatableObject<string> _cardNumber;
+        private ValidatableObject<string> _expirationDate;
+        private ValidatableObject<string> _password;
 
-        public ValidatableObject<string> _passwordConfirmation;
+        private ValidatableObject<string> _passwordConfirmation;
         #endregion
-
-        #region Ctor
+        #region PublicProperties
         public UserProfile Profile
         {
             get
@@ -40,14 +39,132 @@ namespace Abonnements.ViewModel
                 RaisePropertyChanged(() => Profile);
             }
         }
+        public ValidatableObject<string> Mail
+        {
+            get
+            {
+                return _mail;
+            }
+            set
+            {
+                _mail = value;
+                RaisePropertyChanged(() => Mail);
+            }
+        }
+        public ValidatableObject<string> Phone
+        {
+            get
+            {
+                return _phone;
+            }
+            set
+            {
+                _phone = value;
+                RaisePropertyChanged(() => Phone);
+            }
+        }
+        public ValidatableObject<DateTime> Birthday
+        {
+            get
+            {
+                return _birthDay;
+            }
+            set
+            {
+                _birthDay = value;
+                RaisePropertyChanged(() => Birthday);
+            }
+        }
+        public ValidatableObject<string> BirthLocation
+        {
+            get
+            {
+                return _birthLocation;
+            }
+            set
+            {
+                _birthLocation = value;
+                RaisePropertyChanged(() => BirthLocation);
+            }
+        }
+        public ValidatableObject<string> Ccv
+        {
+            get
+            {
+                return _ccv;
+            }
+            set
+            {
+                _ccv = value;
+                RaisePropertyChanged(() => Ccv);
+            }
+        }
+        public ValidatableObject<string> CardNumber
+        {
+            get
+            {
+                return _cardNumber;
+            }
+            set
+            {
+                _cardNumber = value;
+                RaisePropertyChanged(() => CardNumber);
+            }
+        }
+        public ValidatableObject<string> ExpirationDate
+        {
+            get
+            {
+                return _expirationDate;
+            }
+            set
+            {
+                _expirationDate = value;
+                RaisePropertyChanged(() => ExpirationDate);
+            }
+        }
+        public ValidatableObject<string> Password
+        {
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                _password = value;
+                RaisePropertyChanged(() => Password);
+            }
+        }
+        public ValidatableObject<string> PasswordConfirmation
+        {
+            get
+            {
+                return _passwordConfirmation;
+            }
+            set
+            {
+                _passwordConfirmation = value;
+                RaisePropertyChanged(() => PasswordConfirmation);
+            }
+        }
+
         #endregion
 
         #region Ctor
         public AccountViewModel(UserDataService userDataService)
         {
             _userDataService = userDataService;
-            //Todo : Uncomment below comment when login will work
             _profile = Settings.CurrentUser;
+
+            _mail = new ValidatableObject<string>() { Value = Profile.Mail };
+            _phone = new ValidatableObject<string>() { Value = Profile.Phone };
+            _birthDay = new ValidatableObject<DateTime>() { Value = Profile.BirthDay ?? new DateTime() };
+            _ccv = new ValidatableObject<string>() { Value = Profile.Ccv };
+            _expirationDate = new ValidatableObject<string>() { Value = Profile.ExpirationDate };
+            _password = new ValidatableObject<string>();
+            _passwordConfirmation = new ValidatableObject<string>();
+
+            //Todo : Uncomment below comment when login will work
            // _profile = new UserProfile("Hervé", "Aymes", "ha@gmail.com", "", DateTime.Now, "", "874", "69465464985", "0529");
         }
         #endregion
