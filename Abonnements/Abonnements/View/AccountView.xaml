@@ -78,7 +78,10 @@
                     <Entry Style="{StaticResource EntryProfileStyle}" Text="{Binding PasswordConfirmation.Value}" />
 
                     <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Mail" />
-                    <Entry Style="{StaticResource EntryProfileStyle}" Text="{Binding Mail.Value}" />
+                    <Entry
+                        Keyboard="Email"
+                        Style="{StaticResource EntryProfileStyle}"
+                        Text="{Binding Mail.Value}" />
 
                     <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Date de naissance" />
                     <DatePicker Date="{Binding BirthDay.Value}" MaximumDate="{x:Static sys:DateTime.Now}" />
@@ -87,8 +90,11 @@
                     <Entry Style="{StaticResource EntryProfileStyle}" Text="{Binding BirthLocation.Value}" />
 
                     <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Numéro de téléphone" />
-                    <Entry Style="{StaticResource EntryProfileStyle}" Text="{Binding Phone.Value}" />
-
+                    <Entry Style="{StaticResource EntryProfileStyle}" Text="{Binding Phone.Value}">
+                        <Entry.Behaviors>
+                            <behavior:ExpirationDateMaskBehavior Mask="XX XX XX XX XX" />
+                        </Entry.Behaviors>
+                    </Entry>
                     <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Numéro de carte" />
                     <Entry
                         Keyboard="Numeric"
