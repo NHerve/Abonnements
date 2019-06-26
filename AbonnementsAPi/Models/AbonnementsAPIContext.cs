@@ -16,5 +16,6 @@ namespace AbonnementsAPi.Models
         public DbSet<AbonnementsAPi.Models.Log> Log { get; set; }
         public DbSet<AbonnementsAPi.Models.Historique> Historique { get; set; }
         public DbSet<AbonnementsAPi.Models.Employer> Employer { get; set; }
+        public DbSet<AbonnementsAPi.Models.Paiement> Paiement { get; set; }
     }
 }

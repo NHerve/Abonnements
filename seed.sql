@@ -64,6 +64,17 @@
     ALTER TABLE public."Historique" ADD FOREIGN KEY ("hisFKCli") REFERENCES public."clients"("cliId");
     ALTER TABLE public."Historique" ADD FOREIGN KEY ("hisFKEmp") REFERENCES public."Employer"("empId");
 
+      CREATE TABLE "Paiement" (
+      "uuid" serial NOT NULL,
+      "cid" text NULL,
+      "cardNumber" text NULL,
+      "cardMonth" int4 NOT NULL,
+      "cardYear" int4 NOT NULL,
+      "amount" numeric NOT NULL,
+      "transaction" text NULL,
+      CONSTRAINT "PK_Paiement" PRIMARY KEY ("uuid")
+    );
+
 INSERT INTO "clients" ("cliNom","cliPrenom","cliPassword","cliMail","cliDateNaissance","cliLieuNaissance","cliPhone") VALUES ('AYMES', 'Herve', '123haymes456' , 'herve.04@hotmail.fr', '1996-07-17', 'Marseille','0666740985');
 INSERT INTO "clients" ("cliNom","cliPrenom","cliPassword","cliMail","cliDateNaissance","cliLieuNaissance","cliNumCart","cliExpiCarte","cliCCV","cliPhone") VALUES ('JEANNE', 'Steven', '123sjeanne456' , 'steven@mail.com', '1996-07-17', 'Valreas','0123456789123456','0820','123','0601020304');
 INSERT INTO "clients" ("cliNom","cliPrenom","cliPassword","cliMail","cliDateNaissance","cliLieuNaissance","cliPhone") VALUES ('JOLY', 'Fred', '123fjoly456' , 'fred@mail.fr', '1994-06-09', 'Paris','0609080706');

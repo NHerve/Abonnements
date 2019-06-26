@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbonnementsAPi.Migrations
 {
     [DbContext(typeof(AbonnementsAPIContext))]
-    [Migration("20190618080630_mig")]
+    [Migration("20190625150652_mig")]
     partial class mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,22 +55,17 @@ namespace AbonnementsAPi.Migrations
 
                     b.Property<string>("cliLieuNaissance");
 
-                    b.Property<string>("cliMail")
-                        .IsRequired();
+                    b.Property<string>("cliMail");
 
-                    b.Property<string>("cliNom")
-                        .IsRequired();
+                    b.Property<string>("cliNom");
 
                     b.Property<string>("cliNumCart");
 
-                    b.Property<string>("cliPassword")
-                        .IsRequired();
+                    b.Property<string>("cliPassword");
 
-                    b.Property<string>("cliPhone")
-                        .IsRequired();
+                    b.Property<string>("cliPhone");
 
-                    b.Property<string>("cliPrenom")
-                        .IsRequired();
+                    b.Property<string>("cliPrenom");
 
                     b.HasKey("cliId");
 
@@ -150,6 +145,28 @@ namespace AbonnementsAPi.Migrations
                     b.HasKey("magId");
 
                     b.ToTable("Magazines");
+                });
+
+            modelBuilder.Entity("AbonnementsAPi.Models.Paiement", b =>
+                {
+                    b.Property<int>("uuid")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<decimal>("amount");
+
+                    b.Property<int>("cardMonth");
+
+                    b.Property<string>("cardNumber");
+
+                    b.Property<int>("cardYear");
+
+                    b.Property<string>("cid");
+
+                    b.Property<string>("transaction");
+
+                    b.HasKey("uuid");
+
+                    b.ToTable("Paiement");
                 });
 #pragma warning restore 612, 618
         }

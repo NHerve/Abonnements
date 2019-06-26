@@ -31,11 +31,11 @@ namespace AbonnementsAPi.Migrations
                 {
                     cliId = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    cliNom = table.Column<string>(nullable: false),
-                    cliPrenom = table.Column<string>(nullable: false),
-                    cliPassword = table.Column<string>(nullable: false),
-                    cliMail = table.Column<string>(nullable: false),
-                    cliPhone = table.Column<string>(nullable: false),
+                    cliNom = table.Column<string>(nullable: true),
+                    cliPrenom = table.Column<string>(nullable: true),
+                    cliPassword = table.Column<string>(nullable: true),
+                    cliMail = table.Column<string>(nullable: true),
+                    cliPhone = table.Column<string>(nullable: true),
                     cliDateNaissance = table.Column<DateTime>(nullable: true),
                     cliLieuNaissance = table.Column<string>(nullable: true),
                     cliNumCart = table.Column<string>(nullable: true),
@@ -109,6 +109,24 @@ namespace AbonnementsAPi.Migrations
                 {
                     table.PrimaryKey("PK_Magazines", x => x.magId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Paiement",
+                columns: table => new
+                {
+                    uuid = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    cid = table.Column<string>(nullable: true),
+                    cardNumber = table.Column<string>(nullable: true),
+                    cardMonth = table.Column<int>(nullable: false),
+                    cardYear = table.Column<int>(nullable: false),
+                    amount = table.Column<decimal>(nullable: false),
+                    transaction = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Paiement", x => x.uuid);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -130,6 +148,9 @@ namespace AbonnementsAPi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Magazines");
+
+            migrationBuilder.DropTable(
+                name: "Paiement");
         }
     }
 }
