@@ -5,6 +5,8 @@ namespace MagGestion.View.Interface
 {
     public interface IClientView
     {
+        int Id { set; get; }
+        string Motif { get;}
         string Nom { set; }
         string Prenom { set; }
         string Telephone { set; }

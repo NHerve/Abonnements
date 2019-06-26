@@ -1,7 +1,11 @@
-﻿namespace MagGestion.Helper
+﻿using MagGestion.Model.Employe;
+
+namespace MagGestion.Helper
 {
     public static class Constant
     {
+
+        public static Employe CurrentEmploye { get; set; }
         public static bool isAuth { get; set; } = false;
 
         public static bool isEnabled { get; set; } = true;
@@ -13,17 +17,19 @@
 
         public static string BaseUrl = @"https://192.168.2.80:45456/api/";
 
-        public static string ClientUrl = @"Clients/";
+        public static string ClientsUrl = @"Clients/";
+
+        public static string ClientUrl = @"client/";
 
         public static string ErrorUrl = @"Logs/";
 
         public static string EmployerUrl = @"Employers/";
 
-        public static string LoginUrl = @"Login";
+        public static string LoginUrl = @"Authenticate";
 
-        public static string MagazineUrl = @"magazines";
+        public static string MagazineUrl = @"magazines/";
 
-        public static string HistoriqueUrl = @"historiques";
+        public static string HistoriqueUrl = @"historiques/";
 
 
 

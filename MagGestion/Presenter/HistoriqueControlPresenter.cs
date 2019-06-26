@@ -1,6 +1,8 @@
 ﻿using MagGestion.Controls.Interface;
+using MagGestion.DataServices;
 using MagGestion.DataServices.Interface;
 using MagGestion.Forms;
+using MagGestion.Helper;
 using MagGestion.Helper.Interface;
 using MagGestion.Model.Historique;
 using RestSharp.Deserializers;
@@ -24,8 +26,8 @@ namespace MagGestion.Presenter
 
         private void OnShowClientForm(object sender, EventArgs e)
         {
-            var id = _control.DataGridViewHistorique.SelectedRows[0].Cells["Id"].Value;
-            new ClientForm(id.ToString(), _control, _cache, _errorLogger, _serializer).Show();
+            int id = Convert.ToInt32(_control.DataGridViewHistorique.SelectedRows[0].Cells["Id"].Value);
+            new ClientForm(id, _control, _cache, _errorLogger, _serializer).Show();
         }
         private void OnCellSelected(object sender, EventArgs e)
         {
@@ -34,7 +36,7 @@ namespace MagGestion.Presenter
 
         public void FillDGV()
         {
-            List<DGVHistorique> Historique = new List<DGVHistorique>();
+            List<DGVHistorique> Historique = new HistoriqueDataService(_cache, _serializer, _errorLogger).GetAllHistoriquesOfEmp(Constant.CurrentEmploye.Id) ?? new List<DGVHistorique>();
 
             Historique.Add(new DGVHistorique(1, "Steven", "Jeanne", "Mail", "Impayé", DateTime.Now.AddMonths(-2)));
             Historique.Add(new DGVHistorique(1, "Steven", "Jeanne", "Sms", "Impayé", DateTime.Now.AddMonths(-1)));

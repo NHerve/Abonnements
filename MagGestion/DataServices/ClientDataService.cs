@@ -17,16 +17,16 @@ namespace MagGestion.DataServices
     {
         public ClientDataService(ICacheService cache, IDeserializer serializer, IErrorLogger errorLogger) : base(cache, serializer, errorLogger)
         {
-            BaseUrl = new Uri(BaseUrl, Constant.ClientUrl);
+            BaseUrl = new Uri(BaseUrl, Constant.ClientsUrl);
         }
         public List<DGVClients> GetClients()
         {
             RestRequest request = new RestRequest() { Method = Method.GET };
-            request.AddHeader("content-type", "application/json");
+            
             return Get <List<DGVClients>>(request);
         }
 
-        public Client GetClient(string id)
+        public Client GetClient(int id)
         {
             RestRequest request = new RestRequest($"{id}") { Method = Method.GET };
             return GetFromCache<Client>(request, "user"+id);

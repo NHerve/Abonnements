@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace MagGestion.Model.Client
 {
@@ -31,6 +32,6 @@ namespace MagGestion.Model.Client
         public string Phone { get; set; }
 
         [JsonProperty(PropertyName = "cliDateNaissance")]
-        public string Birthday { get; set; }
+        public DateTime Birthday { get; set; }
     }
 }

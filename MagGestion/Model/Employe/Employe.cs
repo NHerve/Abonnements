@@ -19,6 +19,12 @@ namespace MagGestion.Model.Employe
             Password = password;
         }
 
+        [JsonProperty("empId")]
+        public int Id { get; set; }
+
+        [JsonProperty("empAuthKey")]
+        public string AuthKey { get; set; }
+
         [JsonProperty("empLogin")]
         public string Login { get; set; }
 

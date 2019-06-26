@@ -13,7 +13,6 @@ namespace MagGestion.Forms
     {
         private IControl _control;
 
-        private readonly string _id;
         private readonly ICacheService _cache;
         private readonly IErrorLogger _errorLogger;
         private readonly IDeserializer _serializer;
@@ -27,10 +26,12 @@ namespace MagGestion.Forms
         public string Telephone { set => lbTelephone.Text = value; }
         public string Mail { set => lbMail.Text = value; }
         public string BirthDay { set => lbBirthday.Text = value; }
+        public int Id { get; set; }
+        public string Motif => TBMotif.Text;
 
-        public ClientForm(string id, IControl control, ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer)
+        public ClientForm(int id, IControl control, ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer)
         {
-            _id = id;
+            Id = id;
             _cache = cache;
             _errorLogger = errorLogger;
             _serializer = serializer;
@@ -50,7 +51,24 @@ namespace MagGestion.Forms
         private void ClientForm_Load(object sender, EventArgs e)
         {
             Presenter = new ClientPresenter(this, _cache, _errorLogger, _serializer);
-            Presenter.GetCustomer(_id);
+            Presenter.GetCustomer(Id);
+        }
+
+        private void BTCourrier_Click(object sender, EventArgs e)
+        {
+            CreationHistoriqueRequested(sender, e);
+        }
+
+        private void BTMail_Click(object sender, EventArgs e)
+        {
+            CreationHistoriqueRequested(sender, e);
+
+        }
+
+        private void BTTelephone_Click(object sender, EventArgs e)
+        {
+            CreationHistoriqueRequested(sender, e);
+
         }
     }
 }

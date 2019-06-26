@@ -1,4 +1,5 @@
 ﻿using MagGestion.Controls.Interface;
+using MagGestion.DataServices;
 using MagGestion.DataServices.Interface;
 using MagGestion.Forms;
 using MagGestion.Helper.Interface;
@@ -24,11 +25,11 @@ namespace MagGestion.Presenter
 
         private void OnShowClientForm(object sender, EventArgs e)
         {
-            var id = _control.DataGridViewClient.SelectedRows[0].Cells["Id"].Value;
+            int id = Convert.ToInt32(_control.DataGridViewClient.SelectedRows[0].Cells["Id"].Value);
             try
             {
 
-                new ClientForm(id.ToString(), _control, _cache, _errorLogger, _serializer).Show();
+                new ClientForm(id, _control, _cache, _errorLogger, _serializer).Show();
             }
             catch (Exception ex)
             {
@@ -43,19 +44,7 @@ namespace MagGestion.Presenter
 
         public void FillDGV()
         {
-            //  List<DGVClients> Clients = new ClientDataService(_cache, _serializer, _errorLogger).GetClients();
-            List<DGVClients> Clients = new List<DGVClients>();
-            Clients.Add(new DGVClients(1, "Steven", "Jeanne"));
-            Clients.Add(new DGVClients(2, "Steven", "Jeanne"));
-            Clients.Add(new DGVClients(3, "Steven", "Jeanne"));
-            Clients.Add(new DGVClients(4, "Steven", "Jeanne"));
-            Clients.Add(new DGVClients(5, "Steven", "Jeanne"));
-            Clients.Add(new DGVClients(6, "Steven", "Jeanne"));
-            Clients.Add(new DGVClients(2, "Steven", "Jeanne"));
-            Clients.Add(new DGVClients(3, "Steven", "Jeanne"));
-            Clients.Add(new DGVClients(4, "Steven", "Jeanne"));
-            Clients.Add(new DGVClients(5, "Steven", "Jeanne"));
-            Clients.Add(new DGVClients(6, "Steven", "Jeanne"));
+            List<DGVClients> Clients = new ClientDataService(_cache, _serializer, _errorLogger).GetClients() ?? new List<DGVClients>();
 
             var c = new BindingList<DGVClients>(Clients);
             _control.DataGridViewClient.DataSource = new BindingSource(c, null);

@@ -25,7 +25,7 @@ namespace MagGestion.Presenter
 
         private void OnShowMagazineForm(object sender, EventArgs e)
         {
-            var id = _control.DGVMagazine.SelectedRows[0].Cells["Id"].Value;
+            var id = _control.DataGridViewMagazine.SelectedRows[0].Cells["Id"].Value;
             new MagazineForm((Control)_control, id.ToString()).Show();
         }
         private void OnCellSelected(object sender, EventArgs e)
@@ -38,10 +38,10 @@ namespace MagGestion.Presenter
             List<DGVMagazine> Magazines = new MagazineDataService(_cache, _serializer, _errorLogger).GetMagazines() ?? new List<DGVMagazine>();
 
             var h = new BindingList<DGVMagazine>(Magazines);
-            _control.DGVMagazine.DataSource = new BindingSource(h, null);
-            _control.DGVMagazine.Columns["Id"].Visible = false;
-            _control.DGVMagazine.Columns["NumeroAnnée"].HeaderText = "Numéro année";
-            _control.DGVMagazine.Columns["PrixAnnuel"].HeaderText = "Prix annuel";
+            _control.DataGridViewMagazine.DataSource = new BindingSource(h, null);
+            _control.DataGridViewMagazine.Columns["Id"].Visible = false;
+            _control.DataGridViewMagazine.Columns["NumeroAnnée"].HeaderText = "Numéro année";
+            _control.DataGridViewMagazine.Columns["PrixAnnuel"].HeaderText = "Prix annuel";
         }
     }
 }

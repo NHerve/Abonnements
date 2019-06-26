@@ -28,9 +28,10 @@ namespace MagGestion.DataServices
             Execute(request);
         }
 
-        public Employe GetEmploye(string login)
+        public Employe Authenticate(Employe employe)
         {
-            RestRequest request = new RestRequest($"{Constant.LoginUrl}/{login}") { Method = Method.GET };
+            RestRequest request = new RestRequest($"{Constant.LoginUrl}") { Method = Method.POST };
+            request.AddJsonBody(employe);
             return Get<Employe>(request);
         }
     }
