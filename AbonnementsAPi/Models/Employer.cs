@@ -11,9 +11,11 @@ namespace AbonnementsAPi.Models
     {
         [Key]
         public int empId { get; set; }
-        [Required]
+        //[Required]
         public string empLogin { get; set; }
-        [Required]
+        //[Required]
         public string empPassword { get; set; }
+
+        public string empAuthKey { get; set; }
     }
 }

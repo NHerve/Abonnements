@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbonnementsAPi.Migrations
 {
     [DbContext(typeof(AbonnementsAPIContext))]
-    [Migration("20190625150652_mig")]
+    [Migration("20190626132758_mig")]
     partial class mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,11 +77,11 @@ namespace AbonnementsAPi.Migrations
                     b.Property<int>("empId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("empLogin")
-                        .IsRequired();
+                    b.Property<string>("empAuthKey");
 
-                    b.Property<string>("empPassword")
-                        .IsRequired();
+                    b.Property<string>("empLogin");
+
+                    b.Property<string>("empPassword");
 
                     b.HasKey("empId");
 

@@ -54,8 +54,9 @@ namespace AbonnementsAPi.Migrations
                 {
                     empId = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    empLogin = table.Column<string>(nullable: false),
-                    empPassword = table.Column<string>(nullable: false)
+                    empLogin = table.Column<string>(nullable: true),
+                    empPassword = table.Column<string>(nullable: true),
+                    empAuthKey = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

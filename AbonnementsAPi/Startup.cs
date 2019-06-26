@@ -64,6 +64,7 @@ namespace AbonnementsAPi
 
             // configure DI for application services
             services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<IEmployerService, EmployerService>();
 
         }
 
