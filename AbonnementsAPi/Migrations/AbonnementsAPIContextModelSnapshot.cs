@@ -75,11 +75,11 @@ namespace AbonnementsAPi.Migrations
                     b.Property<int>("empId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("empLogin")
-                        .IsRequired();
+                    b.Property<string>("empAuthKey");
 
-                    b.Property<string>("empPassword")
-                        .IsRequired();
+                    b.Property<string>("empLogin");
+
+                    b.Property<string>("empPassword");
 
                     b.HasKey("empId");
 

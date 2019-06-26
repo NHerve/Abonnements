@@ -6,18 +6,24 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AbonnementsAPi.Models;
+using Microsoft.AspNetCore.Authorization;
+using AbonnementsAPi.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace AbonnementsAPi.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class EmployersController : ControllerBase
     {
         private readonly AbonnementsAPIContext _context;
+        private readonly IEmployerService _employerService;
 
-        public EmployersController(AbonnementsAPIContext context)
+        public EmployersController(AbonnementsAPIContext context,IEmployerService employerService)
         {
             _context = context;
+            _employerService = employerService;
         }
 
         // GET: api/Employers
@@ -101,6 +107,41 @@ namespace AbonnementsAPi.Controllers
             }
 
             return NoContent();
+        }
+
+        // POST: api/Employers/authenticate
+        [AllowAnonymous]
+        [HttpPost("Authenticate")]
+        public async Task<IActionResult> Authenticate([FromBody]Employer empParam)
+        {
+            string test = (from c in _context.Employer
+                           where c.empLogin == empParam.empLogin
+                           select c.empPassword).FirstOrDefault();
+
+            if (test != null)
+            {
+
+
+                if (SaltPassword.ComparePassword(test, empParam.empPassword))
+                {
+                    var emp = _employerService.Authenticate(empParam.empLogin, test);
+
+                    if (emp == null)
+                        return BadRequest(new { message = "Username or password is incorrect" });
+
+                    await _context.SaveChangesAsync();
+
+                    emp.empPassword = null;
+
+                    return Ok(emp);
+                }
+                else
+                {
+                    return BadRequest(new { message = "Username or password is incorrect" });
+                }
+
+            }
+            return BadRequest(new { message = "Username or password is incorrect" });
         }
 
         // POST: api/Employers

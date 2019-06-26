@@ -28,7 +28,10 @@ namespace AbonnementsAPi.Controllers
         [HttpGet]
         public IEnumerable<Abonnements> GetAbonnements()
         {
-            return _context.Abonnements;
+            var abo = from a in _context.Abonnements
+                      orderby a.aboDateFin descending
+                      select a;
+            return abo;
         }
 
         // GET: api/Abonnements/5
@@ -55,7 +58,9 @@ namespace AbonnementsAPi.Controllers
         public async Task<IActionResult> GetAboByCli([FromRoute] int id)
         {
             string cliId = User.FindFirst(ClaimTypes.Email)?.Value;
-            if (int.Parse(cliId) == id)
+            string emp = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (int.Parse(cliId) == id || emp == "employer")
             {
                 if (!ModelState.IsValid)
                 {
@@ -66,6 +71,7 @@ namespace AbonnementsAPi.Controllers
                     from a in _context.Abonnements
                     where a.aboFKCli == id
                     where a.aboDateFin > DateTime.Now
+                    orderby a.aboDateFin ascending
                     select a;
 
                 if (abonnements == null)
@@ -86,7 +92,9 @@ namespace AbonnementsAPi.Controllers
         public async Task<IActionResult> GetNonAboByCli([FromRoute] int id)
         {
             string cliId = User.FindFirst(ClaimTypes.Email)?.Value;
-            if (int.Parse(cliId) == id)
+            string emp = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (int.Parse(cliId) == id || emp == "employer")
             {
                 if (!ModelState.IsValid)
                 {

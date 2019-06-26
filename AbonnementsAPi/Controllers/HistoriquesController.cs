@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AbonnementsAPi.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace AbonnementsAPi.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class HistoriquesController : ControllerBase
@@ -37,6 +40,48 @@ namespace AbonnementsAPi.Controllers
             }
 
             var historique = await _context.Historique.FindAsync(id);
+
+            if (historique == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(historique);
+        }
+
+        // GET: api/Historiques/client/5
+        [HttpGet("client/{id}")]
+        public async Task<IActionResult> GetHistoriqueByCli([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var historique = from h in _context.Historique
+                                   where h.hisFKCli == id
+                                   select h;
+
+            if (historique == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(historique);
+        }
+
+        // GET: api/Historiques/employer/5
+        [HttpGet("employer/{id}")]
+        public async Task<IActionResult> GetHistoriqueByEmp([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var historique = from h in _context.Historique
+                             where h.hisFKEmp == id
+                             select h;
 
             if (historique == null)
             {

@@ -40,7 +40,9 @@ namespace AbonnementsAPi.Controllers
         public async Task<IActionResult> GetClients([FromRoute] int id)
         {
             string cliId = User.FindFirst(ClaimTypes.Email)?.Value;
-            if(int.Parse(cliId) == id)
+            string emp = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if(int.Parse(cliId) == id || emp == "employer")
             {
 
                 if (!ModelState.IsValid)
@@ -68,7 +70,9 @@ namespace AbonnementsAPi.Controllers
         public async Task<IActionResult> PutClients([FromRoute] int id, [FromBody] Clients clients)
         {
             string cliId = User.FindFirst(ClaimTypes.Email)?.Value;
-            if (int.Parse(cliId) == id)
+            string emp = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (int.Parse(cliId) == id || emp == "employer")
             {
 
                 if (!ModelState.IsValid)
@@ -170,7 +174,9 @@ namespace AbonnementsAPi.Controllers
         public async Task<IActionResult> DeleteClients([FromRoute] int id)
         {
             string cliId = User.FindFirst(ClaimTypes.Email)?.Value;
-            if (int.Parse(cliId) == id)
+            string emp = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (int.Parse(cliId) == id || emp == "employer")
             {
 
                 if (!ModelState.IsValid)
