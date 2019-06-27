@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbonnementsAPi.Migrations
 {
     [DbContext(typeof(AbonnementsAPIContext))]
-    [Migration("20190626132758_mig")]
+    [Migration("20190627102759_mig")]
     partial class mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -161,6 +161,8 @@ namespace AbonnementsAPi.Migrations
                     b.Property<int>("cardYear");
 
                     b.Property<string>("cid");
+
+                    b.Property<int>("paiFKAbo");
 
                     b.Property<string>("transaction");
 

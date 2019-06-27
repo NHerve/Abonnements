@@ -122,7 +122,8 @@ namespace AbonnementsAPi.Migrations
                     cardMonth = table.Column<int>(nullable: false),
                     cardYear = table.Column<int>(nullable: false),
                     amount = table.Column<decimal>(nullable: false),
-                    transaction = table.Column<string>(nullable: true)
+                    transaction = table.Column<string>(nullable: true),
+                    paiFKAbo = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

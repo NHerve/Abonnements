@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,5 +17,7 @@ namespace AbonnementsAPi.Models
         public int cardYear { get; set; }
         public decimal amount { get; set; }
         public string transaction { get; set; }
+        [ForeignKey("paiFKAbo")]
+        public int paiFKAbo { get; set; }
     }
 }

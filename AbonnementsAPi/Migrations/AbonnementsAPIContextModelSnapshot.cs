@@ -160,6 +160,8 @@ namespace AbonnementsAPi.Migrations
 
                     b.Property<string>("cid");
 
+                    b.Property<int>("paiFKAbo");
+
                     b.Property<string>("transaction");
 
                     b.HasKey("uuid");

@@ -101,7 +101,7 @@ namespace AbonnementsAPi.Controllers
 
             if (ok)
             {
-                _context.Abonnements.Add(new Abonnements(idClient, idMagazine));
+                //_context.Abonnements.Add(new Abonnements(idClient, idMagazine));
                 await _context.SaveChangesAsync();
             }
             else
