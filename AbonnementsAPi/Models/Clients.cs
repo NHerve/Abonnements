@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace AbonnementsAPi.Models
 {
     public class Clients
@@ -21,8 +23,11 @@ namespace AbonnementsAPi.Models
         public string cliPhone { get; set; }
         public DateTime? cliDateNaissance { get; set; }
         public string cliLieuNaissance { get; set; }
+        [NotMapped]
         public string cliNumCart { get; set; }
+        [NotMapped]
         public string cliExpiCarte { get; set; }
+        [NotMapped]
         public string cliCCV { get; set; }
         public string cliAuthKey { get; set; }
     }

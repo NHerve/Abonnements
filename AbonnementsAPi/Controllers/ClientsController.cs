@@ -162,9 +162,18 @@ namespace AbonnementsAPi.Controllers
             {
                 return BadRequest(ModelState);
             }
+            string cliPassword = clients.cliPassword;
+            clients.cliPassword = SaltPassword.GetPasswordHash(clients.cliPassword);
 
             _context.clients.Add(clients);
+
             await _context.SaveChangesAsync();
+
+            clients.cliPassword = cliPassword;
+
+           await Authenticate(clients);
+
+            clients.cliPassword = null;
 
             return CreatedAtAction("GetClients", new { id = clients.cliId }, clients);
         }

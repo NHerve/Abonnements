@@ -7,9 +7,6 @@
           "cliPhone" text NOT NULL,
           "cliDateNaissance" timestamp NULL,
           "cliLieuNaissance" text NULL,
-          "cliNumCart" text NULL,
-          "cliExpiCarte" text NULL,
-          "cliCCV" text NULL,
           "cliAuthKey" text NULL,
           CONSTRAINT "PK_clients" PRIMARY KEY ("cliId")
       );
@@ -79,10 +76,10 @@
     ALTER TABLE public."Paiement" ADD FOREIGN KEY ("paiFKAbo") REFERENCES public."Abonnements"("aboId");
 
 INSERT INTO "clients" ("cliNom","cliPrenom","cliPassword","cliMail","cliDateNaissance","cliLieuNaissance","cliPhone") VALUES ('AYMES', 'Herve', 'R0EDo2ezCceT55HqbPikRSXVlGUdSdFOP+/UBlVSvPeewXgM' , 'herve.04@hotmail.fr', '1996-07-17', 'Marseille','0666740985');
-INSERT INTO "clients" ("cliNom","cliPrenom","cliPassword","cliMail","cliDateNaissance","cliLieuNaissance","cliNumCart","cliExpiCarte","cliCCV","cliPhone") VALUES ('JEANNE', 'Steven', '123sjeanne456' , 'steven@mail.com', '1996-07-17', 'Valreas','0123456789123456','0820','123','0601020304');
+INSERT INTO "clients" ("cliNom","cliPrenom","cliPassword","cliMail","cliDateNaissance","cliLieuNaissance","cliPhone") VALUES ('JEANNE', 'Steven', '123sjeanne456' , 'steven@mail.com', '1996-07-17', 'Valreas','0601020304');
 INSERT INTO "clients" ("cliNom","cliPrenom","cliPassword","cliMail","cliDateNaissance","cliLieuNaissance","cliPhone") VALUES ('JOLY', 'Fred', '123fjoly456' , 'fred@mail.fr', '1994-06-09', 'Paris','0609080706');
 
-INSERT INTO "Employer" ("empLogin","empPassword") VALUES ('Lael','et'),('Cruz','purus.'),('Tanisha','non'),('Kiara','justo.'),('Lucian','luctus'),('Phillip','enim.'),('Christine','metus.'),('Ezekiel','semper'),('Oliver','ac'),('Ronan','malesuada');
+INSERT INTO "Employer" ("empLogin","empPassword") VALUES ('Lael','et'),('Cruz','R0EDo2ezCceT55HqbPikRSXVlGUdSdFOP+/UBlVSvPeewXgM.'),('Tanisha','non'),('Kiara','justo.'),('Lucian','luctus'),('Phillip','enim.'),('Christine','metus.'),('Ezekiel','semper'),('Oliver','ac'),('Ronan','malesuada');
 
 INSERT INTO "Magazines" ("magTitre", "magNbVolumeAnnee","magPhotoCouverture","magDescription","magPrixAnnuel") VALUES ('le gorafi' , 365, 'http://www.legorafi.fr/wp-content/themes/legorafi/img/socials.png', 'Le Gorafi est un site d''information trés serieux, créé en mai 2012 durant la campagne présidentielle française',99.99);
 INSERT INTO "Magazines" ("magTitre", "magNbVolumeAnnee","magPhotoCouverture","magDescription","magPrixAnnuel") VALUES ('nord presse' , 365, 'https://cdni.rt.com/french/images/2016.10/article/5810e944c36188e3488b456f.jpg', 'Nordpresse est un site d''information belge. Commençant d''abord par s''inspirer de Sudpresse, le site utilise également des noms de domaines ressemblant à ceux de médias français pour crédibiliser ses informations.',99.98);

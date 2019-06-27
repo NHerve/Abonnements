@@ -173,7 +173,7 @@ namespace Abonnements.ViewModel
             {
                 try
                 {
-                    UserSignUp userSignUp = new UserSignUp(_userMail.Value, SaltPassword.GetPasswordHash(_userPassword.Value), _userFirstname.Value, _userLastname.Value, _userPhone.Value);
+                    UserSignUp userSignUp = new UserSignUp(_userMail.Value,_userPassword.Value, _userFirstname.Value, _userLastname.Value, _userPhone.Value);
                     userSignUp = _userDataService.SignUp(userSignUp);
                     if(userSignUp != null && userSignUp.Id > 0)
                     {
