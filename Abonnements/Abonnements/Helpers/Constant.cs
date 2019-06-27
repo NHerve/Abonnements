@@ -18,6 +18,9 @@ namespace Abonnements.Helpers
         public const string MagazineUrl = @"magazines/";
         public const string Authenticate = @"authenticate/";
         public const string AbonnementUrl = @"abonnements/";
+        public const string PaiementUrl= @"paiement/";
+        public const string PaiementRequestUrl = @"request/";
+
         public const string AbonnementClientUrl = @"client/"; // /id.
         public const string NonAbonnementClientUrl = @"clientnonabo/"; // /id
 

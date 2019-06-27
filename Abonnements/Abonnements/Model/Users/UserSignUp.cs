@@ -43,5 +43,8 @@ namespace Abonnements.Model.Users
 
         [JsonProperty("cliPhone")]
         public string Phone { get; set; }
+
+        [JsonProperty("cliAuthKey")]
+        public string AuthKey { get; set; }
     }
 }

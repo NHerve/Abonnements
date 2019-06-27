@@ -90,36 +90,14 @@
                     <Entry Style="{StaticResource EntryProfileStyle}" Text="{Binding BirthLocation.Value}" />
 
                     <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Numéro de téléphone" />
-                    <Entry 
+                    <Entry
                         Keyboard="Numeric"
-                        Style="{StaticResource EntryProfileStyle}" Text="{Binding Phone.Value}">
+                        Style="{StaticResource EntryProfileStyle}"
+                        Text="{Binding Phone.Value}">
                         <Entry.Behaviors>
                             <behavior:ExpirationDateMaskBehavior Mask="XX XX XX XX XX" />
                         </Entry.Behaviors>
                     </Entry>
-                    <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Numéro de carte" />
-                    <Entry
-                        Keyboard="Numeric"
-                        MaxLength="16"
-                        Style="{StaticResource EntryProfileStyle}"
-                        Text="{Binding CardNumber.Value}" />
-
-                    <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="Date d'expiration" />
-                    <Entry
-                        Keyboard="Numeric"
-                        Style="{StaticResource EntryProfileStyle}"
-                        Text="{Binding ExpirationDate.Value}">
-                        <Entry.Behaviors>
-                            <behavior:ExpirationDateMaskBehavior Mask="XX/XX" />
-                        </Entry.Behaviors>
-                    </Entry>
-
-                    <Label Style="{StaticResource ProfileTitleLabelStyle}" Text="CCV" />
-                    <Entry
-                        Keyboard="Numeric"
-                        MaxLength="3"
-                        Style="{StaticResource EntryProfileStyle}"
-                        Text="{Binding Ccv.Value}" />
                     <Button
                         x:Name="EditButton"
                         AutomationId="edit"

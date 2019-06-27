@@ -10,7 +10,7 @@ namespace Abonnements.Model.Users
     {
         #region PublicProperties
         [JsonProperty("cliAuthKey")]
-        public string Auth_key { get; set; } 
+        public string AuthKey { get; set; } 
         [JsonProperty("cliId")]
         public int Id { get; set; }
         [JsonProperty("cliNom")]
@@ -25,12 +25,6 @@ namespace Abonnements.Model.Users
         public DateTime? BirthDay { get; set; }
         [JsonProperty("cliLieuNaissance")]
         public string BirthLocation { get; set; }
-        [JsonProperty("cliCCV")]
-        public string Ccv { get; set; } = "";
-        [JsonProperty("cliNumCart")]
-        public string CardNumber { get; set; } = "";
-        [JsonProperty("cliExpiCarte")]
-        public string ExpirationDate { get; set; } = "";
         [JsonProperty("cliPassword")]
         public string Password { get; set; }
 
@@ -50,9 +44,6 @@ namespace Abonnements.Model.Users
             Phone= phone;
             BirthDay = birthDay;
             BirthLocation = birthLocation;
-            Ccv= ccv;
-            CardNumber= cardNumber;
-            ExpirationDate= expirationDate;
         }
 
         public UserProfile(UserSignUp userSignUp)
@@ -62,6 +53,7 @@ namespace Abonnements.Model.Users
             LastName = userSignUp.LastName;
             Phone =userSignUp.Phone;
             Mail = userSignUp.Mail;
+            AuthKey = userSignUp.AuthKey;
         }
         //Add validation
         #endregion

@@ -20,9 +20,6 @@ namespace Abonnements.ViewModel
         private ValidatableObject<string> _phone;
         private ValidatableObject<DateTime> _birthDay;
         private ValidatableObject<string> _birthLocation;
-        private ValidatableObject<string> _ccv;
-        private ValidatableObject<string> _cardNumber;
-        private ValidatableObject<string> _expirationDate;
         private ValidatableObject<string> _password;
 
         private ValidatableObject<string> _passwordConfirmation;
@@ -88,42 +85,6 @@ namespace Abonnements.ViewModel
                 RaisePropertyChanged(() => BirthLocation);
             }
         }
-        public ValidatableObject<string> Ccv
-        {
-            get
-            {
-                return _ccv;
-            }
-            set
-            {
-                _ccv = value;
-                RaisePropertyChanged(() => Ccv);
-            }
-        }
-        public ValidatableObject<string> CardNumber
-        {
-            get
-            {
-                return _cardNumber;
-            }
-            set
-            {
-                _cardNumber = value;
-                RaisePropertyChanged(() => CardNumber);
-            }
-        }
-        public ValidatableObject<string> ExpirationDate
-        {
-            get
-            {
-                return _expirationDate;
-            }
-            set
-            {
-                _expirationDate = value;
-                RaisePropertyChanged(() => ExpirationDate);
-            }
-        }
         public ValidatableObject<string> Password
         {
             get
@@ -161,9 +122,6 @@ namespace Abonnements.ViewModel
             _phone = new ValidatableObject<string>() { Value = Profile.Phone };
             _birthDay = new ValidatableObject<DateTime>() { Value = Profile.BirthDay ?? DateTime.Now.AddYears(-70) };
             _birthLocation = new ValidatableObject<string>() { Value = Profile.BirthLocation };
-            _ccv = new ValidatableObject<string>() { Value = Profile.Ccv };
-            _cardNumber = new ValidatableObject<string>() { Value = Profile.CardNumber };
-            _expirationDate = new ValidatableObject<string>() { Value = Profile.ExpirationDate };
             _password = new ValidatableObject<string>();
             _passwordConfirmation = new ValidatableObject<string>();
 
@@ -211,15 +169,6 @@ namespace Abonnements.ViewModel
 
                     if (!string.IsNullOrEmpty(_phone.Value) && _profile.Phone != _phone.Value)
                         _profile.Phone = _phone.Value;
-
-                    if (!string.IsNullOrEmpty(_expirationDate.Value) && _profile.ExpirationDate != _expirationDate.Value)
-                        _profile.ExpirationDate = _expirationDate.Value;
-
-                    if (!string.IsNullOrEmpty(_ccv.Value) && _profile.Ccv != _ccv.Value)
-                        _profile.Ccv = _ccv.Value;
-
-                    if (!string.IsNullOrEmpty(_cardNumber.Value) && _profile.CardNumber != _cardNumber.Value)
-                        _profile.CardNumber = _cardNumber.Value;
 
                     if (_profile.BirthDay?.Equals(_birthDay.Value) == false)
                         _profile.BirthDay = _birthDay.Value;

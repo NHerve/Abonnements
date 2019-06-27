@@ -101,7 +101,15 @@ namespace AbonnementsAPi.Controllers
 
             if (ok)
             {
-                //_context.Abonnements.Add(new Abonnements(idClient, idMagazine));
+                Abonnements abo = new Abonnements(idClient, idMagazine);
+
+                _context.Abonnements.Add(abo);
+                await _context.SaveChangesAsync();
+
+
+                paiement.paiFKAbo = abo.aboId;
+
+                _context.Paiement.Add(paiement);
                 await _context.SaveChangesAsync();
             }
             else
@@ -119,8 +127,13 @@ namespace AbonnementsAPi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            _context.Paiement.Add(paiement);
+           
             //update abonnement where paiement.FkAbo = abo.id
+            var abo = _context.Abonnements.FirstOrDefault(a => a.aboId == paiement.paiFKAbo);
+            if(abo != null)
+            {
+                abo.aboStatus = 1;
+            }
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPaiement", new { id = paiement.uuid }, paiement);

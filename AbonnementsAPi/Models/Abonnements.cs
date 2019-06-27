@@ -9,18 +9,7 @@ namespace AbonnementsAPi.Models
 {
     public class Abonnements
     {
-        //public Abonnements()
-        //{
 
-        //}
-        //public Abonnements(int idClient, int idMagazine)
-        //{
-        //    aboFKCli = idClient;
-        //    aboFKMag = idMagazine;
-        //    aboDateDebut = DateTime.Now;
-        //    aboDateFin = aboDateDebut.AddYears(1);
-        //    aboStatus = 2;
-        //}
         [Key]
         public int aboId { get; set; }
         [ForeignKey("aboFKCli")]
@@ -32,5 +21,19 @@ namespace AbonnementsAPi.Models
         [Required]
         public DateTime aboDateFin { get; set; }
         public int aboStatus { get; set; }
+
+        public Abonnements()
+        {
+
+        }
+        public Abonnements(int idclient, int idmagazine)
+        {
+            aboFKCli = idclient;
+            aboFKMag = idmagazine;
+            aboDateDebut = DateTime.Now;
+            aboDateFin = aboDateDebut.AddYears(1);
+            aboStatus = 2;
+        }
+
     }
 }

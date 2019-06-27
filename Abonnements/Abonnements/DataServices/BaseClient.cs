@@ -31,7 +31,7 @@ namespace Abonnements.DataServices
             if(Settings.CurrentUser != null)
             {
                 if (request.Parameters.FirstOrDefault(p => p.Name == "Authorization") == null)
-                    request.AddParameter("Authorization", string.Format("bearer {0}", Settings.CurrentUser.Auth_key), ParameterType.HttpHeader);
+                    request.AddParameter("Authorization", string.Format("bearer {0}", Settings.CurrentUser.AuthKey), ParameterType.HttpHeader);
             }
             if (request.Method == Method.POST || request.Method == Method.PUT)
             {
@@ -46,7 +46,7 @@ namespace Abonnements.DataServices
             if (Settings.CurrentUser != null)
             {
                 if(request.Parameters.FirstOrDefault(p => p.Name == "Authorization") == null)
-                    request.AddParameter("Authorization", string.Format("bearer {0}", Settings.CurrentUser.Auth_key), ParameterType.HttpHeader); 
+                    request.AddParameter("Authorization", string.Format("bearer {0}", Settings.CurrentUser.AuthKey), ParameterType.HttpHeader); 
             }
             if (request.Method == Method.POST || request.Method == Method.PUT)
             {
