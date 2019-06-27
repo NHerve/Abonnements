@@ -29,6 +29,8 @@ namespace MagGestion.Forms
         public int Id { get; set; }
         public string Motif => TBMotif.Text;
 
+        public DataGridView DataGridViewHistorique { get => DGVHistoriqueClient; set => DGVHistoriqueClient = value; }
+
         public ClientForm(int id, IControl control, ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer)
         {
             Id = id;
@@ -52,6 +54,7 @@ namespace MagGestion.Forms
         {
             Presenter = new ClientPresenter(this, _cache, _errorLogger, _serializer);
             Presenter.GetCustomer(Id);
+            Presenter.FillDGV(Id);
         }
 
         private void BTCourrier_Click(object sender, EventArgs e)

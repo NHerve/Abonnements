@@ -45,6 +45,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.TBMotif = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.DGVHistoriqueClient = new System.Windows.Forms.DataGridView();
+            this.label7 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVHistoriqueClient)).BeginInit();
             this.SuspendLayout();
             // 
             // BTQuit
@@ -53,7 +56,7 @@
             this.BTQuit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BTQuit.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTQuit.ForeColor = System.Drawing.Color.White;
-            this.BTQuit.Location = new System.Drawing.Point(417, 406);
+            this.BTQuit.Location = new System.Drawing.Point(798, 407);
             this.BTQuit.Margin = new System.Windows.Forms.Padding(2);
             this.BTQuit.Name = "BTQuit";
             this.BTQuit.Size = new System.Drawing.Size(105, 40);
@@ -251,11 +254,44 @@
             this.label6.TabIndex = 17;
             this.label6.Text = "Motif de la communication (date du jour appliqué)";
             // 
+            // DGVHistoriqueClient
+            // 
+            this.DGVHistoriqueClient.AllowUserToAddRows = false;
+            this.DGVHistoriqueClient.AllowUserToDeleteRows = false;
+            this.DGVHistoriqueClient.AllowUserToResizeColumns = false;
+            this.DGVHistoriqueClient.AllowUserToResizeRows = false;
+            this.DGVHistoriqueClient.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DGVHistoriqueClient.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.DGVHistoriqueClient.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DGVHistoriqueClient.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.DGVHistoriqueClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVHistoriqueClient.Location = new System.Drawing.Point(480, 60);
+            this.DGVHistoriqueClient.Name = "DGVHistoriqueClient";
+            this.DGVHistoriqueClient.ReadOnly = true;
+            this.DGVHistoriqueClient.RowHeadersVisible = false;
+            this.DGVHistoriqueClient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DGVHistoriqueClient.Size = new System.Drawing.Size(423, 341);
+            this.DGVHistoriqueClient.TabIndex = 18;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label7.Location = new System.Drawing.Point(485, 20);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(279, 29);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Historique de relation :";
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 458);
+            this.ClientSize = new System.Drawing.Size(915, 458);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.DGVHistoriqueClient);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.TBMotif);
             this.Controls.Add(this.lbMail);
@@ -278,6 +314,7 @@
             this.Name = "ClientForm";
             this.Text = "ClientForm";
             this.Load += new System.EventHandler(this.ClientForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DGVHistoriqueClient)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -302,5 +339,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox TBMotif;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridView DGVHistoriqueClient;
+        private System.Windows.Forms.Label label7;
     }
 }

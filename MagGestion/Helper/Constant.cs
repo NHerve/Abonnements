@@ -23,7 +23,9 @@ namespace MagGestion.Helper
 
         public static string ErrorUrl = @"Logs/";
 
-        public static string EmployerUrl = @"Employers/";
+        public static string EmployersUrl = @"Employers/";
+
+        public static string EmployerUrl = @"employer/";
 
         public static string LoginUrl = @"Authenticate";
 

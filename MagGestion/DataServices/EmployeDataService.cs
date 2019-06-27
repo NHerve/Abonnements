@@ -17,7 +17,7 @@ namespace MagGestion.DataServices
     {
         public EmployeDataService(ICacheService cache, IDeserializer serializer, IErrorLogger errorLogger) : base(cache, serializer, errorLogger)
         {
-            BaseUrl = new Uri(BaseUrl, Constant.EmployerUrl);
+            BaseUrl = new Uri(BaseUrl, Constant.EmployersUrl);
         }
 
         public void PostEmploye(Employe employe)

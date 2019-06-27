@@ -103,6 +103,7 @@
     <Compile Include="DataServices\InMemoryCache.cs" />
     <Compile Include="DataServices\Interface\ICacheService.cs" />
     <Compile Include="DataServices\MagazineDataService.cs" />
+    <Compile Include="Model\Client\DGVHistoriqueClient.cs" />
     <Compile Include="Presenter\BasePresenter.cs" />
     <Compile Include="Presenter\ClientControlPresenter.cs" />
     <Compile Include="Presenter\ClientPresenter.cs" />

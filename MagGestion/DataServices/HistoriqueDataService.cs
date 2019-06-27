@@ -1,6 +1,7 @@
 ﻿using MagGestion.DataServices.Interface;
 using MagGestion.Helper;
 using MagGestion.Helper.Interface;
+using MagGestion.Model.Client;
 using MagGestion.Model.Historique;
 using RestSharp;
 using RestSharp.Deserializers;
@@ -19,15 +20,15 @@ namespace MagGestion.DataServices
 
         public List<DGVHistorique> GetAllHistoriquesOfEmp(int id)
         {
-            RestRequest request = new RestRequest($"{id}") { Method = Method.GET };
+            RestRequest request = new RestRequest($"{Constant.EmployerUrl}{id}") { Method = Method.GET };
 
             return Get<List<DGVHistorique>>(request);
         }
-        public List<DGVHistorique> GetAllHistoriquesOfCli(int id)
+        public List<DGVHistoriqueClient> GetAllHistoriquesOfCli(int id)
         {
             RestRequest request = new RestRequest($"{Constant.ClientUrl}{id}") { Method = Method.GET };
 
-            return Get<List<DGVHistorique>>(request);
+            return Get<List<DGVHistoriqueClient>>(request);
         }
         public bool CreateHistorique(Historique historique)
         {

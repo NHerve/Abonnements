@@ -47,7 +47,7 @@ namespace MagGestion.Forms
 
         private void magasinesToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            ShowMagazine(this, e);
+            ShowMagazine(this, EventArgs.Empty);
 
         }
 

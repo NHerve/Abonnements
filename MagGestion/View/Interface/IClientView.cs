@@ -1,5 +1,6 @@
 ﻿using MagGestion.Presenter;
 using System;
+using System.Windows.Forms;
 
 namespace MagGestion.View.Interface
 {
@@ -12,6 +13,8 @@ namespace MagGestion.View.Interface
         string Telephone { set; }
         string Mail { set; }
         string BirthDay { set; }
+
+        DataGridView DataGridViewHistorique { get; set; }
 
         ClientPresenter Presenter { set; }
 
