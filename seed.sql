@@ -66,7 +66,7 @@
     ALTER TABLE public."Historique" ADD FOREIGN KEY ("hisFKEmp") REFERENCES public."Employer"("empId");
 
       CREATE TABLE "Paiement" (
-          "uuid" serial NOT NULL,
+          "uuid" text NOT NULL,
           "cid" text NULL,
           "cardNumber" text NULL,
           "cardMonth" int4 NOT NULL,

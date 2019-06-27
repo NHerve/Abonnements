@@ -10,7 +10,7 @@ namespace AbonnementsAPi.Models
     public class Paiement
     {
         [Key]
-        public int uuid { get; set; }
+        public string uuid { get; set; }
         public string cid { get; set; }
         public string cardNumber { get; set; }
         public int cardMonth { get; set; }

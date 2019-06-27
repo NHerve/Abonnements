@@ -147,7 +147,7 @@ namespace AbonnementsAPi.Migrations
 
             modelBuilder.Entity("AbonnementsAPi.Models.Paiement", b =>
                 {
-                    b.Property<int>("uuid")
+                    b.Property<string>("uuid")
                         .ValueGeneratedOnAdd();
 
                     b.Property<decimal>("amount");

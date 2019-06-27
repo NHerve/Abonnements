@@ -115,8 +115,7 @@ namespace AbonnementsAPi.Migrations
                 name: "Paiement",
                 columns: table => new
                 {
-                    uuid = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    uuid = table.Column<string>(nullable: false),
                     cid = table.Column<string>(nullable: true),
                     cardNumber = table.Column<string>(nullable: true),
                     cardMonth = table.Column<int>(nullable: false),

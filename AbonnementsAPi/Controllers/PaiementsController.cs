@@ -53,7 +53,7 @@ namespace AbonnementsAPi.Controllers
 
         // PUT: api/Paiements/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPaiement([FromRoute] int id, [FromBody] Paiement paiement)
+        public async Task<IActionResult> PutPaiement([FromRoute] string id, [FromBody] Paiement paiement)
         {
             if (!ModelState.IsValid)
             {
@@ -160,7 +160,7 @@ namespace AbonnementsAPi.Controllers
             return Ok(paiement);
         }
 
-        private bool PaiementExists(int id)
+        private bool PaiementExists(string id)
         {
             return _context.Paiement.Any(e => e.uuid == id);
         }

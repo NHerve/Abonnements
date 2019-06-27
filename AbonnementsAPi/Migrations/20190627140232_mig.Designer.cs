@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbonnementsAPi.Migrations
 {
     [DbContext(typeof(AbonnementsAPIContext))]
-    [Migration("20190627102759_mig")]
+    [Migration("20190627140232_mig")]
     partial class mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -149,7 +149,7 @@ namespace AbonnementsAPi.Migrations
 
             modelBuilder.Entity("AbonnementsAPi.Models.Paiement", b =>
                 {
-                    b.Property<int>("uuid")
+                    b.Property<string>("uuid")
                         .ValueGeneratedOnAdd();
 
                     b.Property<decimal>("amount");
