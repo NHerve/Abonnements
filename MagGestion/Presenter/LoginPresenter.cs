@@ -39,8 +39,8 @@ namespace MagGestion.Presenter
             else if (!string.IsNullOrEmpty(_view.Login) && !string.IsNullOrEmpty(_view.Password))
             {
 
-                string savedPasswordHash = new EmployeDataService(_cache, _serializer, _errorLogger).GetEmploye(_view.Login)?.Password ?? "";
-                if (SaltPassword.ComparePassword(savedPasswordHash, _view.Password))
+                Constant.CurrentEmploye = new EmployeDataService(_cache, _serializer, _errorLogger).Authenticate(new Employe(_view.Login, _view.Password));
+                if (Constant.CurrentEmploye != null && Constant.CurrentEmploye.AuthKey != "")
                 {
                     _formOpener.ShowModalForm<MainView>();
                     _view.Close();

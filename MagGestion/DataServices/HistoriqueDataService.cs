@@ -17,19 +17,24 @@ namespace MagGestion.DataServices
         }
 
 
-        public List<DGVHistorique> GetHistoriques()
+        public List<DGVHistorique> GetAllHistoriquesOfEmp(int id)
         {
-            RestRequest request = new RestRequest() { Method = Method.GET };
-            request.AddHeader("content-type", "application/json");
+            RestRequest request = new RestRequest($"{id}") { Method = Method.GET };
+
             return Get<List<DGVHistorique>>(request);
         }
+        public List<DGVHistorique> GetAllHistoriquesOfCli(int id)
+        {
+            RestRequest request = new RestRequest($"{Constant.ClientUrl}{id}") { Method = Method.GET };
 
-        public void CreateHistorique(Historique historique)
+            return Get<List<DGVHistorique>>(request);
+        }
+        public bool CreateHistorique(Historique historique)
         {
             RestRequest request = new RestRequest() { Method = Method.POST };
             request.AddJsonBody(historique);
 
-            Execute(request);
+            return Execute(request).StatusCode == System.Net.HttpStatusCode.Created ? true : false;
         }
     }
 }

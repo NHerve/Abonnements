@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MagGestion.DataServices
 {
@@ -29,7 +30,12 @@ namespace MagGestion.DataServices
 
         public override IRestResponse Execute(IRestRequest request)
         {
-            if(request.Method == Method.POST)
+            if (Constant.CurrentEmploye != null)
+            {
+                if (request.Parameters.FirstOrDefault(p => p.Name == "Authorization") == null)
+                    request.AddParameter("Authorization", string.Format("bearer {0}", Constant.CurrentEmploye.AuthKey), ParameterType.HttpHeader);
+            }
+            if (request.Method == Method.POST || request.Method == Method.PUT)
             {
                 request.JsonSerializer = new JsonSerializer();
             }
@@ -39,6 +45,15 @@ namespace MagGestion.DataServices
         }
         public override IRestResponse<T> Execute<T>(IRestRequest request)
         {
+            if (Constant.CurrentEmploye != null)
+            {
+                if (request.Parameters.FirstOrDefault(p => p.Name == "Authorization") == null)
+                    request.AddParameter("Authorization", string.Format("bearer {0}", Constant.CurrentEmploye.AuthKey), ParameterType.HttpHeader);
+            }
+            if (request.Method == Method.POST || request.Method == Method.PUT)
+            {
+                request.JsonSerializer = new JsonSerializer();
+            }
             var response = base.Execute<T>(request);
             TimeoutCheck(request, response);
             return response;
@@ -53,7 +68,19 @@ namespace MagGestion.DataServices
             }
             else
             {
-                LogError(BaseUrl, request, response);
+                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    MessageBox.Show("Vous n'avez pas le droit", "Problème de droit");
+
+                }
+                else
+                {
+                    MessageBox.Show("Serveur inaccessible", "Problème avec le serveur");
+                }
+                if (response.StatusCode != 0)
+                {
+                    LogError(BaseUrl, request, response);
+                }
                 return default(T);
             }
         }

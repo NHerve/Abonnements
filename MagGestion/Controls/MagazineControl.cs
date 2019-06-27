@@ -18,7 +18,7 @@ namespace MagGestion.Controls
         public event EventHandler OnShowMagazineForm;
 
         public MagazineControlPresenter Presenter { private get; set; }
-        public DataGridView DGVMagazine { get => DGVMagazine; set => DGVMagazine = value; }
+        public DataGridView DataGridViewMagazine { get => DGVPublication; set => DGVPublication = value; }
         public Button BTMag { get => BTMagazine; set => BTMagazine = value; }
 
         public MagazineControl(ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer)
