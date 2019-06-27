@@ -9,6 +9,7 @@ using AbonnementsAPi.Models;
 using System.Net;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using RestSharp;
 
 namespace AbonnementsAPi.Controllers
 {
@@ -85,6 +86,31 @@ namespace AbonnementsAPi.Controllers
             return NoContent();
         }
 
+        // POST: api/Paiements/request/idClient/idMagazine
+        [HttpPost("request/{idClient}/{idMagazine}")]
+        public async Task<IActionResult> PostPaiementRequest([FromBody] Paiement paiement, int idClient, int idMagazine)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            RestClient client = new RestClient(new Uri(@"http://192.168.2.1:6543/cardpay/"));
+            RestRequest request = new RestRequest($"{paiement.uuid}/{paiement.cid}/{paiement.cardNumber}/{paiement.cardMonth}/{paiement.cardYear}/{paiement.amount}") { Method = Method.GET };
+            bool ok = client.Execute(request).StatusCode == HttpStatusCode.OK;
+
+            if (ok)
+            {
+                _context.Abonnements.Add(new Abonnements(idClient, idMagazine));
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                return BadRequest();
+            }
+            return CreatedAtAction("GetPaiement", new { id = paiement.uuid }, paiement);
+        }
+
         // POST: api/Paiements
         [HttpPost]
         public async Task<IActionResult> PostPaiement([FromBody] Paiement paiement)
@@ -93,8 +119,8 @@ namespace AbonnementsAPi.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             _context.Paiement.Add(paiement);
+            //update abonnement where paiement.FkAbo = abo.id
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPaiement", new { id = paiement.uuid }, paiement);
