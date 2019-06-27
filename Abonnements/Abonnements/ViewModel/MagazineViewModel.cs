@@ -15,6 +15,8 @@ namespace Abonnements.ViewModel
         private string _description;
         private string _numeroAnnee;
         private string _prixAnnuel;
+        private bool _isAbonnement;
+        private bool _isNonAbonnement;
 
         #endregion
 
@@ -39,6 +41,16 @@ namespace Abonnements.ViewModel
             get { return _prixAnnuel; }
             set { _prixAnnuel = value; RaisePropertyChanged(() => PrixAnnuel); }
         }
+        public bool IsAbonnement
+        {
+            get { return _isAbonnement; }
+            set { _isAbonnement = value; RaisePropertyChanged(() => IsAbonnement); }
+        }
+        public bool IsNonAbonnement
+        {
+            get { return _isNonAbonnement; }
+            set { _isNonAbonnement = value; RaisePropertyChanged(() => IsNonAbonnement); }
+        }
         #endregion
 
         #region Ctor
@@ -55,11 +67,15 @@ namespace Abonnements.ViewModel
             if (navigationData is Magazine)
             {
                 mag = (Magazine)navigationData;
+                IsAbonnement = false;
+                IsNonAbonnement = true;
             }
             else
             {
                 int magId = (int)navigationData;
                 mag = _magazineDataService.GetMagazine(magId);
+                IsAbonnement = true;
+                IsNonAbonnement = false;
             }
             Titre = mag.Titre;
             Description = mag.Description;
