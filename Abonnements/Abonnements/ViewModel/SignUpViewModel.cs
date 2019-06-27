@@ -203,6 +203,7 @@ namespace Abonnements.ViewModel
 
             if (isRegistered)
             {
+                DialogService.ToastAlert("Inscription réussie");
                 await NavigationService.NavigateToAsync<MainViewModel>();
             }
 

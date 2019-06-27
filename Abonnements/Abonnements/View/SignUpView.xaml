@@ -87,6 +87,7 @@
                     x:Name="EntryUserMail"
                     Margin="0,20"
                     AutomationId="usermail"
+                    Keyboard="Email"
                     Placeholder="Mail"
                     Style="{StaticResource FormEntryStyle}"
                     Text="{Binding UserMail.Value, Mode=TwoWay}">
@@ -113,6 +114,7 @@
                     Text="{Binding UserPhone.Value, Mode=TwoWay}">
 
                     <Entry.Behaviors>
+                        <behaviors:ExpirationDateMaskBehavior Mask="XX XX XX XX XX" />
                         <behaviors:TurnValidOnFocusBehavior ValidityObject="{Binding UserPhone}" />
                     </Entry.Behaviors>
                     <Entry.Triggers>

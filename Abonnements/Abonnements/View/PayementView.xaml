@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="Abonnements.View.PayementView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behavior="clr-namespace:Abonnements.Behaviors">
+    <ContentView.Content>
+        <Grid>
+            <Label Text="{Binding Titre}" />
+            <Entry
+                Keyboard="Numeric"
+                Placeholder="Numéro carte bleu"
+                Text="{Binding CardNumber}">
+                <Entry.Behaviors>
+                    <behavior:ExpirationDateMaskBehavior Mask="XXXX XXXX XXXX XXXX" />
+                </Entry.Behaviors>
+            </Entry>
+            <Entry
+                Keyboard="Numeric"
+                MaxLength="2"
+                Placeholder="Mois"
+                Text="{Binding CardMonth}" />
+            <Entry
+                Keyboard="Numeric"
+                MaxLength="2"
+                Placeholder="Année"
+                Text="{Binding CardYear}" />
+            <Button Command="{Binding Payement}" Text="{Binding Amount, StringFormat='Payer : {O}€'}" />
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

@@ -6,5 +6,6 @@ namespace Abonnements.ViewModel
 {
     public class ButtonSubscribeMagazineViewModel : ViewModelBase
     {
+
     }
 }
