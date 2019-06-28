@@ -97,8 +97,8 @@ namespace AbonnementsAPi.Controllers
 
             RestClient client = new RestClient(new Uri(@"http://192.168.2.1:6543/cardpay/"));
             RestRequest request = new RestRequest($"{paiement.uuid}/{paiement.cid}/{paiement.cardNumber}/{paiement.cardMonth}/{paiement.cardYear}/{paiement.amount}") { Method = Method.GET };
-            bool ok = client.Execute(request).StatusCode == HttpStatusCode.OK;
-
+            var response = client.Execute(request);
+            bool ok = response.StatusCode == HttpStatusCode.OK;
             if (ok)
             {
                 Abonnements abo = new Abonnements(idClient, idMagazine);
@@ -111,12 +111,13 @@ namespace AbonnementsAPi.Controllers
 
                 _context.Paiement.Add(paiement);
                 await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetPaiement", new { id = paiement.cid }, paiement);
             }
             else
             {
                 return BadRequest();
             }
-            return CreatedAtAction("GetPaiement", new { id = paiement.uuid }, paiement);
         }
 
         // POST: api/Paiements

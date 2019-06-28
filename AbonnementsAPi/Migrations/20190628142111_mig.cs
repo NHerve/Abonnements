@@ -38,9 +38,6 @@ namespace AbonnementsAPi.Migrations
                     cliPhone = table.Column<string>(nullable: true),
                     cliDateNaissance = table.Column<DateTime>(nullable: true),
                     cliLieuNaissance = table.Column<string>(nullable: true),
-                    cliNumCart = table.Column<string>(nullable: true),
-                    cliExpiCarte = table.Column<string>(nullable: true),
-                    cliCCV = table.Column<string>(nullable: true),
                     cliAuthKey = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -115,18 +112,18 @@ namespace AbonnementsAPi.Migrations
                 name: "Paiement",
                 columns: table => new
                 {
-                    uuid = table.Column<string>(nullable: false),
-                    cid = table.Column<string>(nullable: true),
+                    uuid = table.Column<string>(nullable: true),
+                    cid = table.Column<string>(nullable: false),
                     cardNumber = table.Column<string>(nullable: true),
-                    cardMonth = table.Column<int>(nullable: false),
-                    cardYear = table.Column<int>(nullable: false),
+                    cardMonth = table.Column<string>(nullable: true),
+                    cardYear = table.Column<string>(nullable: true),
                     amount = table.Column<decimal>(nullable: false),
                     transaction = table.Column<string>(nullable: true),
                     paiFKAbo = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Paiement", x => x.uuid);
+                    table.PrimaryKey("PK_Paiement", x => x.cid);
                 });
         }
 

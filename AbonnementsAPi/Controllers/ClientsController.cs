@@ -124,8 +124,8 @@ namespace AbonnementsAPi.Controllers
         public async Task<IActionResult> Authenticate([FromBody]Clients cliParam)
         {
             string test = (from c in _context.clients
-                       where c.cliMail == cliParam.cliMail
-                       select c.cliPassword).FirstOrDefault();
+                           where c.cliMail == cliParam.cliMail
+                           select c.cliPassword).FirstOrDefault();
 
             if (test != null)
             {

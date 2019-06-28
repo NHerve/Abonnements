@@ -122,7 +122,7 @@ namespace AbonnementsAPi.Controllers
             {
 
 
-                if (SaltPassword.ComparePassword(test, empParam.empPassword))
+                if(SaltPassword.ComparePassword(test, empParam.empPassword))
                 {
                     var emp = _employerService.Authenticate(empParam.empLogin, test);
 

@@ -45,19 +45,13 @@ namespace AbonnementsAPi.Migrations
 
                     b.Property<string>("cliAuthKey");
 
-                    b.Property<string>("cliCCV");
-
                     b.Property<DateTime?>("cliDateNaissance");
-
-                    b.Property<string>("cliExpiCarte");
 
                     b.Property<string>("cliLieuNaissance");
 
                     b.Property<string>("cliMail");
 
                     b.Property<string>("cliNom");
-
-                    b.Property<string>("cliNumCart");
 
                     b.Property<string>("cliPassword");
 
@@ -147,24 +141,24 @@ namespace AbonnementsAPi.Migrations
 
             modelBuilder.Entity("AbonnementsAPi.Models.Paiement", b =>
                 {
-                    b.Property<string>("uuid")
+                    b.Property<string>("cid")
                         .ValueGeneratedOnAdd();
 
                     b.Property<decimal>("amount");
 
-                    b.Property<int>("cardMonth");
+                    b.Property<string>("cardMonth");
 
                     b.Property<string>("cardNumber");
 
-                    b.Property<int>("cardYear");
-
-                    b.Property<string>("cid");
+                    b.Property<string>("cardYear");
 
                     b.Property<int>("paiFKAbo");
 
                     b.Property<string>("transaction");
 
-                    b.HasKey("uuid");
+                    b.Property<string>("uuid");
+
+                    b.HasKey("cid");
 
                     b.ToTable("Paiement");
                 });
