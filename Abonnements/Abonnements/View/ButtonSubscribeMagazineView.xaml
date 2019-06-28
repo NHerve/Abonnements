@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentView.Content>
         <Button
-            Command="{Binding Subscribe}"
+            Command="{Binding SubscribeCommand}"
             Style="{StaticResource ButtonStyle}"
             Text="S'abonner" />
     </ContentView.Content>

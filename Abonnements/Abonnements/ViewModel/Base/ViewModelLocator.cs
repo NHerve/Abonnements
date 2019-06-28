@@ -45,6 +45,7 @@ namespace Abonnements.ViewModel.Base
             _unityContainer.RegisterType<UserDataService>();
             _unityContainer.RegisterType<MagazineDataService>();
             _unityContainer.RegisterType<AbonnementDataService>();
+            _unityContainer.RegisterType<PaiementDataService>();
 
             // View models
             _unityContainer.RegisterType<LoginViewModel>();
@@ -53,6 +54,8 @@ namespace Abonnements.ViewModel.Base
 
             _unityContainer.RegisterType<AbonnementsViewModel>();
             _unityContainer.RegisterType<MagazineViewModel>();
+            _unityContainer.RegisterType<PayementViewModel>();
+
             _unityContainer.RegisterType<ButtonSubscribedMagazineViewModel>();
             _unityContainer.RegisterType<ButtonSubscribeMagazineViewModel>();
 

@@ -17,9 +17,9 @@ namespace Abonnements.DataServices
             BaseUrl = new Uri(BaseUrl, Constant.PaiementUrl);
         }
 
-        public bool RequestPaiement(Paiement paiement)
+        public bool RequestPaiement(Paiement paiement, int idMagazine)
         {
-            RestRequest request = new RestRequest(Constant.PaiementRequestUrl) { Method = Method.POST };
+            RestRequest request = new RestRequest($"{Constant.PaiementRequestUrl}{Settings.CurrentUser.Id}/{idMagazine}") { Method = Method.POST };
             request.AddJsonBody(paiement);
 
             return Execute(request).StatusCode == System.Net.HttpStatusCode.OK;

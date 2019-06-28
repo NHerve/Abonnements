@@ -22,10 +22,12 @@
                 <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
                 <Setter Property="Margin" Value="0,0,0,14" />
             </Style>
-            <Style x:Key="DescriptionLabelStyle" TargetType="{x:Type Label}"
-                BasedOn="{StaticResource BaseLabelStyle}">
+            <Style
+                x:Key="DescriptionLabelStyle"
+                BasedOn="{StaticResource BaseLabelStyle}"
+                TargetType="{x:Type Label}">
                 <Setter Property="FontFamily" Value="{StaticResource MontserratRegular}" />
-                <Setter Property="effects:NumberOfLinesEffect.NumberOfLines" Value="12"/>
+                <Setter Property="effects:NumberOfLinesEffect.NumberOfLines" Value="12" />
                 <Setter Property="LineBreakMode" Value="WordWrap" />
                 <Setter Property="TextColor" Value="{StaticResource TransparentBlueColor}" />
                 <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
@@ -65,8 +67,8 @@
 
                     <Label Style="{StaticResource TitleLabelStyle}" Text="Prix annuel" />
                     <Label Style="{StaticResource ItemLabelStyle}" Text="{Binding PrixAnnuel, StringFormat='\{0}€'}" />
-                    <local:ButtonSubscribedMagazineView IsVisible="{Binding IsAbonnement}" />
-                    <local:ButtonSubscribeMagazineView IsVisible="{Binding IsNonAbonnement}" />
+                    <local:ButtonSubscribedMagazineView BindingContext="{Binding Subscribed}" IsVisible="{Binding IsAbonnement}" />
+                    <local:ButtonSubscribeMagazineView BindingContext="{Binding Subscribe}" IsVisible="{Binding IsNonAbonnement}" />
                 </StackLayout>
             </Grid>
         </Grid>
