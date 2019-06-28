@@ -16,6 +16,21 @@ namespace MagGestion.Presenter
     {
         public readonly IMagazineControl _control;
 
+        //private readonly IClientView _view;
+        //private readonly ClientDataService _clientDataService;
+        //private readonly HistoriqueDataService _historiqueDataService;
+
+        //private int IdClient;
+        //public ClientPresenter(IClientView view, ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer) : base(cache, errorLogger, serializer)
+        //{
+        //    _view = view;
+        //    _view.CloseRequested += OnCloseRequested;
+        //    _view.CreationHistoriqueRequested += OnCreationHistoriqueRequested;
+        //    _clientDataService = new ClientDataService(_cache, _serializer, _errorLogger);
+        //    _historiqueDataService = new HistoriqueDataService(_cache, _serializer, _errorLogger);
+        //}
+
+
         public MagazineControlPresenter(IMagazineControl control, ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer) : base(cache, errorLogger, serializer)
         {
             _control = control;
@@ -25,8 +40,8 @@ namespace MagGestion.Presenter
 
         private void OnShowMagazineForm(object sender, EventArgs e)
         {
-            var id = _control.DataGridViewMagazine.SelectedRows[0].Cells["Id"].Value;
-            new MagazineForm((Control)_control, id.ToString()).Show();
+            var id = Convert.ToInt32(_control.DataGridViewMagazine.SelectedRows[0].Cells["Id"].Value);
+            new MagazineForm( (IControl)_control,_cache,_errorLogger, _serializer, id).Show();
         }
         private void OnCellSelected(object sender, EventArgs e)
         {

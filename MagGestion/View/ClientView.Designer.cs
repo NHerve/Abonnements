@@ -313,6 +313,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ClientForm";
             this.Text = "ClientForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClientForm_FormClosing);
             this.Load += new System.EventHandler(this.ClientForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGVHistoriqueClient)).EndInit();
             this.ResumeLayout(false);

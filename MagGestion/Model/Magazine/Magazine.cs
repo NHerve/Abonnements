@@ -14,6 +14,9 @@ namespace MagGestion.Model.Magazine
 
         }
 
+        [JsonProperty(PropertyName = "magId")]
+        public int Id { get; set; }
+
         [JsonProperty("magTitre")]
         public string Titre { get; set; }
 
@@ -24,7 +27,7 @@ namespace MagGestion.Model.Magazine
         public decimal PrixAnnuel { get; set; }
 
         [JsonProperty("magNbVolumeAnnee")]
-        public int NumeroAnnée { get; set; }
+        public int NumeroAnnee { get; set; }
 
     }
 }

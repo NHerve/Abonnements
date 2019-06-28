@@ -42,8 +42,8 @@ namespace MagGestion.Presenter
                 Constant.CurrentEmploye = new EmployeDataService(_cache, _serializer, _errorLogger).Authenticate(new Employe(_view.Login, _view.Password));
                 if (Constant.CurrentEmploye != null && Constant.CurrentEmploye.AuthKey != "")
                 {
-                    _formOpener.ShowModalForm<MainView>();
                     _view.Close();
+                    _formOpener.ShowModalForm<MainView>();
                 }
             }
         }

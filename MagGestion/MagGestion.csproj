@@ -110,6 +110,7 @@
     <Compile Include="Presenter\HistoriqueControlPresenter.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
     <Compile Include="Presenter\MagazineControlPresenter.cs" />
+    <Compile Include="Presenter\MagazineViewPresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
     <Compile Include="View\ClientView.cs">
       <SubType>Form</SubType>

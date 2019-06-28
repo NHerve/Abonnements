@@ -1,19 +1,45 @@
 ﻿using MagGestion.Controls.Interface;
+using MagGestion.DataServices.Interface;
+using MagGestion.Helper.Interface;
+using MagGestion.Presenter;
+using MagGestion.View.Interface;
+using RestSharp.Deserializers;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace MagGestion.Forms
 {
-    public partial class MagazineForm : Form
+    public partial class MagazineForm : Form, IMagazineView
     {
-        private Control _control;
+        private IControl _control;
+
+
+        private readonly ICacheService _cache;
+        private readonly IErrorLogger _errorLogger;
+        private readonly IDeserializer _serializer;
+
+        public event EventHandler CloseRequested;
+        public event EventHandler CreationHistoriqueRequested;
+
+
+        public MagazineViewPresenter Presenter { private get; set; }
+        public int Id { get; set; }
+        public string Titre { get => TBTitre.Text; set => TBTitre.Text = value; }
+        public string URLPhoto { get; set; }
+        public decimal PrixAnnee { get => NumericPrice.Value; set => NumericPrice.Value = value; }
+        public string Description { get; set; }
+        public int NumeroAnnee { get => (int)NumericNumberPerYear.Value; set => NumericNumberPerYear.Value = value; }
+
         private readonly string _id;
-        public MagazineForm(Control control, string id)
+
+        public MagazineForm(IControl control, ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer, int id)
         {
             InitializeComponent();
+            Id = id;
+            _cache = cache;
             _control = control;
-            _id = id;
+            _serializer = serializer;
             _control.Parent.Parent.Enabled = false;
             this.TopMost = true;
             this.CenterToScreen();

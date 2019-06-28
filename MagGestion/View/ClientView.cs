@@ -73,5 +73,11 @@ namespace MagGestion.Forms
             CreationHistoriqueRequested(sender, e);
 
         }
+
+        private void ClientForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _control.Parent.Parent.Enabled = true;
+            _control.Parent.Parent.Focus();
+        }
     }
 }
