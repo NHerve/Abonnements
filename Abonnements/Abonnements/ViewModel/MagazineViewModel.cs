@@ -10,17 +10,23 @@ namespace Abonnements.ViewModel
     public class MagazineViewModel : ViewModelBase
     {
         #region Private Properties
+        private ButtonSubscribedMagazineViewModel _subscribed;
+        private ButtonSubscribeMagazineViewModel _subscribe;
         private readonly MagazineDataService _magazineDataService;
         private string _titre;
         private string _description;
         private string _numeroAnnee;
-        private string _prixAnnuel;
+        private decimal _prixAnnuel;
         private bool _isAbonnement;
         private bool _isNonAbonnement;
 
         #endregion
 
         #region Public Properties
+
+        public ButtonSubscribedMagazineViewModel Subscribed { get { return _subscribed; } set { _subscribed = value; RaisePropertyChanged(() => Subscribed); } }
+        public ButtonSubscribeMagazineViewModel Subscribe { get { return _subscribe; } set { _subscribe = value; RaisePropertyChanged(() => Subscribe); } }
+        
         public string Titre
         {
             get { return _titre; }
@@ -36,7 +42,7 @@ namespace Abonnements.ViewModel
             get { return _numeroAnnee; }
             set { _numeroAnnee = value; RaisePropertyChanged(() => NumeroAnnee); }
         }
-        public string PrixAnnuel
+        public decimal PrixAnnuel
         {
             get { return _prixAnnuel; }
             set { _prixAnnuel = value; RaisePropertyChanged(() => PrixAnnuel); }
@@ -54,9 +60,11 @@ namespace Abonnements.ViewModel
         #endregion
 
         #region Ctor
-        public MagazineViewModel(MagazineDataService magazineDateService)
+        public MagazineViewModel(MagazineDataService magazineDateService, ButtonSubscribedMagazineViewModel subscribed, ButtonSubscribeMagazineViewModel subscribe)
         {
             _magazineDataService = magazineDateService;
+            _subscribe = subscribe;
+            _subscribed = subscribed;
         }
         #endregion
 
@@ -80,7 +88,9 @@ namespace Abonnements.ViewModel
             Titre = mag.Titre;
             Description = mag.Description;
             NumeroAnnee = mag.NumeroAnnee.ToString();
-            PrixAnnuel = mag.PrixAnnuel.ToString();
+            PrixAnnuel = mag.PrixAnnuel;
+            _subscribe.Paiement = new Paiement { Titre = _titre, amount = _prixAnnuel, IdMagazine = mag.Id };
+
             return Task.FromResult(false);
         }
         #endregion

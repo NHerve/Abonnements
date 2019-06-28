@@ -166,6 +166,7 @@ namespace Abonnements.Services
             }
 
             return page;
+          
         }
 
         private void CreatePageViewModelMappings()
@@ -180,6 +181,7 @@ namespace Abonnements.Services
             _mappings.Add(typeof(MainViewModel), typeof(MainView));
             _mappings.Add(typeof(AbonnementsViewModel), typeof(AbonnementsView));
             _mappings.Add(typeof(SubscribeViewModel), typeof(SubscribeView));
+            _mappings.Add(typeof(PayementViewModel), typeof(PayementView));
 
             // _mappings.Add(typeof(CategoriesSettingsViewModel), typeof(CategoriesSettings));
         }

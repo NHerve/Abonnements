@@ -20,9 +20,9 @@ namespace Abonnements.ViewModel
         #region Ctor
         public MainViewModel()
         {
-            AbonnementViewModel = new AbonnementsViewModel();
+            AbonnementViewModel = ViewModelLocator.Instance.Resolve<AbonnementsViewModel>();
             AccountViewModel = ViewModelLocator.Instance.Resolve<AccountViewModel>();
-            NonAbonnementsViewModel = new NonAbonnementsViewModel();
+            NonAbonnementsViewModel = ViewModelLocator.Instance.Resolve<NonAbonnementsViewModel>();
         }
         #endregion
     }

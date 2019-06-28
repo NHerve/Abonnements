@@ -1,19 +1,27 @@
-﻿using System;
+﻿using Abonnements.DataServices;
+using Abonnements.Model;
+using Abonnements.Validations;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Abonnements.ViewModel
 {
     public class PayementViewModel : ViewModelBase
     {
         #region Private Properties
+        private readonly PaiementDataService _paiementDataService;
         private string _titre;
-        private int _cardNumber;
-        private int _cardMonth;
-        private int _cardYear;
+        private ValidatableObject<string> _cardNumber;
+        private ValidatableObject<string> _cardMonth;
+        private ValidatableObject<string> _cardYear;
         private decimal _amount;
         #endregion
         #region Public Properties
+        public int IdMagazine { get; set; }
         public string Titre
         {
             get
@@ -26,7 +34,7 @@ namespace Abonnements.ViewModel
                 RaisePropertyChanged(() => Titre);
             }
         }
-        public int CardNumber
+        public ValidatableObject<string> CardNumber
         {
             get
             {
@@ -38,7 +46,7 @@ namespace Abonnements.ViewModel
                 RaisePropertyChanged(() => CardNumber);
             }
         }
-        public int CardMonth
+        public ValidatableObject<string> CardMonth
         {
             get
             {
@@ -50,7 +58,7 @@ namespace Abonnements.ViewModel
                 RaisePropertyChanged(() => CardMonth);
             }
         }
-        public int CardYear
+        public ValidatableObject<string> CardYear
         {
             get
             {
@@ -77,14 +85,36 @@ namespace Abonnements.ViewModel
         #endregion
 
         #region ctor
-        public PayementViewModel()
+        public PayementViewModel(PaiementDataService paiementDataService)
         {
-
+            _paiementDataService = paiementDataService;
+            CardNumber = new ValidatableObject<string>();
+            CardMonth = new ValidatableObject<string>();
+            CardYear = new ValidatableObject<string>();
         }
         #endregion
 
         #region Command
+        public ICommand PayementCommand => new Command(Payement);
+        #endregion
 
+        #region Private Function
+        private void Payement()
+        {
+            if (_paiementDataService.RequestPaiement(new Paiement(CardNumber.Value, CardMonth.Value, CardYear.Value, Amount),IdMagazine)) {
+                DialogService.ShowAlertAsync("Payement effectué, en attente de validation par le service", "", "Ok");
+            }
+        }
+        #endregion
+        #region Initialize
+        public override Task InitializeAsync(object navigationData)
+        {
+            Paiement paiement = (Paiement)navigationData;
+            Titre = paiement.Titre;
+            Amount = paiement.amount;
+            IdMagazine = paiement.IdMagazine;
+            return Task.FromResult(false);
+        }
         #endregion
     }
 }
