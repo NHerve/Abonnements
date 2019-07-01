@@ -132,7 +132,13 @@
             // NumericPrice
             // 
             this.NumericPrice.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.NumericPrice.DecimalPlaces = 2;
             this.NumericPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumericPrice.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.NumericPrice.Location = new System.Drawing.Point(35, 284);
             this.NumericPrice.Name = "NumericPrice";
             this.NumericPrice.Size = new System.Drawing.Size(222, 25);
@@ -215,9 +221,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BTQuit);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MagazineForm";
             this.Text = "Magasine";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MagazineForm_FormClosed);
             this.Load += new System.EventHandler(this.MagazineForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.NumericPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericNumberPerYear)).EndInit();

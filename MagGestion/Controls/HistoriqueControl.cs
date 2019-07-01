@@ -49,5 +49,10 @@ namespace MagGestion.Controls
             Presenter = new HistoriqueControlPresenter(this, _cache, _errorLogger, _serializer);
             Presenter.FillDGV();
         }
+
+        void IControl.Load()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

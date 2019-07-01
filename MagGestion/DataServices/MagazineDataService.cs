@@ -29,7 +29,14 @@ namespace MagGestion.DataServices
         public Magazine GetMagazine(int id)
         {
             RestRequest request = new RestRequest($"{id}") { Method = Method.GET };
-            return GetFromCache<Magazine>(request, "user" + id);
+            return Get<Magazine>(request);
+        }
+
+        public bool PutMagazine(Magazine mag)
+        {
+            RestRequest request = new RestRequest($"{mag.Id}") { Method = Method.PUT };
+            request.AddJsonBody(mag);
+            return Execute(request).StatusCode == System.Net.HttpStatusCode.Created ? true : false;
         }
     }
 }

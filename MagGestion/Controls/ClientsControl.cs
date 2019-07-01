@@ -13,7 +13,7 @@ namespace MagGestion.Controls
         public ClientControlPresenter Presenter { private get; set; }
         public DataGridView DataGridViewClient { get => DGVClients; set => DGVClients = value; }
         public Button ButtonClient { get => BTClient; set => BTClient = value; }
-
+        
         private readonly ICacheService _cache;
         private readonly IErrorLogger _errorLogger;
         private readonly IDeserializer _serializer;
@@ -50,6 +50,11 @@ namespace MagGestion.Controls
         }
 
         public bool Equals(ClientsControl other)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IControl.Load()
         {
             throw new NotImplementedException();
         }

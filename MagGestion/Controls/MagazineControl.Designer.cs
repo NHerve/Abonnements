@@ -62,6 +62,7 @@
             this.DGVPublication.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVPublication.Location = new System.Drawing.Point(3, 2);
             this.DGVPublication.Margin = new System.Windows.Forms.Padding(2);
+            this.DGVPublication.MultiSelect = false;
             this.DGVPublication.Name = "DGVPublication";
             this.DGVPublication.ReadOnly = true;
             this.DGVPublication.RowHeadersVisible = false;

@@ -49,5 +49,10 @@ namespace MagGestion.Controls
             Presenter = new MagazineControlPresenter(this, _cache, _errorLogger, _serializer);
             Presenter.FillDGV();
         }
+
+        void IControl.Load()
+        {
+            Presenter.FillDGV();
+        }
     }
 }

@@ -5,5 +5,6 @@ namespace MagGestion.Controls.Interface
     public interface IControl
     {
         Control Parent { get; set; }
+        void Load();
     }
 }

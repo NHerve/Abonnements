@@ -49,8 +49,7 @@ namespace MagGestion.Forms
             Presenter = new MagazineViewPresenter(this, _cache, _errorLogger, _serializer);
             Presenter.GetMagazine(Id);
         }
-
-
+        
         private void BTQuit_Click(object sender, EventArgs e)
         {
             _control.Parent.Parent.Enabled = true;
@@ -79,6 +78,13 @@ namespace MagGestion.Forms
         private void BTEnregistrer_Click(object sender, EventArgs e)
         {
             SaveMagazine(sender, e);
+        }
+
+        private void MagazineForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _control.Parent.Parent.Enabled = true;
+            _control.Parent.Parent.Focus();
+            _control.Load();
         }
     }
 }

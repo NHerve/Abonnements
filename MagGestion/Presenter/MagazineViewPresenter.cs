@@ -24,6 +24,7 @@ namespace MagGestion.Presenter
         public MagazineViewPresenter(IMagazineView view, ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer) : base(cache, errorLogger, serializer)
         {
             _view = view;
+            _view.SaveMagazine += SaveMagazine;
             _magazineDataService = new MagazineDataService(_cache, _serializer, _errorLogger);
         }
 
@@ -42,5 +43,19 @@ namespace MagGestion.Presenter
             _view.NumeroAnnee = magazine.NumeroAnnee;
         }
 
+        public void SaveMagazine(object sender, EventArgs e)
+        {
+            int id = _view.Id;
+            string titre = _view.Titre;
+            int numAnnee = _view.NumeroAnnee;
+            //string urlPhoto
+            decimal prixAnnuel = _view.PrixAnnee;
+            string description = _view.Description;
+
+            _magazineDataService.PutMagazine(new Magazine { Id = id, Titre = titre, Description = description, NumeroAnnee = numAnnee, PrixAnnuel = prixAnnuel });
+            _view.Close();
+            
+
+        }
     }
 }
