@@ -31,6 +31,9 @@ namespace MagGestion.Helper
 
         public static string MagazineUrl = @"magazines/";
 
+        public static string AbonnementUrl = @"abonnements/";
+
+
         public static string HistoriqueUrl = @"historiques/";
 
 
