@@ -16,10 +16,17 @@ namespace MagGestion.View.Interface
 
         DataGridView DataGridViewHistorique { get; set; }
 
+        DataGridView DataGridViewClient { get; set; }
+
+
         ClientPresenter Presenter { set; }
 
         event EventHandler CloseRequested;
         event EventHandler CreationHistoriqueRequested;
+
+        event EventHandler OnSuspendAbonnement;
+        event EventHandler OnRepayAbonnement;
+
         void Close();
 
     }

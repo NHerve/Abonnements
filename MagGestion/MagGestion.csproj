@@ -94,6 +94,7 @@
     <Compile Include="Controls\MagazineControl.Designer.cs">
       <DependentUpon>MagazineControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataServices\AbonnementDataService.cs" />
     <Compile Include="DataServices\BaseClient.cs" />
     <Compile Include="DataServices\ClientDataService.cs" />
     <Compile Include="DataServices\Deserializer\JsonSerializer.cs" />
@@ -103,7 +104,11 @@
     <Compile Include="DataServices\InMemoryCache.cs" />
     <Compile Include="DataServices\Interface\ICacheService.cs" />
     <Compile Include="DataServices\MagazineDataService.cs" />
+    <Compile Include="Helper\EnumExtensionMethod.cs" />
+    <Compile Include="Helper\FriendlyEnumMethod.cs" />
+    <Compile Include="Model\Client\DGVAbonnementsClient.cs" />
     <Compile Include="Model\Client\DGVHistoriqueClient.cs" />
+    <Compile Include="Model\Enum\StatusCode.cs" />
     <Compile Include="Presenter\BasePresenter.cs" />
     <Compile Include="Presenter\ClientControlPresenter.cs" />
     <Compile Include="Presenter\ClientPresenter.cs" />

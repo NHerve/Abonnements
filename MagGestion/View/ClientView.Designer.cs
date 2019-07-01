@@ -47,7 +47,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.DGVHistoriqueClient = new System.Windows.Forms.DataGridView();
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.DGVAbonnementsClient = new System.Windows.Forms.DataGridView();
+            this.BTSuspendre = new System.Windows.Forms.Button();
+            this.BTRembourser = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGVHistoriqueClient)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVAbonnementsClient)).BeginInit();
             this.SuspendLayout();
             // 
             // BTQuit
@@ -56,7 +61,7 @@
             this.BTQuit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BTQuit.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTQuit.ForeColor = System.Drawing.Color.White;
-            this.BTQuit.Location = new System.Drawing.Point(798, 407);
+            this.BTQuit.Location = new System.Drawing.Point(799, 461);
             this.BTQuit.Margin = new System.Windows.Forms.Padding(2);
             this.BTQuit.Name = "BTQuit";
             this.BTQuit.Size = new System.Drawing.Size(105, 40);
@@ -117,7 +122,7 @@
             this.BTCourrier.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BTCourrier.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTCourrier.ForeColor = System.Drawing.Color.White;
-            this.BTCourrier.Location = new System.Drawing.Point(13, 407);
+            this.BTCourrier.Location = new System.Drawing.Point(13, 460);
             this.BTCourrier.Name = "BTCourrier";
             this.BTCourrier.Size = new System.Drawing.Size(120, 40);
             this.BTCourrier.TabIndex = 6;
@@ -131,7 +136,7 @@
             this.BTMail.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BTMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTMail.ForeColor = System.Drawing.Color.White;
-            this.BTMail.Location = new System.Drawing.Point(138, 407);
+            this.BTMail.Location = new System.Drawing.Point(138, 460);
             this.BTMail.Name = "BTMail";
             this.BTMail.Size = new System.Drawing.Size(120, 40);
             this.BTMail.TabIndex = 7;
@@ -145,7 +150,7 @@
             this.BTTelephone.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BTTelephone.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTTelephone.ForeColor = System.Drawing.Color.White;
-            this.BTTelephone.Location = new System.Drawing.Point(264, 407);
+            this.BTTelephone.Location = new System.Drawing.Point(264, 460);
             this.BTTelephone.Name = "BTTelephone";
             this.BTTelephone.Size = new System.Drawing.Size(120, 40);
             this.BTTelephone.TabIndex = 8;
@@ -236,7 +241,7 @@
             // 
             // TBMotif
             // 
-            this.TBMotif.Location = new System.Drawing.Point(11, 300);
+            this.TBMotif.Location = new System.Drawing.Point(11, 324);
             this.TBMotif.Margin = new System.Windows.Forms.Padding(2);
             this.TBMotif.Multiline = true;
             this.TBMotif.Name = "TBMotif";
@@ -247,7 +252,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(10, 279);
+            this.label6.Location = new System.Drawing.Point(9, 288);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(355, 20);
@@ -270,7 +275,7 @@
             this.DGVHistoriqueClient.ReadOnly = true;
             this.DGVHistoriqueClient.RowHeadersVisible = false;
             this.DGVHistoriqueClient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGVHistoriqueClient.Size = new System.Drawing.Size(423, 341);
+            this.DGVHistoriqueClient.Size = new System.Drawing.Size(423, 147);
             this.DGVHistoriqueClient.TabIndex = 18;
             // 
             // label7
@@ -285,11 +290,74 @@
             this.label7.TabIndex = 19;
             this.label7.Text = "Historique de relation :";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label8.Location = new System.Drawing.Point(475, 247);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(172, 29);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "Abonnements";
+            // 
+            // DGVAbonnementsClient
+            // 
+            this.DGVAbonnementsClient.AllowUserToAddRows = false;
+            this.DGVAbonnementsClient.AllowUserToDeleteRows = false;
+            this.DGVAbonnementsClient.AllowUserToResizeColumns = false;
+            this.DGVAbonnementsClient.AllowUserToResizeRows = false;
+            this.DGVAbonnementsClient.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DGVAbonnementsClient.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.DGVAbonnementsClient.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DGVAbonnementsClient.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.DGVAbonnementsClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVAbonnementsClient.Location = new System.Drawing.Point(480, 279);
+            this.DGVAbonnementsClient.Name = "DGVAbonnementsClient";
+            this.DGVAbonnementsClient.ReadOnly = true;
+            this.DGVAbonnementsClient.RowHeadersVisible = false;
+            this.DGVAbonnementsClient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DGVAbonnementsClient.Size = new System.Drawing.Size(423, 177);
+            this.DGVAbonnementsClient.TabIndex = 21;
+            // 
+            // BTSuspendre
+            // 
+            this.BTSuspendre.BackColor = System.Drawing.Color.Chocolate;
+            this.BTSuspendre.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.BTSuspendre.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTSuspendre.ForeColor = System.Drawing.Color.White;
+            this.BTSuspendre.Location = new System.Drawing.Point(480, 462);
+            this.BTSuspendre.Name = "BTSuspendre";
+            this.BTSuspendre.Size = new System.Drawing.Size(120, 40);
+            this.BTSuspendre.TabIndex = 22;
+            this.BTSuspendre.Text = "Suspendre";
+            this.BTSuspendre.UseVisualStyleBackColor = false;
+            this.BTSuspendre.Click += new System.EventHandler(this.BTSuspendre_Click);
+            // 
+            // BTRembourser
+            // 
+            this.BTRembourser.BackColor = System.Drawing.Color.Chocolate;
+            this.BTRembourser.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.BTRembourser.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTRembourser.ForeColor = System.Drawing.Color.White;
+            this.BTRembourser.Location = new System.Drawing.Point(606, 462);
+            this.BTRembourser.Name = "BTRembourser";
+            this.BTRembourser.Size = new System.Drawing.Size(124, 40);
+            this.BTRembourser.TabIndex = 23;
+            this.BTRembourser.Text = "Rembourser";
+            this.BTRembourser.UseVisualStyleBackColor = false;
+            this.BTRembourser.Click += new System.EventHandler(this.BTRembourser_Click);
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(915, 458);
+            this.ClientSize = new System.Drawing.Size(915, 512);
+            this.Controls.Add(this.BTRembourser);
+            this.Controls.Add(this.BTSuspendre);
+            this.Controls.Add(this.DGVAbonnementsClient);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.DGVHistoriqueClient);
             this.Controls.Add(this.label6);
@@ -309,13 +377,14 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BTQuit);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ClientForm";
             this.Text = "ClientForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClientForm_FormClosing);
             this.Load += new System.EventHandler(this.ClientForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGVHistoriqueClient)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVAbonnementsClient)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,5 +411,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView DGVHistoriqueClient;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DataGridView DGVAbonnementsClient;
+        private System.Windows.Forms.Button BTSuspendre;
+        private System.Windows.Forms.Button BTRembourser;
     }
 }

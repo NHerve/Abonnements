@@ -42,10 +42,11 @@
             this.TBLogin.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TBLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TBLogin.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.TBLogin.Location = new System.Drawing.Point(86, 74);
+            this.TBLogin.Location = new System.Drawing.Point(57, 48);
+            this.TBLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TBLogin.MaxLength = 50;
             this.TBLogin.Name = "TBLogin";
-            this.TBLogin.Size = new System.Drawing.Size(322, 37);
+            this.TBLogin.Size = new System.Drawing.Size(215, 25);
             this.TBLogin.TabIndex = 0;
             // 
             // TBPassword
@@ -54,10 +55,11 @@
             this.TBPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TBPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TBPassword.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.TBPassword.Location = new System.Drawing.Point(86, 198);
+            this.TBPassword.Location = new System.Drawing.Point(57, 129);
+            this.TBPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TBPassword.MaxLength = 50;
             this.TBPassword.Name = "TBPassword";
-            this.TBPassword.Size = new System.Drawing.Size(322, 37);
+            this.TBPassword.Size = new System.Drawing.Size(215, 25);
             this.TBPassword.TabIndex = 1;
             this.TBPassword.UseSystemPasswordChar = true;
             // 
@@ -67,9 +69,10 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label1.Location = new System.Drawing.Point(80, 42);
+            this.label1.Location = new System.Drawing.Point(53, 27);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 29);
+            this.label1.Size = new System.Drawing.Size(48, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "Login";
             // 
@@ -79,9 +82,10 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label2.Location = new System.Drawing.Point(80, 168);
+            this.label2.Location = new System.Drawing.Point(53, 109);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(170, 29);
+            this.label2.Size = new System.Drawing.Size(113, 20);
             this.label2.TabIndex = 3;
             this.label2.Text = "Mots de passe";
             // 
@@ -91,9 +95,10 @@
             this.BTConnection.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BTConnection.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTConnection.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BTConnection.Location = new System.Drawing.Point(86, 262);
+            this.BTConnection.Location = new System.Drawing.Point(57, 170);
+            this.BTConnection.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BTConnection.Name = "BTConnection";
-            this.BTConnection.Size = new System.Drawing.Size(322, 69);
+            this.BTConnection.Size = new System.Drawing.Size(215, 45);
             this.BTConnection.TabIndex = 4;
             this.BTConnection.Text = "Se connecter";
             this.BTConnection.UseVisualStyleBackColor = false;
@@ -105,9 +110,10 @@
             this.BTQuit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BTQuit.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTQuit.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BTQuit.Location = new System.Drawing.Point(86, 343);
+            this.BTQuit.Location = new System.Drawing.Point(57, 223);
+            this.BTQuit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BTQuit.Name = "BTQuit";
-            this.BTQuit.Size = new System.Drawing.Size(322, 69);
+            this.BTQuit.Size = new System.Drawing.Size(215, 45);
             this.BTQuit.TabIndex = 5;
             this.BTQuit.Text = "Quitter";
             this.BTQuit.UseVisualStyleBackColor = false;
@@ -115,17 +121,18 @@
             // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(494, 492);
+            this.ClientSize = new System.Drawing.Size(329, 320);
             this.Controls.Add(this.BTQuit);
             this.Controls.Add(this.BTConnection);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TBPassword);
             this.Controls.Add(this.TBLogin);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "LoginForm";
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.ResumeLayout(false);

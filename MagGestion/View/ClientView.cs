@@ -19,6 +19,8 @@ namespace MagGestion.Forms
 
         public event EventHandler CloseRequested;
         public event EventHandler CreationHistoriqueRequested;
+        public event EventHandler OnSuspendAbonnement;
+        public event EventHandler OnRepayAbonnement;
 
         public ClientPresenter Presenter { private get; set; }
         public string Nom { set => lbNom.Text = value; }
@@ -30,6 +32,7 @@ namespace MagGestion.Forms
         public string Motif => TBMotif.Text;
 
         public DataGridView DataGridViewHistorique { get => DGVHistoriqueClient; set => DGVHistoriqueClient = value; }
+        public DataGridView DataGridViewClient { get => DGVAbonnementsClient; set => DGVAbonnementsClient = value; }
 
         public ClientForm(int id, IControl control, ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer)
         {
@@ -78,6 +81,16 @@ namespace MagGestion.Forms
         {
             _control.Parent.Parent.Enabled = true;
             _control.Parent.Parent.Focus();
+        }
+
+        private void BTSuspendre_Click(object sender, EventArgs e)
+        {
+            OnSuspendAbonnement(this, EventArgs.Empty);
+        }
+
+        private void BTRembourser_Click(object sender, EventArgs e)
+        {
+            OnRepayAbonnement(this, EventArgs.Empty);
         }
     }
 }
