@@ -36,7 +36,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.TBTitre = new System.Windows.Forms.TextBox();
             this.NumericPrice = new System.Windows.Forms.NumericUpDown();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.TBDescription = new System.Windows.Forms.TextBox();
             this.BTEnregistrer = new System.Windows.Forms.Button();
             this.NumericNumberPerYear = new System.Windows.Forms.NumericUpDown();
             this.BTSelectImage = new System.Windows.Forms.Button();
@@ -138,14 +138,14 @@
             this.NumericPrice.Size = new System.Drawing.Size(222, 25);
             this.NumericPrice.TabIndex = 27;
             // 
-            // textBox3
+            // TBDescription
             // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(35, 352);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(222, 86);
-            this.textBox3.TabIndex = 28;
+            this.TBDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TBDescription.Location = new System.Drawing.Point(35, 352);
+            this.TBDescription.Multiline = true;
+            this.TBDescription.Name = "TBDescription";
+            this.TBDescription.Size = new System.Drawing.Size(222, 86);
+            this.TBDescription.TabIndex = 28;
             // 
             // BTEnregistrer
             // 
@@ -159,12 +159,18 @@
             this.BTEnregistrer.TabIndex = 29;
             this.BTEnregistrer.Text = "Enregistrer";
             this.BTEnregistrer.UseVisualStyleBackColor = false;
+            this.BTEnregistrer.Click += new System.EventHandler(this.BTEnregistrer_Click);
             // 
             // NumericNumberPerYear
             // 
             this.NumericNumberPerYear.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.NumericNumberPerYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NumericNumberPerYear.Location = new System.Drawing.Point(35, 133);
+            this.NumericNumberPerYear.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.NumericNumberPerYear.Name = "NumericNumberPerYear";
             this.NumericNumberPerYear.Size = new System.Drawing.Size(222, 25);
             this.NumericNumberPerYear.TabIndex = 30;
@@ -200,7 +206,7 @@
             this.Controls.Add(this.BTSelectImage);
             this.Controls.Add(this.NumericNumberPerYear);
             this.Controls.Add(this.BTEnregistrer);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.TBDescription);
             this.Controls.Add(this.NumericPrice);
             this.Controls.Add(this.TBTitre);
             this.Controls.Add(this.label3);
@@ -212,6 +218,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MagazineForm";
             this.Text = "Magasine";
+            this.Load += new System.EventHandler(this.MagazineForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.NumericPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericNumberPerYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicturePhoto)).EndInit();
@@ -230,7 +237,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox TBTitre;
         private System.Windows.Forms.NumericUpDown NumericPrice;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox TBDescription;
         private System.Windows.Forms.Button BTEnregistrer;
         private System.Windows.Forms.NumericUpDown NumericNumberPerYear;
         private System.Windows.Forms.Button BTSelectImage;

@@ -14,9 +14,6 @@ namespace MagGestion.View.Interface
         int NumeroAnnee { set; get; }
 
         MagazineViewPresenter Presenter { set; }
-
-        event EventHandler CloseRequested;
-        event EventHandler CreationHistoriqueRequested;
         void Close();
     }
 }

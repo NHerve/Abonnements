@@ -18,9 +18,8 @@ namespace MagGestion.Forms
         private readonly ICacheService _cache;
         private readonly IErrorLogger _errorLogger;
         private readonly IDeserializer _serializer;
-
-        public event EventHandler CloseRequested;
-        public event EventHandler CreationHistoriqueRequested;
+        
+        public event EventHandler SaveMagazine;
 
 
         public MagazineViewPresenter Presenter { private get; set; }
@@ -28,7 +27,7 @@ namespace MagGestion.Forms
         public string Titre { get => TBTitre.Text; set => TBTitre.Text = value; }
         public string URLPhoto { get; set; }
         public decimal PrixAnnee { get => NumericPrice.Value; set => NumericPrice.Value = value; }
-        public string Description { get; set; }
+        public string Description { get =>TBDescription.Text; set=>TBDescription.Text = value; }
         public int NumeroAnnee { get => (int)NumericNumberPerYear.Value; set => NumericNumberPerYear.Value = value; }
 
         private readonly string _id;
@@ -44,11 +43,17 @@ namespace MagGestion.Forms
             this.TopMost = true;
             this.CenterToScreen();
         }
+        
+        private void MagazineForm_Load(object sender, EventArgs e)
+        {
+            Presenter = new MagazineViewPresenter(this, _cache, _errorLogger, _serializer);
+            Presenter.GetMagazine(Id);
+        }
+
 
         private void BTQuit_Click(object sender, EventArgs e)
         {
             _control.Parent.Parent.Enabled = true;
-
             this.Close();
         }
 
@@ -69,6 +74,11 @@ namespace MagGestion.Forms
         private void Initialize(int id)
         {
             //  Magazine magazine = new MagazineDataService().GetMagazine(id);
+        }
+
+        private void BTEnregistrer_Click(object sender, EventArgs e)
+        {
+            SaveMagazine(sender, e);
         }
     }
 }
