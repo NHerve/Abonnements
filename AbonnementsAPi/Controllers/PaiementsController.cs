@@ -96,7 +96,7 @@ namespace AbonnementsAPi.Controllers
             }
 
             RestClient client = new RestClient(new Uri(@"http://192.168.2.1:6543/cardpay/"));
-            RestRequest request = new RestRequest($"{paiement.uuid}/{paiement.cid}/{paiement.cardNumber}/{paiement.cardMonth}/{paiement.cardYear}/{paiement.amount}") { Method = Method.GET };
+            RestRequest request = new RestRequest($"{paiement.uuid}/{paiement.cid}/{paiement.cardNumber}/{paiement.cardMonth}/{paiement.cardYear}/{paiement.amount.ToString().Replace(",",".")}") { Method = Method.GET };
             var response = client.Execute(request);
             bool ok = response.StatusCode == HttpStatusCode.OK;
             if (ok)
