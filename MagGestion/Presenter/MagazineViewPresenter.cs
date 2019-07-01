@@ -24,7 +24,6 @@ namespace MagGestion.Presenter
         public MagazineViewPresenter(IMagazineView view, ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer) : base(cache, errorLogger, serializer)
         {
             _view = view;
-            _view.CloseRequested += OnCloseRequested;
             _magazineDataService = new MagazineDataService(_cache, _serializer, _errorLogger);
         }
 
@@ -33,7 +32,7 @@ namespace MagGestion.Presenter
             _view.Close();
         }
 
-        public void GetCustomer(int id)
+        public void GetMagazine(int id)
         {
             Magazine magazine = _magazineDataService.GetMagazine(id) ?? new Magazine { Titre = "Test", Description = "TestPre", NumeroAnnee = 365, PrixAnnuel = 99.99M };
             IdMagazine = magazine.Id;
@@ -43,12 +42,5 @@ namespace MagGestion.Presenter
             _view.NumeroAnnee = magazine.NumeroAnnee;
         }
 
-        //public void FillDGV(int id)
-        //{
-        //    List<DGVHistoriqueClient> HistoriquesClient = _historiqueDataService.GetAllHistoriquesOfCli(id) ?? new List<DGVHistoriqueClient>();
-
-        //    var h = new BindingList<DGVHistoriqueClient>(HistoriquesClient);
-        //    _view.DataGridViewHistorique.DataSource = new BindingSource(h, null);
-        //}
     }
 }
