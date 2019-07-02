@@ -16,7 +16,7 @@ namespace MagGestion.View.Interface
 
         DataGridView DataGridViewHistorique { get; set; }
 
-        DataGridView DataGridViewClient { get; set; }
+        DataGridView DataGridViewClientAbonnement { get; set; }
 
 
         ClientPresenter Presenter { set; }

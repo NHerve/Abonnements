@@ -106,6 +106,7 @@
     <Compile Include="DataServices\MagazineDataService.cs" />
     <Compile Include="Helper\EnumExtensionMethod.cs" />
     <Compile Include="Helper\FriendlyEnumMethod.cs" />
+    <Compile Include="Model\Abonnement\Abonnement.cs" />
     <Compile Include="Model\Client\DGVAbonnementsClient.cs" />
     <Compile Include="Model\Client\DGVHistoriqueClient.cs" />
     <Compile Include="Model\Enum\StatusCode.cs" />
