@@ -140,6 +140,11 @@
             0,
             65536});
             this.NumericPrice.Location = new System.Drawing.Point(35, 284);
+            this.NumericPrice.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.NumericPrice.Name = "NumericPrice";
             this.NumericPrice.Size = new System.Drawing.Size(222, 25);
             this.NumericPrice.TabIndex = 27;

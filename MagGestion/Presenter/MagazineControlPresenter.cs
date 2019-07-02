@@ -25,8 +25,16 @@ namespace MagGestion.Presenter
 
         private void OnShowMagazineForm(object sender, EventArgs e)
         {
-            var id = Convert.ToInt32(_control.DataGridViewMagazine.SelectedRows[0].Cells["Id"].Value);
-            new MagazineForm( (IControl)_control,_cache,_errorLogger, _serializer, id).Show();
+            Button btn = (Button)sender;
+            if (btn.Name == "BTMagazine") 
+            {
+                var id = Convert.ToInt32(_control.DataGridViewMagazine.SelectedRows[0].Cells["Id"].Value);
+                new MagazineForm( (IControl)_control,_cache,_errorLogger, _serializer, id).Show();
+            }
+            else
+            {
+                new MagazineForm((IControl)_control, _cache, _errorLogger, _serializer).Show();
+            }
         }
         private void OnCellSelected(object sender, EventArgs e)
         {

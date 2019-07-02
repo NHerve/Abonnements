@@ -30,6 +30,7 @@
         {
             this.BTMagazine = new System.Windows.Forms.Button();
             this.DGVPublication = new System.Windows.Forms.DataGridView();
+            this.BTNAddMag = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGVPublication)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,11 +74,27 @@
             this.DGVPublication.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVPublication_CellClick);
             this.DGVPublication.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DGVPublication_DataBindingComplete);
             // 
+            // BTNAddMag
+            // 
+            this.BTNAddMag.BackColor = System.Drawing.SystemColors.Highlight;
+            this.BTNAddMag.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.BTNAddMag.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNAddMag.ForeColor = System.Drawing.Color.White;
+            this.BTNAddMag.Location = new System.Drawing.Point(3, 283);
+            this.BTNAddMag.Margin = new System.Windows.Forms.Padding(2);
+            this.BTNAddMag.Name = "BTNAddMag";
+            this.BTNAddMag.Size = new System.Drawing.Size(227, 39);
+            this.BTNAddMag.TabIndex = 5;
+            this.BTNAddMag.Text = "Ajouter un magazine";
+            this.BTNAddMag.UseVisualStyleBackColor = false;
+            this.BTNAddMag.Click += new System.EventHandler(this.BTNAddMag_Click);
+            // 
             // MagazineControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.BTNAddMag);
             this.Controls.Add(this.BTMagazine);
             this.Controls.Add(this.DGVPublication);
             this.Name = "MagazineControl";
@@ -92,5 +109,6 @@
 
         private System.Windows.Forms.Button BTMagazine;
         private System.Windows.Forms.DataGridView DGVPublication;
+        private System.Windows.Forms.Button BTNAddMag;
     }
 }

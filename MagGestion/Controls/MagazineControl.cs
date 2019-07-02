@@ -41,7 +41,7 @@ namespace MagGestion.Controls
 
         private void BTMagazine_Click(object sender, EventArgs e)
         {
-            OnShowMagazineForm(this, EventArgs.Empty);
+            OnShowMagazineForm(sender, EventArgs.Empty);
         }
 
         private void MagazineControl_Load(object sender, EventArgs e)
@@ -53,6 +53,11 @@ namespace MagGestion.Controls
         void IControl.Load()
         {
             Presenter.FillDGV();
+        }
+
+        private void BTNAddMag_Click(object sender, EventArgs e)
+        {
+            OnShowMagazineForm(sender, EventArgs.Empty);
         }
     }
 }

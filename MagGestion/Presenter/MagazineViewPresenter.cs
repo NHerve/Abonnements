@@ -25,6 +25,7 @@ namespace MagGestion.Presenter
         {
             _view = view;
             _view.SaveMagazine += SaveMagazine;
+            _view.CreateMagazine += CreateMagazine;
             _magazineDataService = new MagazineDataService(_cache, _serializer, _errorLogger);
         }
 
@@ -52,9 +53,36 @@ namespace MagGestion.Presenter
             decimal prixAnnuel = _view.PrixAnnee;
             string description = _view.Description;
 
-            _magazineDataService.PutMagazine(new Magazine { Id = id, Titre = titre, Description = description, NumeroAnnee = numAnnee, PrixAnnuel = prixAnnuel });
-            _view.Close();
-            
+            if(_magazineDataService.PutMagazine(new Magazine { Id = id, Titre = titre, Description = description, NumeroAnnee = numAnnee, PrixAnnuel = prixAnnuel }))
+            {
+                _view.Close();
+            }
+            else
+            {
+                MessageBox.Show("update fail");
+            }
+
+
+        }
+
+        public void CreateMagazine(object sender, EventArgs e)
+        {
+            //int id = _view.Id;
+            string titre = _view.Titre;
+            int numAnnee = _view.NumeroAnnee;
+            //string urlPhoto
+            decimal prixAnnuel = _view.PrixAnnee;
+            string description = _view.Description;
+
+            if(_magazineDataService.PostMagazine(new Magazine { Titre = titre, Description = description, NumeroAnnee = numAnnee, PrixAnnuel = prixAnnuel }))
+            {
+                _view.Close();
+            }
+            else
+            {
+                MessageBox.Show("creation fail");
+            }
+
 
         }
     }

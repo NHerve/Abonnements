@@ -15,6 +15,7 @@ namespace MagGestion.View.Interface
 
         MagazineViewPresenter Presenter { set; }
         event EventHandler SaveMagazine;
+        event EventHandler CreateMagazine;
         void Close();
     }
 }

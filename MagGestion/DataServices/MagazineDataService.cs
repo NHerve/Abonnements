@@ -36,6 +36,13 @@ namespace MagGestion.DataServices
         {
             RestRequest request = new RestRequest($"{mag.Id}") { Method = Method.PUT };
             request.AddJsonBody(mag);
+            return Execute(request).StatusCode == System.Net.HttpStatusCode.NoContent ? true : false;
+        }
+
+        public bool PostMagazine(Magazine mag)
+        {
+            RestRequest request = new RestRequest { Method = Method.POST };
+            request.AddJsonBody(mag);
             return Execute(request).StatusCode == System.Net.HttpStatusCode.Created ? true : false;
         }
     }

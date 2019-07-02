@@ -20,6 +20,7 @@ namespace MagGestion.Forms
         private readonly IDeserializer _serializer;
         
         public event EventHandler SaveMagazine;
+        public event EventHandler CreateMagazine;
 
 
         public MagazineViewPresenter Presenter { private get; set; }
@@ -43,11 +44,25 @@ namespace MagGestion.Forms
             this.TopMost = true;
             this.CenterToScreen();
         }
-        
+
+        public MagazineForm(IControl control, ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer)
+        {
+            InitializeComponent();
+            _cache = cache;
+            _control = control;
+            _serializer = serializer;
+            _control.Parent.Parent.Enabled = false;
+            this.TopMost = true;
+            this.CenterToScreen();
+        }
+
         private void MagazineForm_Load(object sender, EventArgs e)
         {
             Presenter = new MagazineViewPresenter(this, _cache, _errorLogger, _serializer);
-            Presenter.GetMagazine(Id);
+            if(Id != 0)
+            {
+                Presenter.GetMagazine(Id);
+            }
         }
         
         private void BTQuit_Click(object sender, EventArgs e)
@@ -70,14 +85,17 @@ namespace MagGestion.Forms
                 }
             }
         }
-        private void Initialize(int id)
-        {
-            //  Magazine magazine = new MagazineDataService().GetMagazine(id);
-        }
 
         private void BTEnregistrer_Click(object sender, EventArgs e)
         {
-            SaveMagazine(sender, e);
+            if(Id != 0)
+            {
+                SaveMagazine(sender, e);
+            }
+            else
+            {
+                CreateMagazine(sender, e);
+            }
         }
 
         private void MagazineForm_FormClosed(object sender, FormClosedEventArgs e)
