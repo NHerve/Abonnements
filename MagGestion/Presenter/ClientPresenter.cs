@@ -3,6 +3,7 @@ using MagGestion.DataServices.Interface;
 using MagGestion.Helper;
 using MagGestion.Helper.Interface;
 using MagGestion.Model;
+using MagGestion.Model.Abonnement;
 using MagGestion.Model.Client;
 using MagGestion.Model.Historique;
 using MagGestion.Model.Magazine;
@@ -28,6 +29,8 @@ namespace MagGestion.Presenter
             _view = view;
             _view.CloseRequested += OnCloseRequested;
             _view.CreationHistoriqueRequested += OnCreationHistoriqueRequested;
+            _view.OnSuspendAbonnement += SuspendAbonnement;
+            _view.OnRepayAbonnement += RepayAbonnement;
             _clientDataService = new ClientDataService(_cache, _serializer, _errorLogger);
             _abonnementDataService = new AbonnementDataService(_cache, _serializer, _errorLogger);
             _historiqueDataService= new HistoriqueDataService(_cache, _serializer, _errorLogger);
@@ -96,22 +99,41 @@ namespace MagGestion.Presenter
                 abo.StatusFriendly = ((StatusCode)abo.Status).GetDescription();
             }
             var a = new BindingList<DGVAbonnementsClient>(AbonnementsClients);
-            _view.DataGridViewClient.DataSource = new BindingSource(a, null);
-            _view.DataGridViewClient.Columns["AbonnementId"].Visible = false;
-            _view.DataGridViewClient.Columns["Status"].Visible = false;
+            _view.DataGridViewClientAbonnement.DataSource = new BindingSource(a, null);
+            _view.DataGridViewClientAbonnement.Columns["AbonnementId"].Visible = false;
+            _view.DataGridViewClientAbonnement.Columns["Status"].Visible = false;
 
-            _view.DataGridViewClient.Columns["MagId"].Visible = false;
+            _view.DataGridViewClientAbonnement.Columns["MagId"].Visible = false;
 
-            _view.DataGridViewClient.Columns["MagazineName"].HeaderText = "Titre";
-            _view.DataGridViewClient.Columns["StatusFriendly"].HeaderText = "Etat";
+            _view.DataGridViewClientAbonnement.Columns["MagazineName"].HeaderText = "Titre";
+            _view.DataGridViewClientAbonnement.Columns["StatusFriendly"].HeaderText = "Etat";
 
-            _view.DataGridViewClient.Columns["Price"].HeaderText = "Prix";
-            _view.DataGridViewClient.Columns["DateFin"].HeaderText = "Date de fin";
+            _view.DataGridViewClientAbonnement.Columns["Price"].HeaderText = "Prix";
+            _view.DataGridViewClientAbonnement.Columns["DateFin"].HeaderText = "Date de fin";
         }
 
-        private void StatusCodeToString(int code)
+        public void SuspendAbonnement(object sender, EventArgs e)
         {
+            int id = Convert.ToInt32(_view.DataGridViewClientAbonnement.SelectedRows[0].Cells["AbonnementId"].Value);
+            Abonnement abonnement = _abonnementDataService.Get(id);
 
+            if(abonnement != null)
+            {
+                abonnement.aboStatus = (int)StatusCode.Paused;
+                _abonnementDataService.Update(abonnement);
+            }
         }
+        public void RepayAbonnement(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(_view.DataGridViewClientAbonnement.SelectedRows[0].Cells["AbonnementId"].Value);
+            Abonnement abonnement = _abonnementDataService.Get(id);
+
+            if (abonnement != null)
+            {
+                abonnement.aboStatus = (int)StatusCode.Expired;
+                _abonnementDataService.Update(abonnement);
+            }
+        }
+        
     }
 }

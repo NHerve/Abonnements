@@ -32,7 +32,7 @@ namespace MagGestion.Forms
         public string Motif => TBMotif.Text;
 
         public DataGridView DataGridViewHistorique { get => DGVHistoriqueClient; set => DGVHistoriqueClient = value; }
-        public DataGridView DataGridViewClient { get => DGVAbonnementsClient; set => DGVAbonnementsClient = value; }
+        public DataGridView DataGridViewClientAbonnement { get => DGVAbonnementsClient; set => DGVAbonnementsClient = value; }
 
         public ClientForm(int id, IControl control, ICacheService cache, IErrorLogger errorLogger, IDeserializer serializer)
         {
@@ -85,12 +85,12 @@ namespace MagGestion.Forms
 
         private void BTSuspendre_Click(object sender, EventArgs e)
         {
-            OnSuspendAbonnement(this, EventArgs.Empty);
+            OnSuspendAbonnement(sender, EventArgs.Empty);
         }
 
         private void BTRembourser_Click(object sender, EventArgs e)
         {
-            OnRepayAbonnement(this, EventArgs.Empty);
+            OnRepayAbonnement(sender, EventArgs.Empty);
         }
     }
 }
