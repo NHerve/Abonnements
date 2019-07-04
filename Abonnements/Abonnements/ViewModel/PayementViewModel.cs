@@ -91,6 +91,7 @@ namespace Abonnements.ViewModel
             CardNumber = new ValidatableObject<string>();
             CardMonth = new ValidatableObject<string>();
             CardYear = new ValidatableObject<string>();
+            AddValidations();
         }
         #endregion
 
@@ -99,12 +100,35 @@ namespace Abonnements.ViewModel
         #endregion
 
         #region Private Function
+        private bool Validate()
+        {
+            bool isValidCardMonth = _cardMonth.Validate();
+            bool isValidCardYear = _cardYear.Validate();
+            return isValidCardMonth && isValidCardYear;
+        }
+
+
         private void Payement()
         {
-            if (_paiementDataService.RequestPaiement(new Paiement(CardNumber.Value, CardMonth.Value, CardYear.Value, Amount),IdMagazine)) {
-                DialogService.ShowAlertAsync("Payement effectué, en attente de validation par le service", "", "Ok");
+            IsBusy = true;
+            bool isValid = Validate();
+            if (isValid)
+            {
+                if (_paiementDataService.RequestPaiement(new Paiement(CardNumber.Value, CardMonth.Value, CardYear.Value, Amount), IdMagazine))
+                {
+                    DialogService.ShowAlertAsync("Payement effectué, en attente de validation par le service", "", "Ok");
+                }
             }
+
         }
+
+        private void AddValidations()
+        {
+            _cardMonth.Validations.Add(new CardMonthRule<string>() { ValidationMessage = "Le mois doit être supérieur à 00 et inférieur à 12" });
+            _cardYear.Validations.Add(new CardYearRule<string>() { ValidationMessage = "L'année doit être supérieur à celle d'aujourd'hui et l'écart inférieur à 5 ans" });
+
+        }
+
         #endregion
         #region Initialize
         public override Task InitializeAsync(object navigationData)

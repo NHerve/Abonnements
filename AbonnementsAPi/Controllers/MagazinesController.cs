@@ -18,13 +18,21 @@ namespace AbonnementsAPi.Controllers
         public MagazinesController(AbonnementsAPIContext context)
         {
             _context = context;
+            
         }
 
         // GET: api/Magazines
         [HttpGet]
-        public IEnumerable<Magazines> GetMagazines()
+        public object GetMagazines()
         {
-            return _context.Magazines;
+            try
+            {
+                return _context.Magazines;
+            }
+            catch (Exception ex)
+            {
+                return ex;
+            }
         }
 
         // GET: api/Magazines/5
