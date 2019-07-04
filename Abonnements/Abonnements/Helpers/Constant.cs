@@ -13,7 +13,8 @@ namespace Abonnements.Helpers
 
         public const string UUID = "0e2b3c5b-432a-7e65-7b00-3d6b24489fac";
 
-        public static string BaseUrl = @"https://192.168.2.80:45456/api/";
+        //public static string BaseUrl = @"https://192.168.2.80:45456/api/";
+        public static string BaseUrl = @"http://54.209.117.31/api/";
         public const string ErrorUrl = @"errors";
         public const string ClientUrl = @"clients/";
         public const string MagazineUrl = @"magazines/";

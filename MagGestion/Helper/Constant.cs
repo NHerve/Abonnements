@@ -15,7 +15,9 @@ namespace MagGestion.Helper
         public const int HashingIterationsCount = 1000;
 
 
-        public static string BaseUrl = @"https://192.168.2.80:45456/api/";
+        //public static string BaseUrl = @"https://192.168.2.80:45456/api/";
+
+        public static string BaseUrl = @"http://54.209.117.31/api/";
 
         public static string ClientsUrl = @"Clients/";
 
