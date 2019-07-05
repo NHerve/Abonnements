@@ -67,8 +67,13 @@
 
                     <Label Style="{StaticResource TitleLabelStyle}" Text="Prix annuel" />
                     <Label Style="{StaticResource ItemLabelStyle}" Text="{Binding PrixAnnuel, StringFormat='\{0}€'}" />
-                    <local:ButtonSubscribedMagazineView BindingContext="{Binding Subscribed}" IsVisible="{Binding IsAbonnement}" />
-                    <local:ButtonSubscribeMagazineView BindingContext="{Binding Subscribe}" IsVisible="{Binding IsNonAbonnement}" />
+                    <StackLayout IsVisible="{Binding IsAbonnement}">
+                        <local:ButtonSubscribedMagazineView BindingContext="{Binding Subscribed}" />
+                    </StackLayout>
+                    <StackLayout IsVisible="{Binding IsNonAbonnement}">
+                        <local:ButtonSubscribeMagazineView BindingContext="{Binding Subscribe}" />
+
+                    </StackLayout>
                 </StackLayout>
             </Grid>
         </Grid>

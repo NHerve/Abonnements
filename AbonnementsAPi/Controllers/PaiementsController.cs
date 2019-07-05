@@ -96,7 +96,8 @@ namespace AbonnementsAPi.Controllers
             }
 
             RestClient client = new RestClient(new Uri(@"http://ec2-52-47-88-142.eu-west-3.compute.amazonaws.com/cardpay/"));
-            RestRequest request = new RestRequest($"{paiement.uuid}/{paiement.cid}/{paiement.cardNumber}/{paiement.cardMonth}/{paiement.cardYear}/{paiement.amount.ToString().Replace(",",".")}") { Method = Method.GET };
+            string url= $"{paiement.uuid}/{paiement.cid}/{paiement.cardNumber}/{paiement.cardMonth}/{paiement.cardYear}/{paiement.amount.ToString().Replace(",", ".")}";
+            RestRequest request = new RestRequest(url) { Method = Method.GET };
             var response = client.Execute(request);
             bool ok = response.StatusCode == HttpStatusCode.OK;
             if (ok)

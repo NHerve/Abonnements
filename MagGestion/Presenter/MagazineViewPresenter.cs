@@ -50,16 +50,17 @@ namespace MagGestion.Presenter
             string titre = _view.Titre;
             int numAnnee = _view.NumeroAnnee;
             //string urlPhoto
+            string urlphoto = _view.URLPhoto;
             decimal prixAnnuel = _view.PrixAnnee;
             string description = _view.Description;
 
-            if(_magazineDataService.PutMagazine(new Magazine { Id = id, Titre = titre, Description = description, NumeroAnnee = numAnnee, PrixAnnuel = prixAnnuel }))
+            if(_magazineDataService.PutMagazine(new Magazine { Id = id, Titre = titre, Description = description, NumeroAnnee = numAnnee, PrixAnnuel = prixAnnuel, imageUrl = urlphoto }))
             {
                 _view.Close();
             }
             else
             {
-                MessageBox.Show("update fail");
+                MessageBox.Show("La modification a échoué");
             }
 
 
@@ -80,7 +81,7 @@ namespace MagGestion.Presenter
             }
             else
             {
-                MessageBox.Show("creation fail");
+                MessageBox.Show("La création a échoué");
             }
 
 

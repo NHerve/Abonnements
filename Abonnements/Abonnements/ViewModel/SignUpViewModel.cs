@@ -187,9 +187,8 @@ namespace Abonnements.ViewModel
                 }
                 catch (Exception ex) when (ex is WebException || ex is HttpRequestException)
                 {
-                    await DialogService.ShowAlertAsync("Invalid credentials", "Login failure", "Try again");
                     Debug.WriteLine($"[SignIn] Error signing in: {ex}");
-                    await DialogService.ShowAlertAsync("Communication error", "Error", "Ok");
+                    await DialogService.ShowAlertAsync("Erreur de communication", "Erreur", "Ok");
                 }
                 catch (Exception ex)
                 {
@@ -257,7 +256,7 @@ namespace Abonnements.ViewModel
                 _userPasswordConfirmation.Validations.Remove(validation);
             }
 
-            _userPasswordConfirmation.Validations.Add(new RepeatPasswordRule<string> { ValidationMessage = "The passwords do not match", Password = _userPassword.Value });
+            _userPasswordConfirmation.Validations.Add(new RepeatPasswordRule<string> { ValidationMessage = "Les mots de passes ne sont pas identiques", Password = _userPassword.Value });
         }
         #endregion
     }

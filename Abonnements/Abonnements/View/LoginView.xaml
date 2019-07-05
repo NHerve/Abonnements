@@ -106,14 +106,6 @@
 
                     </Entry.Triggers>
                 </Entry>
-                <Label
-                    HorizontalOptions="End"
-                    Style="{StaticResource ForgotPwdLabelStyle}"
-                    Text="Mots de passe oublier ?">
-                    <Label.Effects>
-                        <effects:UnderlineTextEffect />
-                    </Label.Effects>
-                </Label>
                 <Button
                     x:Name="SignInButton"
                     AutomationId="signin"

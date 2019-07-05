@@ -24,5 +24,7 @@ namespace Abonnements.DataServices
             RestRequest request = new RestRequest($"{id}") { Method = Method.GET };
             return Get<Magazine>(request);
         }
+
+     
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,5 +30,7 @@ namespace MagGestion.Model.Magazine
         [JsonProperty("magNbVolumeAnnee")]
         public int NumeroAnnee { get; set; }
 
+        [JsonProperty("magPhotoCouverture")]
+        public string imageUrl { get; set; }
     }
 }

@@ -35,7 +35,9 @@ namespace MagGestion.DataServices
         public bool PutMagazine(Magazine mag)
         {
             RestRequest request = new RestRequest($"{mag.Id}") { Method = Method.PUT };
+    //        request.AddHeader("Content-Type", "multipart/form-data");
             request.AddJsonBody(mag);
+      //      request.AddFile("image", mag.imageUrl);
             return Execute(request).StatusCode == System.Net.HttpStatusCode.NoContent ? true : false;
         }
 

@@ -5,7 +5,9 @@ using MagGestion.Presenter;
 using MagGestion.View.Interface;
 using RestSharp.Deserializers;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace MagGestion.Forms
@@ -77,11 +79,25 @@ namespace MagGestion.Forms
             {
 
                 dlg.Title = "Choisir couverture";
-                dlg.Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|All files (*.*)|*.*";
+                dlg.Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    PicturePhoto.Image = new Bitmap(dlg.FileName);
-                    PicturePhoto.SizeMode = PictureBoxSizeMode.CenterImage;
+                    string filename = dlg.FileName;
+                    FileInfo fi = new FileInfo(filename);
+                    if (fi != null && fi.Length > 0)
+                    {
+                        var ext = Path.GetExtension(filename);
+                        if (fi.Length > 1024 * 1024 * 8)
+                        {
+                            MessageBox.Show("Choisissez un fichier dont la tête est inférieur à 8 mb.");
+                        }
+                        else
+                        {
+                            PicturePhoto.Image = new Bitmap(dlg.FileName);
+                            PicturePhoto.SizeMode = PictureBoxSizeMode.CenterImage;
+                            URLPhoto = filename;
+                        }
+                    }
                 }
             }
         }

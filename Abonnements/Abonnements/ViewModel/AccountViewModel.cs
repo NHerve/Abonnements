@@ -196,7 +196,7 @@ namespace Abonnements.ViewModel
                 _passwordConfirmation.Validations.Remove(validation);
             }
 
-            _passwordConfirmation.Validations.Add(new RepeatPasswordRule<string> { ValidationMessage = "The passwords do not match", Password = _password.Value });
+            _passwordConfirmation.Validations.Add(new RepeatPasswordRule<string> { ValidationMessage = "Les mots de passe ne correspondent pas", Password = _password.Value });
         }
         #endregion
 

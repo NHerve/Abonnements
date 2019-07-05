@@ -32,10 +32,18 @@ namespace Abonnements.DataServices
             return Get<List<Magazine>>(request);
         }
 
-        //Subscribe Abonnement
-
         //Delete Abonnement
-
+        public bool Delete(Magazine magazine)
+        {
+            RestRequest request = new RestRequest($"{magazine.Id}") { Method = Method.PUT };
+            return Execute<Magazine>(request).StatusCode == System.Net.HttpStatusCode.OK;
+        }
         //Pause Abonnement
+        public bool Pause(Magazine magazine)
+        {
+            RestRequest request = new RestRequest($"{magazine.Id}") { Method = Method.PUT };
+            //change abonnement.status
+            return Execute<Magazine>(request).StatusCode == System.Net.HttpStatusCode.OK;
+        }
     }
 }

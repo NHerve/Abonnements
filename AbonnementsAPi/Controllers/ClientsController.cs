@@ -136,7 +136,7 @@ namespace AbonnementsAPi.Controllers
                     var cli = _clientService.Authenticate(cliParam.cliMail, test);
 
                     if (cli == null)
-                        return BadRequest(new { message = "Username or password is incorrect" });
+                        return BadRequest(new { message = "Login ou mots de passe incorrect" });
 
                     await _context.SaveChangesAsync();
 
@@ -146,11 +146,11 @@ namespace AbonnementsAPi.Controllers
                 }
                 else
                 {
-                    return BadRequest(new { message = "Username or password is incorrect" });
+                    return BadRequest(new { message = "Login ou mots de passe incorrect" });
                 }
 
             }
-            return BadRequest(new { message = "Username or password is incorrect" });
+            return BadRequest(new { message = "Login ou mots de passe incorrect" });
         }
 
         // POST: api/Clients

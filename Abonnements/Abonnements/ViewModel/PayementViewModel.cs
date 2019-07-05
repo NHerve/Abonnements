@@ -116,7 +116,7 @@ namespace Abonnements.ViewModel
             {
                 if (_paiementDataService.RequestPaiement(new Paiement(CardNumber.Value, CardMonth.Value, CardYear.Value, Amount), IdMagazine))
                 {
-                    DialogService.ShowAlertAsync("Payement effectué, en attente de validation par le service", "", "Ok");
+                    DialogService.ShowAlertAsync("Paiement effectué, en attente de validation par le service", "", "Ok");
                 }
             }
 

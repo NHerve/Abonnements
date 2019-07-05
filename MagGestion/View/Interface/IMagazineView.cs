@@ -1,5 +1,6 @@
 ﻿using MagGestion.Presenter;
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace MagGestion.View.Interface

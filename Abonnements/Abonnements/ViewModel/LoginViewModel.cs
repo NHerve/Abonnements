@@ -128,9 +128,9 @@ namespace Abonnements.ViewModel
                 }
                 catch (Exception ex) when (ex is WebException || ex is HttpRequestException)
                 {
-                    await DialogService.ShowAlertAsync("Invalid credentials", "Login failure", "Try again");
+                    await DialogService.ShowAlertAsync("Mauvais paramètres", "Connexion échoué", "Renouveler l'opération");
                     Debug.WriteLine($"[SignIn] Error signing in: {ex}");
-                    await DialogService.ShowAlertAsync("Communication error", "Error", "Ok");
+                    await DialogService.ShowAlertAsync("Erreur de communication", "Erreur", "Ok");
                 }
                 catch (Exception ex)
                 {

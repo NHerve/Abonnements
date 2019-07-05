@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AbonnementsAPi.Models;
+using System.Net.Http;
 
 namespace AbonnementsAPi.Controllers
 {
@@ -25,20 +26,17 @@ namespace AbonnementsAPi.Controllers
         [HttpGet]
         public object GetMagazines()
         {
-            try
-            {
+          
+            
                 return _context.Magazines;
-            }
-            catch (Exception ex)
-            {
-                return ex;
-            }
+           
+          
         }
 
         // GET: api/Magazines/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMagazines([FromRoute] int id)
-        {
+        {   
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
